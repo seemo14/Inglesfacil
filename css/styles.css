@@ -514,3 +514,14 @@ footer {
     padding: 6rem 0 3rem;
   }
 }
+/* strike out original price and highlight promo */
+.price del {
+  color: #888;                   /* faded color */
+  text-decoration: line-through; /* dashed-out */
+  margin-right: 0.5rem;
+}
+
+.price .new-price {
+  color: var(--accent-color);    /* your accent highlight */
+  font-weight: bold;
+}
