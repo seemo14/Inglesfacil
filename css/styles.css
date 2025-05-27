@@ -1,127 +1,61 @@
-/* css/styles.css */
-/* Main Styles for Ingles.Facil123 Website */
-
+/* styles.css */
 :root {
-  --primary-color: #4a6fa5;
+  --primary-color:   #4a6fa5;
   --secondary-color: #ff6b6b;
-  --accent-color: #ffd166;
-  --dark-color: #2c3e50;
-  --light-color: #f8f9fa;
-  --success-color: #28a745;
-  --font-main: 'Poppins', sans-serif;
-  --font-heading: 'Montserrat', sans-serif;
+  --accent-color:    #ffd166;
+  --dark-color:      #2c3e50;
+  --light-color:     #f8f9fa;
+  --font-main:       'Poppins', sans-serif;
+  --font-heading:    'Montserrat', sans-serif;
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--primary-color);
-}
-p, a, li, input, select, textarea, button {
-  font-family: var(--font-main);
-  color: var(--dark-color);
-  line-height: 1.6;
-}
+h1,h2,h3,h4,h5,h6 { font-family: var(--font-heading); color: var(--primary-color); margin-bottom:1rem; }
+p,a,li,input,select,textarea,button { font-family: var(--font-main); color: var(--dark-color); }
 
 /* Layout */
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+.container { width:90%; max-width:1200px; margin:0 auto; }
 
 /* Header */
-header {
-  background: var(--light-color);
-  padding: 1rem 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+header { background: var(--light-color); padding:1rem 0; box-shadow:0 2px 4px rgba(0,0,0,0.1); }
+.navbar { display:flex; align-items:center; justify-content:space-between; }
+.nav-links { list-style:none; display:flex; gap:1rem; }
+.nav-links li a { text-decoration:none; color:var(--dark-color); font-weight:500; }
+.mobile-menu { display:none; cursor:pointer; }
+
+/* Language buttons */
+.language-switcher { margin-left:1rem; }
+.lang-btn {
+  background: transparent; border:1px solid var(--dark-color); padding:0.3rem 0.6rem;
+  margin:0 0.2rem; cursor:pointer; font-family: var(--font-main);
 }
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-}
-.nav-links li a {
-  text-decoration: none;
-  color: var(--dark-color);
-  font-weight: 500;
-}
-/* Mobile menu */
-.mobile-menu {
-  display: none;
-  cursor: pointer;
+.lang-btn.active {
+  background: var(--primary-color); color:#fff; border-color: var(--primary-color);
 }
 
-/* Hero Section */
-.hero {
-  text-align: center;
-  padding: 4rem 0;
-}
-.hero-buttons .btn {
-  margin: 0.5rem;
-}
+/* Hero */
+.hero { text-align:center; padding:4rem 0; }
+.hero-buttons .btn { margin:0.5rem; }
 
-/* …other existing styles for features, content, resources, testimonials, contact… */
+/* Contact */
+.contact { padding:4rem 0; }
+.contact-form .form-group { margin-bottom:1rem; }
+.contact-form .form-control { width:100%; padding:0.8rem; border:1px solid #ccc; border-radius:4px; }
 
 /* Footer */
-footer {
-  background: var(--dark-color);
-  color: #fff;
-  padding: 2rem 0;
-}
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-.footer-about, .footer-links {
-  flex: 1 1 200px;
-  margin: 1rem;
-}
-.footer-links ul {
-  list-style: none;
-  padding: 0;
-}
-.footer-links ul li a {
-  color: #fff;
-  text-decoration: none;
-}
-.footer-bottom {
-  text-align: center;
-  margin-top: 2rem;
-}
+footer { background: var(--dark-color); color:#fff; padding:2rem 0; }
+.footer-content { display:flex; flex-wrap:wrap; gap:2rem; }
+.footer-bottom { text-align:center; margin-top:2rem; }
 
-/* Language Switcher */
-.language-switcher {
-  margin-left: 1rem;
-}
-.language-switcher select {
-  font-family: var(--font-main);
-  padding: 0.3rem 0.6rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  cursor: pointer;
-}
+/* Reveal animation (injected by JS) remains the same */
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .mobile-menu { display: block; }
-  .nav-links.active { display: flex; flex-direction: column; background: var(--light-color); padding: 1rem; position: absolute; top: 60px; right: 20px; border-radius: 8px; }
-}
-
-/* Original price styling */
-.price-original {
-  color: #888;
-  text-decoration: line-through;
-}
-.price-discount {
-  color: var(--accent-color);
+/* Responsive */
+@media(max-width:768px) {
+  .nav-links { display:none; }
+  .mobile-menu { display:block; }
+  .nav-links.active {
+    display:flex; flex-direction:column;
+    background: var(--light-color); padding:1rem;
+    position:absolute; top:60px; right:20px; border-radius:8px;
+  }
 }
