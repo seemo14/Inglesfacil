@@ -2,110 +2,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inglés Fácil 123 - Learn English Easily</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inglés Fácil 123</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <h1>Inglés Fácil 123</h1>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#home" data-key="navHome">Home</a></li>
-                    <li><a href="#features" data-key="navFeatures">Features</a></li>
-                    <li><a href="#content" data-key="navContent">Content</a></li>
-                    <li><a href="#resources" data-key="navResources">Resources</a></li>
-                    <li><a href="#contact" data-key="navContact">Contact</a></li>
-                </ul>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <div class="language-switcher">
-                    <select id="languageSwitcher">
-                        <option value="en">EN</option>
-                        <option value="es">ES</option>
-                    </select>
-                </div>
-            </nav>
+  <!-- Header -->
+  <header>
+    <div class="container navbar">
+      <div class="logo"><h1>Inglés Fácil 123</h1></div>
+      <ul class="nav-links">
+        <li><a href="#home" data-key="navHome">Home</a></li>
+        <li><a href="#features" data-key="navFeatures">Features</a></li>
+        <li><a href="#content" data-key="navContent">Content</a></li>
+        <li><a href="#resources" data-key="navResources">Resources</a></li>
+        <li><a href="#contact" data-key="navContact">Contact</a></li>
+      </ul>
+      <div class="mobile-menu"><i class="fas fa-bars"></i></div>
+      <div class="language-switcher">
+        <button id="btnEn" class="lang-btn">EN</button>
+        <button id="btnEs" class="lang-btn">ES</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="container">
+      <h1 data-key="heroTitle">Learn English the Easy Way</h1>
+      <p data-key="heroSubtitle">
+        Join our community of 385,000+ Spanish speakers learning English through engaging, practical, and fun content.
+      </p>
+      <div class="hero-buttons">
+        <a href="#resources" class="btn btn-primary" data-key="btnGetResources">Get Learning Resources</a>
+        <a href="https://www.instagram.com/ingles.facil123/" class="btn btn-secondary" data-key="btnFollowInstagram">Follow on Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- …other sections (add data-key to headings, paragraphs, buttons, etc.)… -->
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="contact-header">
+        <h2 data-key="contactHeader">Get in Touch</h2>
+      </div>
+      <form class="contact-form">
+        <div class="form-group">
+          <input type="text" class="form-control" data-key-placeholder="contactNamePlaceholder">
         </div>
-    </header>
-
-    <!-- Hero -->
-    <section id="home" class="hero">
-        <div class="container">
-            <h1 data-key="heroTitle">Learn English the Easy Way</h1>
-            <p data-key="heroSubtitle">
-                Join our community of 385,000+ Spanish speakers learning English through engaging, practical, and fun content.
-            </p>
-            <div class="hero-buttons">
-                <a href="#resources" class="btn btn-primary" data-key="btnGetResources">Get Learning Resources</a>
-                <a href="https://www.instagram.com/ingles.facil123/" class="btn btn-secondary" data-key="btnFollowInstagram">Follow on Instagram</a>
-            </div>
+        <div class="form-group">
+          <input type="email" class="form-control" data-key-placeholder="contactEmailPlaceholder">
         </div>
-    </section>
-
-    <!-- (…rest of your sections unchanged…) -->
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="contact-header">
-                <h2>Get in Touch</h2>
-            </div>
-            <form class="contact-form">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Your Email">
-                </div>
-                <div class="form-group">
-                    <select class="form-control">
-                        <option value="" disabled selected>Select Topic</option>
-                        <option value="partnership">Business Partnership</option>
-                        <option value="sponsorship">Sponsorship</option>
-                        <option value="resources">Learning Resources</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" placeholder="Your Message"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
+        <div class="form-group">
+          <select class="form-control">
+            <option value="" disabled selected data-key="contactTopicOption">Select Topic</option>
+            <option value="partnership" data-key="contactPartnership">Business Partnership</option>
+            <option value="sponsorship" data-key="contactSponsorship">Sponsorship</option>
+            <option value="resources" data-key="contactResources">Learning Resources</option>
+            <option value="other" data-key="contactOther">Other</option>
+          </select>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <!-- … -->
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/ingles.facil123/"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://www.youtube.com/@InglesfacilConana" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                    </div>
-                </div>
-                <div class="footer-links">
-                    <!-- … -->
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Inglés Fácil 123. All Rights Reserved.</p>
-            </div>
+        <div class="form-group">
+          <textarea class="form-control" data-key-placeholder="contactMessagePlaceholder"></textarea>
         </div>
-    </footer>
+        <button type="submit" class="btn btn-primary" data-key="contactSend">Send Message</button>
+      </form>
+    </div>
+  </section>
 
-    <script src="js/main.js"></script>
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-about">
+        <!-- … -->
+        <div class="social-links">
+          <a href="https://www.instagram.com/ingles.facil123/"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.tiktok.com/@ingls.fcil.con.ana"><i class="fab fa-tiktok"></i></a>
+          <a href="https://www.youtube.com/@InglesfacilConana" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+          <a href="https://web.facebook.com/Inglefacilconana"><i class="fab fa-facebook"></i></a>
+        </div>
+      </div>
+      <!-- …other footer links… -->
+    </div>
+    <div class="footer-bottom">
+      <p data-key="footerBottom">&copy; 2025 Inglés Fácil 123. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
 </body>
 </html>
+
