@@ -1,4 +1,5 @@
-// Fixed and Enhanced Language Switching JavaScript for Inglés Fácil con Ana
+// Targeted Language Switching JavaScript for Inglés Fácil 123
+// This version preserves the original website layout while adding language functionality
 
 // Global variables for language system
 let translations = {};
@@ -9,17 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize mobile menu
     initMobileMenu();
     
-    // Initialize smooth scrolling
-    initSmoothScrolling();
-    
     // Initialize language system
     initializeLanguageSystem();
     
-    // Initialize quiz
-    initializeQuiz();
-    
-    // Initialize contact form
-    initializeContactForm();
+    // Initialize other functionality
+    initializeOtherFunctionality();
 });
 
 // Mobile Menu Toggle
@@ -32,42 +27,6 @@ function initMobileMenu() {
             navLinks.classList.toggle('active');
         });
     }
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (!event.target.closest('.mobile-menu') && !event.target.closest('.nav-links')) {
-            if (navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-            }
-        }
-    });
-}
-
-// Smooth scrolling for anchor links
-function initSmoothScrolling() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                // Close mobile menu if open
-                const navLinks = document.querySelector('.nav-links');
-                if (navLinks && navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                }
-                
-                // Scroll to target
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80, // Adjust for header height
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
 }
 
 // Initialize language system
@@ -91,7 +50,7 @@ async function initializeLanguageSystem() {
             es: esData.es
         };
         
-        console.log('Translations loaded:', translations);
+        console.log('Translations loaded successfully');
         
         // Detect user's preferred language
         detectLanguage();
@@ -102,50 +61,9 @@ async function initializeLanguageSystem() {
         // Initial translation
         translatePage(currentLang);
         
-        console.log('Language system initialized successfully with language:', currentLang);
+        console.log('Language system initialized with language:', currentLang);
     } catch (error) {
         console.error('Error initializing language system:', error);
-        
-        // Fallback to hardcoded translations if JSON files can't be loaded
-        translations = {
-            en: {
-                nav: {
-                    brand: "English with Ana",
-                    home: "Home",
-                    features: "Features",
-                    content: "Content",
-                    quiz: "Quiz",
-                    resources: "Resources",
-                    contact: "Contact"
-                },
-                language: {
-                    en: "English",
-                    es: "Spanish"
-                }
-                // Add more fallback translations as needed
-            },
-            es: {
-                nav: {
-                    brand: "Inglés Fácil con Ana",
-                    home: "Inicio",
-                    features: "Características",
-                    content: "Contenido",
-                    quiz: "Cuestionario",
-                    resources: "Recursos",
-                    contact: "Contacto"
-                },
-                language: {
-                    en: "Inglés",
-                    es: "Español"
-                }
-                // Add more fallback translations as needed
-            }
-        };
-        
-        // Continue with available translations
-        detectLanguage();
-        setupLanguageSelector();
-        translatePage(currentLang);
     }
 }
 
@@ -158,22 +76,16 @@ function detectLanguage() {
         return;
     }
     
-    // Check browser language
-    const browserLang = navigator.language.split('-')[0];
-    if (browserLang === 'en') {
-        currentLang = 'en';
-    } else {
-        // Default to Spanish for all other languages
-        currentLang = 'es';
-    }
+    // Default to Spanish
+    currentLang = 'es';
 }
 
 // Set up language selector dropdown
 function setupLanguageSelector() {
-    console.log('Setting up language selector...');
-    
-    // Update current language display
-    updateCurrentLanguageDisplay();
+    // Create language selector if it doesn't exist
+    if (!document.querySelector('.language-selector')) {
+        createLanguageSelector();
+    }
     
     // Add click event listeners to language options
     const langOptions = document.querySelectorAll('.lang-option');
@@ -192,19 +104,142 @@ function setupLanguageSelector() {
         });
     });
     
-    // Make sure the language selector is visible
-    const languageSelector = document.querySelector('.language-selector');
-    if (languageSelector) {
-        languageSelector.style.display = 'block';
-    }
+    // Update current language display
+    updateCurrentLanguageDisplay();
+}
+
+// Create language selector
+function createLanguageSelector() {
+    // Create language selector HTML
+    const navLinks = document.querySelector('.nav-links');
     
-    console.log('Language selector setup complete');
+    if (navLinks) {
+        const langSelector = document.createElement('li');
+        langSelector.className = 'language-selector';
+        
+        langSelector.innerHTML = `
+            <div class="current-lang">
+                <svg class="flag-svg current-lang-flag" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="60" height="30" fill="#c60b1e"/>
+                    <rect width="60" height="15" y="7.5" fill="#ffc400"/>
+                </svg>
+                <span class="current-lang-text">Español</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="lang-options">
+                <div class="lang-option" data-lang="en">
+                    <svg class="flag-svg" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="60" height="30" fill="#00247d"/>
+                        <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+                        <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2"/>
+                        <path d="M30,0 L30,30 M0,15 L60,15" stroke="#fff" stroke-width="10"/>
+                        <path d="M30,0 L30,30 M0,15 L60,15" stroke="#cf142b" stroke-width="6"/>
+                    </svg>
+                    <span>English</span>
+                </div>
+                <div class="lang-option active" data-lang="es">
+                    <svg class="flag-svg" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="60" height="30" fill="#c60b1e"/>
+                        <rect width="60" height="15" y="7.5" fill="#ffc400"/>
+                    </svg>
+                    <span>Español</span>
+                </div>
+            </div>
+        `;
+        
+        navLinks.appendChild(langSelector);
+        
+        // Add language selector styles if not already added
+        if (!document.getElementById('language-selector-styles')) {
+            const styleEl = document.createElement('style');
+            styleEl.id = 'language-selector-styles';
+            styleEl.textContent = `
+                .language-selector {
+                    position: relative;
+                    margin-left: 1rem;
+                    z-index: 100;
+                }
+                
+                .current-lang {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    padding: 0.5rem;
+                    border-radius: 4px;
+                    background-color: rgba(255, 255, 255, 0.1);
+                    transition: all 0.3s ease;
+                }
+                
+                .current-lang:hover {
+                    background-color: rgba(255, 255, 255, 0.2);
+                }
+                
+                .flag-svg {
+                    width: 24px;
+                    height: 16px;
+                    margin-right: 0.5rem;
+                    border-radius: 2px;
+                    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+                }
+                
+                .current-lang-text {
+                    margin-right: 0.5rem;
+                    font-weight: 500;
+                }
+                
+                .lang-options {
+                    position: absolute;
+                    top: 100%;
+                    right: 0;
+                    background: white;
+                    border-radius: 4px;
+                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                    overflow: hidden;
+                    display: none;
+                    min-width: 120px;
+                    margin-top: 5px;
+                }
+                
+                .language-selector:hover .lang-options {
+                    display: block;
+                }
+                
+                .lang-option {
+                    padding: 0.75rem 1rem;
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    transition: background-color 0.2s ease;
+                }
+                
+                .lang-option:hover {
+                    background-color: #f5f5f5;
+                }
+                
+                .lang-option.active {
+                    background-color: #f0f0f0;
+                    font-weight: 600;
+                }
+                
+                @media (max-width: 768px) {
+                    .language-selector {
+                        margin-top: 1rem;
+                        margin-left: 0;
+                    }
+                    
+                    .current-lang {
+                        justify-content: center;
+                    }
+                }
+            `;
+            document.head.appendChild(styleEl);
+        }
+    }
 }
 
 // Update current language display
 function updateCurrentLanguageDisplay() {
     const currentLangText = document.querySelector('.current-lang-text');
-    const currentLangFlag = document.querySelector('.current-lang-flag');
     
     if (currentLangText) {
         // Set the text based on the current language
@@ -228,8 +263,6 @@ function updateCurrentLanguageDisplay() {
     
     // Update HTML lang attribute
     document.documentElement.lang = currentLang;
-    
-    console.log('Current language display updated to:', currentLang);
 }
 
 // Switch language
@@ -237,9 +270,6 @@ function switchLanguage(lang) {
     if (lang === currentLang) return;
     
     console.log('Switching language from', currentLang, 'to', lang);
-    
-    // Add translating class to body for visual feedback
-    document.body.classList.add('translating');
     
     // Update current language
     currentLang = lang;
@@ -252,11 +282,6 @@ function switchLanguage(lang) {
     
     // Translate page content
     translatePage(lang);
-    
-    // Remove translating class after a short delay
-    setTimeout(() => {
-        document.body.classList.remove('translating');
-    }, 500);
     
     console.log('Language switched to:', lang);
 }
@@ -280,19 +305,6 @@ function translatePage(lang) {
         }
     });
     
-    // Translate select options
-    document.querySelectorAll('select').forEach(select => {
-        Array.from(select.options).forEach(option => {
-            const key = option.getAttribute('data-i18n');
-            if (key) {
-                translateElement(option, key, lang);
-            }
-        });
-    });
-    
-    // Translate quiz content
-    translateQuizContent(lang);
-    
     console.log('Page translation complete');
 }
 
@@ -314,409 +326,77 @@ function getNestedTranslation(obj, path) {
     }, obj);
 }
 
-// Translate quiz content
-function translateQuizContent(lang) {
-    if (!translations[lang] || !translations[lang].quiz) return;
-    
-    // Update quiz title and intro
-    const quizTitle = document.querySelector('.quiz-title');
-    if (quizTitle) {
-        quizTitle.textContent = translations[lang].quiz.title;
-    }
-    
-    const quizIntro = document.querySelector('.quiz-intro p');
-    if (quizIntro) {
-        quizIntro.textContent = translations[lang].quiz.intro;
-    }
-    
-    // Update start button
-    const startBtn = document.getElementById('start-quiz');
-    if (startBtn) {
-        startBtn.textContent = translations[lang].quiz.start_button;
-    }
-    
-    // Update navigation buttons
-    const prevBtn = document.getElementById('prev-btn');
-    if (prevBtn) {
-        prevBtn.textContent = translations[lang].quiz.prev_button;
-    }
-    
-    const nextBtn = document.getElementById('next-btn');
-    if (nextBtn && nextBtn.textContent !== translations[lang].quiz.see_results) {
-        nextBtn.textContent = translations[lang].quiz.next_button;
-    }
-    
-    // Update question text
-    document.querySelectorAll('.progress-text').forEach(element => {
-        const questionNumber = element.querySelector('#current-question').textContent;
-        element.innerHTML = `<span data-i18n="quiz.question">${translations[lang].quiz.question}</span> <span id="current-question">${questionNumber}</span>/6`;
-    });
-    
-    // Update hint buttons
-    document.querySelectorAll('.hint-btn').forEach(button => {
-        button.textContent = translations[lang].quiz.hint_button;
-    });
-    
-    // Update results section
-    const scoreLabel = document.querySelector('.score-label');
-    if (scoreLabel) {
-        scoreLabel.textContent = translations[lang].quiz.your_score;
-    }
-    
-    const retryBtn = document.getElementById('retry-quiz');
-    if (retryBtn) {
-        retryBtn.textContent = translations[lang].quiz.retry_button;
-    }
-    
-    const shareText = document.querySelector('.share-results h4');
-    if (shareText) {
-        shareText.textContent = translations[lang].quiz.share_results;
-    }
-    
-    // Update participant text
-    const participantText = document.querySelector('.competition-stats p');
-    if (participantText) {
-        const participantNumber = document.getElementById('participant-number').textContent;
-        participantText.innerHTML = `<span data-i18n="quiz.participant_text">${translations[lang].quiz.participant_text}</span><span id="participant-number">${participantNumber}</span> <span data-i18n="quiz.participant_suffix">${translations[lang].quiz.participant_suffix}</span>`;
-    }
-}
-
-// Quiz functionality
-function initializeQuiz() {
-    // Quiz elements
-    const quizIntro = document.querySelector('.quiz-intro');
-    const quizQuestions = document.querySelector('.quiz-questions');
-    const quizResults = document.querySelector('.quiz-results');
-    const startBtn = document.getElementById('start-quiz');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const retryBtn = document.getElementById('retry-quiz');
-    const progressFill = document.querySelector('.progress-fill');
-    const questions = document.querySelectorAll('.question');
-    const scoreEl = document.getElementById('score');
-    const scoreMessage = document.getElementById('score-message');
-    const participantCount = document.getElementById('participant-count');
-    const participantNumber = document.getElementById('participant-number');
-    
-    if (!startBtn) {
-        console.log('Quiz not found on page');
-        return;
-    }
-    
-    console.log('Initializing quiz...');
-    
-    // Quiz state
-    let currentQuestion = 1;
-    let score = 0;
-    let answeredQuestions = {};
-    let quizCompleted = false;
-    
-    // Initialize participant count from localStorage or default to 110
-    let participants = localStorage.getItem('movieQuizParticipants') ? 
-        parseInt(localStorage.getItem('movieQuizParticipants')) : 110;
-    
-    if (participantCount) {
-        participantCount.textContent = participants;
-    }
-    
-    // Start quiz
-    startBtn.addEventListener('click', function() {
-        quizIntro.classList.remove('active');
-        quizQuestions.classList.add('active');
-        showQuestion(currentQuestion);
-    });
-    
-    // Show a specific question
-    function showQuestion(questionNumber) {
-        // Hide all questions
-        questions.forEach(question => {
-            question.classList.remove('active');
-        });
-        
-        // Show current question
-        const currentQuestionEl = document.querySelector(`.question[data-question="${questionNumber}"]`);
-        if (currentQuestionEl) {
-            currentQuestionEl.classList.add('active');
-        }
-        
-        // Update progress
-        document.getElementById('current-question').textContent = questionNumber;
-        progressFill.style.width = `${(questionNumber / questions.length) * 100}%`;
-        
-        // Update navigation buttons
-        prevBtn.disabled = questionNumber === 1;
-        
-        if (questionNumber === questions.length) {
-            nextBtn.textContent = translations[currentLang]?.quiz?.see_results || 'See Results';
-        } else {
-            nextBtn.textContent = translations[currentLang]?.quiz?.next_button || 'Next';
-        }
-    }
-    
-    // Handle option selection
-    document.querySelectorAll('.option').forEach(option => {
-        option.addEventListener('click', function() {
-            const questionEl = this.closest('.question');
-            const questionNumber = parseInt(questionEl.dataset.question);
-            
-            // If already answered, do nothing
-            if (answeredQuestions[questionNumber]) return;
-            
-            // Mark question as answered
-            answeredQuestions[questionNumber] = true;
-            
-            // Disable all options in this question
-            questionEl.querySelectorAll('.option').forEach(opt => {
-                opt.disabled = true;
-                opt.classList.remove('selected');
-            });
-            
-            // Mark selected option
-            this.classList.add('selected');
-            
-            // Check if correct
-            if (this.dataset.correct === 'true') {
-                this.classList.add('correct');
-                score++;
-            } else {
-                this.classList.add('incorrect');
-                // Find and highlight correct answer
-                questionEl.querySelector('.option[data-correct="true"]').classList.add('correct');
-            }
-            
-            // Show explanation
-            questionEl.querySelector('.explanation').classList.add('active');
-        });
-    });
-    
-    // Handle hint buttons
-    document.querySelectorAll('.hint-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const hint = this.nextElementSibling;
-            hint.classList.add('active');
-            this.style.display = 'none';
-        });
-    });
-    
-    // Navigation buttons
-    prevBtn.addEventListener('click', function() {
-        if (currentQuestion > 1) {
-            currentQuestion--;
-            showQuestion(currentQuestion);
-        }
-    });
-    
-    nextBtn.addEventListener('click', function() {
-        if (currentQuestion < questions.length) {
-            currentQuestion++;
-            showQuestion(currentQuestion);
-        } else {
-            // Show results
-            showResults();
-        }
-    });
-    
-    // Show results
-    function showResults() {
-        quizQuestions.classList.remove('active');
-        quizResults.classList.add('active');
-        
-        // Update score
-        scoreEl.textContent = score;
-        
-        // Update score message based on current language
-        if (score === 6) {
-            scoreMessage.textContent = translations[currentLang]?.quiz?.perfect_score || 
-                "¡Perfecto! You're a movie quote master! Your English and movie knowledge are impressive!";
-        } else if (score >= 4) {
-            scoreMessage.textContent = translations[currentLang]?.quiz?.good_score || 
-                "¡Muy bien! You know your movies and English quotes quite well!";
-        } else if (score >= 2) {
-            scoreMessage.textContent = translations[currentLang]?.quiz?.average_score || 
-                "¡Buen intento! Keep watching movies in English to improve your knowledge!";
-        } else {
-            scoreMessage.textContent = translations[currentLang]?.quiz?.low_score || 
-                "¡Sigue practicando! Watch more movies in English with subtitles to learn these famous quotes!";
-        }
-        
-        // Update participant count if quiz wasn't completed before
-        if (!quizCompleted) {
-            participants++;
-            participantCount.textContent = participants;
-            participantNumber.textContent = participants;
-            localStorage.setItem('movieQuizParticipants', participants);
-            quizCompleted = true;
-        }
-    }
-    
-    // Retry quiz
-    retryBtn.addEventListener('click', function() {
-        // Reset quiz state
-        currentQuestion = 1;
-        score = 0;
-        answeredQuestions = {};
-        
-        // Reset UI
-        document.querySelectorAll('.option').forEach(option => {
-            option.disabled = false;
-            option.classList.remove('selected', 'correct', 'incorrect');
-        });
-        
-        document.querySelectorAll('.explanation').forEach(explanation => {
-            explanation.classList.remove('active');
-        });
-        
-        document.querySelectorAll('.hint').forEach(hint => {
-            hint.classList.remove('active');
-        });
-        
-        document.querySelectorAll('.hint-btn').forEach(button => {
-            button.style.display = 'block';
-        });
-        
-        // Show first question
-        quizResults.classList.remove('active');
-        quizQuestions.classList.add('active');
-        showQuestion(currentQuestion);
-    });
-    
-    // Initialize social share buttons
-    document.querySelectorAll('.share-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
+// Initialize other functionality
+function initializeOtherFunctionality() {
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
             
-            const platform = this.querySelector('i').className;
-            const score = document.getElementById('score').textContent;
-            const message = encodeURIComponent(`¡He obtenido ${score}/6 en el cuestionario de frases de películas en inglés de Inglés Fácil con Ana! ¿Puedes superarlo?`);
-            const url = encodeURIComponent(window.location.href);
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
             
-            let shareUrl = '';
-            
-            if (platform.includes('facebook')) {
-                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${message}`;
-            } else if (platform.includes('twitter')) {
-                shareUrl = `https://twitter.com/intent/tweet?text=${message}&url=${url}`;
-            } else if (platform.includes('whatsapp')) {
-                shareUrl = `https://api.whatsapp.com/send?text=${message} ${url}`;
-            }
-            
-            if (shareUrl) {
-                window.open(shareUrl, '_blank', 'width=600,height=400');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
             }
         });
     });
-    
-    console.log('Quiz initialized successfully');
 }
 
-// Contact form functionality
-function initializeContactForm() {
-    const contactForm = document.getElementById('contactForm');
-    
-    if (!contactForm) {
-        console.log('Contact form not found on page');
-        return;
-    }
-    
-    console.log('Initializing contact form...');
-    
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form values
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const topic = document.getElementById('topic').value;
-        const message = document.getElementById('message').value;
-        
-        // Simple validation
-        if (!name || !email || !topic || !message) {
-            showFormMessage('error', currentLang === 'es' ? 
-                'Por favor completa todos los campos.' : 
-                'Please fill in all fields.');
-            return;
+// Add logo enhancement
+function enhanceLogo() {
+    const logo = document.querySelector('.logo');
+    if (logo) {
+        // Check if logo image exists
+        if (!logo.querySelector('img')) {
+            // Create logo image element
+            const logoImg = document.createElement('img');
+            logoImg.src = 'images/logo_ing_transparent.png';
+            logoImg.alt = 'Inglés Fácil 123 Logo';
+            logoImg.className = 'logo-img';
+            
+            // Insert before the h1
+            const logoTitle = logo.querySelector('h1');
+            if (logoTitle) {
+                logo.insertBefore(logoImg, logoTitle);
+            }
         }
         
-        // Email validation
-        if (!validateEmail(email)) {
-            showFormMessage('error', currentLang === 'es' ? 
-                'Por favor ingresa un email válido.' : 
-                'Please enter a valid email address.');
-            return;
-        }
-        
-        // Simulate form submission (in a real implementation, this would send data to a server)
-        showFormMessage('loading', currentLang === 'es' ? 
-            'Enviando mensaje...' : 
-            'Sending message...');
-        
-        // Simulate server response after 1.5 seconds
-        setTimeout(function() {
-            // Success message
-            showFormMessage('success', currentLang === 'es' ? 
-                '¡Mensaje enviado con éxito! Te responderemos pronto.' : 
-                'Message sent successfully! We will respond to you soon.');
-            
-            // Reset form
-            contactForm.reset();
-            
-            // Remove success message after 5 seconds
-            setTimeout(function() {
-                const messageElement = document.querySelector('.form-message');
-                if (messageElement) {
-                    messageElement.remove();
+        // Add logo styles if not already added
+        if (!document.getElementById('logo-enhancement-styles')) {
+            const styleEl = document.createElement('style');
+            styleEl.id = 'logo-enhancement-styles';
+            styleEl.textContent = `
+                .logo {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
                 }
-            }, 5000);
-        }, 1500);
-    });
-    
-    // Function to validate email format
-    function validateEmail(email) {
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    }
-    
-    // Function to show form messages
-    function showFormMessage(type, message) {
-        // Remove any existing message
-        const existingMessage = document.querySelector('.form-message');
-        if (existingMessage) {
-            existingMessage.remove();
-        }
-        
-        // Create message element
-        const messageElement = document.createElement('div');
-        messageElement.className = `form-message ${type}`;
-        
-        // Set message content based on type
-        if (type === 'loading') {
-            messageElement.innerHTML = `
-                <div class="spinner"></div>
-                <p>${message}</p>
+                
+                .logo img {
+                    height: 40px;
+                    width: auto;
+                    transition: transform 0.3s ease;
+                }
+                
+                .logo:hover img {
+                    transform: scale(1.05);
+                }
+                
+                @media (max-width: 768px) {
+                    .logo img {
+                        height: 32px;
+                    }
+                }
             `;
-        } else {
-            messageElement.innerHTML = `
-                <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
-                <p>${message}</p>
-            `;
+            document.head.appendChild(styleEl);
         }
-        
-        // Insert message after form
-        contactForm.parentNode.insertBefore(messageElement, contactForm.nextSibling);
     }
-    
-    console.log('Contact form initialized successfully');
 }
 
-// Debug function to help troubleshoot language switching
-function debugLanguageSystem() {
-    console.log('=== Language System Debug ===');
-    console.log('Current language:', currentLang);
-    console.log('Available translations:', Object.keys(translations));
-    console.log('Language selector elements:', document.querySelectorAll('.lang-option').length);
-    console.log('Translatable elements:', document.querySelectorAll('[data-i18n]').length);
-    console.log('=== End Debug ===');
-}
-
-// Call debug function after initialization
-setTimeout(debugLanguageSystem, 2000);
+// Call logo enhancement after DOM is loaded
+document.addEventListener('DOMContentLoaded', enhanceLogo);
