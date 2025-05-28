@@ -6,6 +6,8 @@
     <title>Inglés Fácil con Ana - Aprende inglés de forma divertida y efectiva</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/multilingual_styles.css">
+    <link rel="stylesheet" href="css/enhanced_language_selector.css">
+    <link rel="stylesheet" href="css/form_styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -14,7 +16,7 @@
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <img src="images/logo_ing_transparent.png" alt="Inglés Fácil con Ana Logo">
+                    <img src="images/logo_ing_transparent.png" alt="Inglés Fácil con Ana Logo" class="logo-img">
                     <h1 data-i18n="nav.brand">Inglés Fácil con Ana</h1>
                 </div>
                 <ul class="nav-links">
@@ -26,17 +28,32 @@
                     <li><a href="#contact" data-i18n="nav.contact">Contacto</a></li>
                     <li class="language-selector">
                         <div class="current-lang">
-                            <img src="images/flags/es.png" alt="Español" class="current-lang-flag">
+                            <!-- SVG Spanish Flag -->
+                            <svg class="flag-svg current-lang-flag" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="60" height="30" fill="#c60b1e"/>
+                                <rect width="60" height="15" y="7.5" fill="#ffc400"/>
+                            </svg>
                             <span class="current-lang-text">Español</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="lang-options">
                             <div class="lang-option" data-lang="en">
-                                <img src="images/flags/en.png" alt="English" class="flag-icon">
+                                <!-- SVG English Flag -->
+                                <svg class="flag-svg" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="60" height="30" fill="#00247d"/>
+                                    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+                                    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2"/>
+                                    <path d="M30,0 L30,30 M0,15 L60,15" stroke="#fff" stroke-width="10"/>
+                                    <path d="M30,0 L30,30 M0,15 L60,15" stroke="#cf142b" stroke-width="6"/>
+                                </svg>
                                 <span>English</span>
                             </div>
-                            <div class="lang-option" data-lang="es">
-                                <img src="images/flags/es.png" alt="Español" class="flag-icon">
+                            <div class="lang-option active" data-lang="es">
+                                <!-- SVG Spanish Flag -->
+                                <svg class="flag-svg" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="60" height="30" fill="#c60b1e"/>
+                                    <rect width="60" height="15" y="7.5" fill="#ffc400"/>
+                                </svg>
                                 <span>Español</span>
                             </div>
                         </div>
@@ -294,24 +311,24 @@
     <section id="social-media" class="social-media-section section">
         <div class="container">
             <div class="section-title">
-                <h2>Síguenos en Redes Sociales</h2>
+                <h2 data-i18n="social.title">Síguenos en Redes Sociales</h2>
             </div>
             <div class="social-platforms">
                 <div class="social-platform">
                     <div class="platform-icon tiktok">
                         <i class="fab fa-tiktok"></i>
                     </div>
-                    <h3 class="platform-title">TikTok</h3>
-                    <p class="platform-description">Aprende inglés con videos cortos y divertidos. Frases útiles, pronunciación y consejos rápidos.</p>
-                    <a href="https://www.tiktok.com/@ingls.fcil.con.ana" target="_blank" class="platform-link">Seguir en TikTok</a>
+                    <h3 class="platform-title" data-i18n="social.tiktok.title">TikTok</h3>
+                    <p class="platform-description" data-i18n="social.tiktok.description">Aprende inglés con videos cortos y divertidos. Frases útiles, pronunciación y consejos rápidos.</p>
+                    <a href="https://www.tiktok.com/@ingls.fcil.con.ana" target="_blank" class="platform-link" data-i18n="social.tiktok.button">Seguir en TikTok</a>
                 </div>
                 <div class="social-platform">
                     <div class="platform-icon youtube">
                         <i class="fab fa-youtube"></i>
                     </div>
-                    <h3 class="platform-title">YouTube</h3>
-                    <p class="platform-description">Lecciones completas, explicaciones detalladas y contenido exclusivo para mejorar tu inglés.</p>
-                    <a href="https://www.youtube.com/@InglesfacilConana" target="_blank" class="platform-link">Suscríbete</a>
+                    <h3 class="platform-title" data-i18n="social.youtube.title">YouTube</h3>
+                    <p class="platform-description" data-i18n="social.youtube.description">Lecciones completas, explicaciones detalladas y contenido exclusivo para mejorar tu inglés.</p>
+                    <a href="https://www.youtube.com/@InglesfacilConana" target="_blank" class="platform-link" data-i18n="social.youtube.button">Suscríbete</a>
                 </div>
             </div>
         </div>
@@ -325,17 +342,17 @@
                     <div class="info-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <h3 class="info-title">Consejos de Aprendizaje</h3>
-                    <p class="info-description">Descubre estrategias efectivas para aprender inglés más rápido, técnicas de memorización y hábitos de estudio recomendados.</p>
-                    <a href="#" class="info-link">Ver Consejos</a>
+                    <h3 class="info-title" data-i18n="info.tips.title">Consejos de Aprendizaje</h3>
+                    <p class="info-description" data-i18n="info.tips.description">Descubre estrategias efectivas para aprender inglés más rápido, técnicas de memorización y hábitos de estudio recomendados.</p>
+                    <a href="#" class="info-link" data-i18n="info.tips.button">Ver Consejos</a>
                 </div>
                 <div class="info-button">
                     <div class="info-icon">
                         <i class="fas fa-laptop"></i>
                     </div>
-                    <h3 class="info-title">Práctica de Inglés</h3>
-                    <p class="info-description">Ejercicios interactivos, juegos de vocabulario y actividades de comprensión para practicar tu inglés de forma divertida.</p>
-                    <a href="#" class="info-link">Practicar Ahora</a>
+                    <h3 class="info-title" data-i18n="info.practice.title">Práctica de Inglés</h3>
+                    <p class="info-description" data-i18n="info.practice.description">Ejercicios interactivos, juegos de vocabulario y actividades de comprensión para practicar tu inglés de forma divertida.</p>
+                    <a href="#" class="info-link" data-i18n="info.practice.button">Practicar Ahora</a>
                 </div>
             </div>
         </div>
@@ -423,12 +440,12 @@
                 <div class="footer-links">
                     <h3 data-i18n="footer.quick_links">Enlaces Rápidos</h3>
                     <ul>
-                        <li><a href="#home">Inicio</a></li>
-                        <li><a href="#features">Características</a></li>
-                        <li><a href="#content">Contenido</a></li>
-                        <li><a href="#quiz">Cuestionario</a></li>
-                        <li><a href="#resources">Recursos</a></li>
-                        <li><a href="#contact">Contacto</a></li>
+                        <li><a href="#home" data-i18n="nav.home">Inicio</a></li>
+                        <li><a href="#features" data-i18n="nav.features">Características</a></li>
+                        <li><a href="#content" data-i18n="nav.content">Contenido</a></li>
+                        <li><a href="#quiz" data-i18n="nav.quiz">Cuestionario</a></li>
+                        <li><a href="#resources" data-i18n="nav.resources">Recursos</a></li>
+                        <li><a href="#contact" data-i18n="nav.contact">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
@@ -448,9 +465,6 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
-    <script src="js/language_switcher.js"></script>
     <script src="js/combined_main.js"></script>
-
 </body>
 </html>
