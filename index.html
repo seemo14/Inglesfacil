@@ -3,227 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inglés Fácil con Ana - Aprende inglés de forma divertida y efectiva</title>
+    <title>Inglés Fácil 123 - Learn English Easily</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/enhanced_language_selector.css">
-    <link rel="stylesheet" href="css/form_styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Enhanced Color Scheme */
-        :root {
-            --primary-color: #4a6fa5;
-            --secondary-color: #ff6b6b;
-            --accent-color: #ffd166;
-            --dark-color: #2c3e50;
-            --light-color: #f8f9fa;
-            --text-color: #333333;
-            --text-light: #ffffff;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-
-        body {
-            color: var(--text-color);
-            background-color: var(--light-color);
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
-        }
-
-        .btn-primary {
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
-            color: var(--text-light);
-            transition: var(--transition);
-        }
-
-        .btn-primary:hover {
-            background-color: #ff5252;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            border: 2px solid var(--text-light);
-            color: var(--text-light);
-            transition: var(--transition);
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .feature-card {
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .feature-icon {
-            background-color: var(--accent-color);
-            color: var(--dark-color);
-        }
-
-        .sample-card {
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-        }
-
-        .sample-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .tag {
-            background-color: var(--accent-color);
-            color: var(--dark-color);
-        }
-
-        .quiz-container {
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-        }
-
-        .option {
-            transition: var(--transition);
-        }
-
-        .option:hover {
-            background-color: rgba(74, 111, 165, 0.1);
-        }
-
-        .option.correct {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .option.incorrect {
-            background-color: #F44336;
-            color: white;
-        }
-
-        .social-platform {
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-        }
-
-        .social-platform:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .platform-icon {
-            border-radius: 50%;
-            background-color: var(--accent-color);
-            color: var(--dark-color);
-        }
-
-        .platform-icon.tiktok {
-            background: linear-gradient(45deg, #25F4EE, #FE2C55);
-            color: white;
-        }
-
-        .platform-icon.youtube {
-            background-color: #FF0000;
-            color: white;
-        }
-
-        .info-button {
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-        }
-
-        .info-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .info-icon {
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 50%;
-        }
-
-        .resource-card {
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-        }
-
-        .resource-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        footer {
-            background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
-            color: var(--text-light);
-        }
-
-        /* Enhanced Logo Styles */
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo img {
-            height: 50px;
-            width: auto;
-            transition: transform 0.3s ease;
-            border-radius: 50%;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .logo:hover img {
-            transform: scale(1.05);
-        }
-
-        .logo h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0;
-            color: white;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            .logo img {
-                height: 40px;
-            }
-            
-            .logo h1 {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="container">
-            <div class="navbar">
+            <nav class="navbar">
                 <div class="logo">
-                    <img src="images/logo_ing_transparent.png" alt="Inglés Fácil con Ana Logo" class="logo-img">
-                    <h1 data-i18n="nav.brand">Inglés Fácil con Ana</h1>
+                    <img src="images/logo_ing_transparent.png" alt="Inglés Fácil 123 Logo" class="logo-img">
+                    <h1 data-i18n="nav.brand">Inglés Fácil 123</h1>
                 </div>
                 <ul class="nav-links">
                     <li><a href="#home" data-i18n="nav.home">Inicio</a></li>
                     <li><a href="#features" data-i18n="nav.features">Características</a></li>
                     <li><a href="#content" data-i18n="nav.content">Contenido</a></li>
-                    <li><a href="#quiz" data-i18n="nav.quiz">Cuestionario</a></li>
                     <li><a href="#resources" data-i18n="nav.resources">Recursos</a></li>
                     <li><a href="#contact" data-i18n="nav.contact">Contacto</a></li>
                     <li class="language-selector">
@@ -262,18 +59,340 @@
                 <div class="mobile-menu">
                     <i class="fas fa-bars"></i>
                 </div>
-            </div>
+            </nav>
         </div>
-        <li><a href="#home" data-i18n="nav.home">Home</a></li>
-<li><a href="#features" data-i18n="nav.features">Features</a></li>
-<li><a href="#content" data-i18n="nav.content">Content</a></li>
-<li><a href="#resources" data-i18n="nav.resources">Resources</a></li>
-<li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
     </header>
 
-    <!-- Rest of the HTML content remains the same as in the previous version -->
-    <!-- ... -->
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1 data-i18n="hero.title">Aprende Inglés de Forma Fácil</h1>
+            <p data-i18n="hero.subtitle">Únete a nuestra comunidad de más de 385,000 hispanohablantes que aprenden inglés a través de contenido atractivo, práctico y divertido.</p>
+            <div class="hero-buttons">
+                <a href="#resources" class="btn btn-primary" data-i18n="hero.btn_resources">Obtener Recursos de Aprendizaje</a>
+                <a href="https://www.instagram.com/ingles.facil123/" class="btn btn-secondary" data-i18n="hero.btn_instagram">Síguenos en Instagram</a>
+            </div>
+        </div>
+    </section>
 
-    <script src="js/fixed_main.js"></script>
+    <!-- Features Section -->
+    <section id="features" class="section features">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="features.title">Por Qué Aprender Con Nosotros</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3 data-i18n="features.daily_life.title">Inglés para la Vida Diaria</h3>
+                    <p data-i18n="features.daily_life.description">Aprende las frases y expresiones más útiles que los hispanohablantes necesitan en situaciones cotidianas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3 data-i18n="features.movie_vocab.title">Vocabulario de Películas</h3>
+                    <p data-i18n="features.movie_vocab.description">Comprende tus películas y series favoritas aprendiendo expresiones comunes y jerga utilizada en el entretenimiento.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <h3 data-i18n="features.pronunciation.title">Pronunciación Perfecta</h3>
+                    <p data-i18n="features.pronunciation.description">Domina los sonidos que son más desafiantes para los hispanohablantes con nuestros ejercicios de práctica específicos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Samples Section -->
+    <section id="content" class="section content-samples">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="content.title">Nuestro Contenido Popular</h2>
+            </div>
+            <div class="samples-grid">
+                <div class="sample-card">
+                    <div class="sample-content">
+                        <span class="tag" data-i18n="content.vocabulary.tag">Vocabulario</span>
+                        <h3 data-i18n="content.vocabulary.title">¿Cuántas Palabras Conoces?</h3>
+                        <p data-i18n="content.vocabulary.description">Pon a prueba tus conocimientos con nuestros populares desafíos de reconocimiento de palabras. ¿Cuántas palabras en inglés puedes recordar?</p>
+                        <a href="#" class="btn btn-primary" data-i18n="content.vocabulary.button">Ver Ejemplo</a>
+                    </div>
+                </div>
+                <div class="sample-card">
+                    <div class="sample-content">
+                        <span class="tag" data-i18n="content.movies.tag">Películas</span>
+                        <h3 data-i18n="content.movies.title">Frases de Películas Famosas</h3>
+                        <p data-i18n="content.movies.description">Aprende frases icónicas de películas en inglés e impresiona a tus amigos con tu conocimiento cultural y perfecta pronunciación.</p>
+                        <a href="#" class="btn btn-primary" data-i18n="content.movies.button">Ver Ejemplo</a>
+                    </div>
+                </div>
+                <div class="sample-card">
+                    <div class="sample-content">
+                        <span class="tag" data-i18n="content.pronunciation.tag">Pronunciación</span>
+                        <h3 data-i18n="content.pronunciation.title">Pronunciación Perfecta</h3>
+                        <p data-i18n="content.pronunciation.description">Domina los sonidos más desafiantes del inglés para hispanohablantes con nuestros ejercicios de pronunciación específicos.</p>
+                        <a href="#" class="btn btn-primary" data-i18n="content.pronunciation.button">Ver Ejemplo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Movie Quote Quiz Section -->
+    <section id="quiz" class="section quiz">
+        <div class="container">
+            <div class="section-title">
+                <h2>Movie Quote Quiz</h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-intro active">
+                    <h3>Test Your Movie Knowledge!</h3>
+                    <p>Can you identify these famous movies from their iconic quotes? Take our quiz to find out!</p>
+                    <p class="quiz-stats"><span id="quiz-participants">110</span> people have taken this quiz</p>
+                    <button id="start-quiz" class="btn btn-primary">Start Quiz</button>
+                </div>
+                <div class="quiz-questions">
+                    <div class="question-container">
+                        <div class="question-number">Question <span id="current-question">1</span>/6</div>
+                        <div class="question-text"></div>
+                        <div class="options-container"></div>
+                        <div class="hint-container">
+                            <button class="hint-button">Need a hint?</button>
+                            <p class="hint-text"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-results">
+                    <h3>Your Score: <span id="score">0</span>/6</h3>
+                    <p id="score-message"></p>
+                    <div class="explanation-container"></div>
+                    <button id="retry-quiz" class="btn btn-primary">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="section resources">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="resources.title">Recursos de Aprendizaje</h2>
+            </div>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h3 data-i18n="resources.travel_guide.title">Guía de Inglés para Viajes</h3>
+                    <p data-i18n="resources.travel_guide.description">Frases esenciales y vocabulario para hispanohablantes que viajan a países de habla inglesa.</p>
+                    <div class="price">
+                        <del data-i18n="resources.travel_guide.price_original">$9.99</del>
+                        <span class="new-price" data-i18n="resources.travel_guide.price_current">¡Gratis por tiempo limitado!</span>
+                    </div>
+                    <a href="https://raw.githubusercontent.com/seemo14/Inglesfacil/main/resources/travel_english_guide.pdf" class="btn btn-primary" data-i18n="resources.travel_guide.button">Obtener Guía</a>
+                </div>
+                <div class="resource-card">
+                    <h3 data-i18n="resources.movie_collection.title">Colección de Inglés de Películas</h3>
+                    <p data-i18n="resources.movie_collection.description">Aprende más de 100 expresiones de películas y programas de TV populares con contexto y ejemplos.</p>
+                    <div class="price">
+                        <del data-i18n="resources.movie_collection.price_original">$14.99</del>
+                        <span class="new-price" data-i18n="resources.movie_collection.price_current">¡Gratis por tiempo limitado!</span>
+                    </div>
+                    <a href="https://raw.githubusercontent.com/seemo14/Inglesfacil/main/resources/movie_english_collection.pdf" class="btn btn-primary" data-i18n="resources.movie_collection.button">Obtener Colección</a>
+                </div>
+                <div class="resource-card">
+                    <h3 data-i18n="resources.pronunciation_workbook.title">Cuaderno de Ejercicios de Pronunciación</h3>
+                    <p data-i18n="resources.pronunciation_workbook.description">Ejercicios específicos para hispanohablantes para dominar los sonidos desafiantes del inglés.</p>
+                    <div class="price">
+                        <del data-i18n="resources.pronunciation_workbook.price_original">$12.99</del>
+                        <span class="new-price" data-i18n="resources.pronunciation_workbook.price_current">¡Gratis por tiempo limitado!</span>
+                    </div>
+                    <a href="https://raw.githubusercontent.com/seemo14/Inglesfacil/main/resources/pronunciation_workbook.pdf" class="btn btn-primary" data-i18n="resources.pronunciation_workbook.button">Obtener Cuaderno</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Tips Section -->
+    <section class="section learning-tips">
+        <div class="container">
+            <div class="section-title">
+                <h2>Learning Tips</h2>
+            </div>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <h3>Listen Daily</h3>
+                    <p>Immerse yourself in English by listening to podcasts, music, or watching movies with subtitles for at least 15 minutes every day.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <h3>Read Aloud</h3>
+                    <p>Practice pronunciation by reading English texts aloud, recording yourself, and comparing with native speakers.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Find Practice Partners</h3>
+                    <p>Join language exchange groups online or in-person to practice conversation with other learners or native speakers.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-sticky-note"></i>
+                    </div>
+                    <h3>Use Sticky Notes</h3>
+                    <p>Label objects around your home with their English names to build vocabulary through visual association.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="section social-media">
+        <div class="container">
+            <div class="section-title">
+                <h2>Follow Us</h2>
+            </div>
+            <div class="social-platforms">
+                <div class="social-platform">
+                    <div class="platform-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h3>Instagram</h3>
+                    <p>Daily vocabulary, phrases, and quick English lessons.</p>
+                    <a href="https://www.instagram.com/ingles.facil123/" class="btn btn-primary">Follow @ingles.facil123</a>
+                </div>
+                <div class="social-platform">
+                    <div class="platform-icon tiktok">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <h3>TikTok</h3>
+                    <p>Fun, short videos teaching English expressions and pronunciation.</p>
+                    <a href="https://www.tiktok.com/@ingls.fcil.con.ana" class="btn btn-primary">Follow @ingls.fcil.con.ana</a>
+                </div>
+                <div class="social-platform">
+                    <div class="platform-icon youtube">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <h3>YouTube</h3>
+                    <p>In-depth English lessons, pronunciation guides, and more.</p>
+                    <a href="https://www.youtube.com/@InglesfacilConana" class="btn btn-primary">Subscribe</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="testimonials.title">Lo Que Dicen Nuestros Estudiantes</h2>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content" data-i18n="testimonials.testimonial1.content">
+                    "Gracias a Inglés Fácil 123, finalmente puedo mantener conversaciones en inglés durante mis viajes. Los videos diarios y las guías de pronunciación han sido fundamentales para mi progreso."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-info">
+                        <h4 data-i18n="testimonials.testimonial1.author">María González</h4>
+                        <p data-i18n="testimonials.testimonial1.location">Madrid, España</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content" data-i18n="testimonials.testimonial2.content">
+                    "He probado muchos métodos para aprender inglés, pero ninguno tan efectivo como este. Las frases de películas y el vocabulario práctico me han ayudado a conectar con la cultura y hablar con más confianza."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-info">
+                        <h4 data-i18n="testimonials.testimonial2.author">Carlos Rodríguez</h4>
+                        <p data-i18n="testimonials.testimonial2.location">Buenos Aires, Argentina</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="contact.title">Ponte en Contacto</h2>
+            </div>
+            <form class="contact-form" id="contact-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" data-i18n-placeholder="contact.name_placeholder" placeholder="Tu Nombre" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" data-i18n-placeholder="contact.email_placeholder" placeholder="Tu Email" required>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" required>
+                        <option value="" disabled selected data-i18n="contact.topic_options.default">Seleccionar Tema</option>
+                        <option value="partnership" data-i18n="contact.topic_options.partnership">Asociación Comercial</option>
+                        <option value="sponsorship" data-i18n="contact.topic_options.sponsorship">Patrocinio</option>
+                        <option value="resources" data-i18n="contact.topic_options.resources">Recursos de Aprendizaje</option>
+                        <option value="other" data-i18n="contact.topic_options.other">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" data-i18n-placeholder="contact.message_placeholder" placeholder="Tu Mensaje" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" data-i18n="contact.submit_button">Enviar Mensaje</button>
+                <div class="form-message"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <h3 data-i18n="nav.brand">Inglés Fácil 123</h3>
+                    </div>
+                    <p data-i18n="footer.about_text">Ayudando a hispanohablantes a aprender inglés a través de contenido atractivo, práctico y divertido desde 2020.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/ingles.facil123/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@ingls.fcil.con.ana"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.youtube.com/@InglesfacilConana"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3 data-i18n="footer.quick_links">Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#home" data-i18n="nav.home">Inicio</a></li>
+                        <li><a href="#features" data-i18n="nav.features">Características</a></li>
+                        <li><a href="#content" data-i18n="nav.content">Contenido</a></li>
+                        <li><a href="#resources" data-i18n="nav.resources">Recursos</a></li>
+                        <li><a href="#contact" data-i18n="nav.contact">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3 data-i18n="footer.resources_title">Recursos</h3>
+                    <ul>
+                        <li><a href="#" data-i18n="footer.resources_links.free_guides">Guías PDF Gratuitas</a></li>
+                        <li><a href="#" data-i18n="footer.resources_links.premium">Materiales Premium</a></li>
+                        <li><a href="#" data-i18n="footer.resources_links.vip">Membresía VIP</a></li>
+                        <li><a href="#" data-i18n="footer.resources_links.business">Inglés de Negocios</a></li>
+                        <li><a href="#" data-i18n="footer.resources_links.travel">Inglés para Viajes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Inglés Fácil 123. <span data-i18n="footer.copyright">Todos los Derechos Reservados.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
