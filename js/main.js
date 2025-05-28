@@ -1,7 +1,29 @@
-// Combined JavaScript for Inglés Fácil con Ana Website
+// Fixed and Enhanced Language Switching JavaScript for Inglés Fácil con Ana
+
+// Global variables for language system
+let translations = {};
+let currentLang = 'es'; // Default to Spanish
+
+// Initialize language system when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize mobile menu
+    initMobileMenu();
+    
+    // Initialize smooth scrolling
+    initSmoothScrolling();
+    
+    // Initialize language system
+    initializeLanguageSystem();
+    
+    // Initialize quiz
+    initializeQuiz();
+    
+    // Initialize contact form
+    initializeContactForm();
+});
 
 // Mobile Menu Toggle
-document.addEventListener('DOMContentLoaded', function() {
+function initMobileMenu() {
     const mobileMenu = document.querySelector('.mobile-menu');
     const navLinks = document.querySelector('.nav-links');
     
@@ -19,8 +41,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-    
-    // Smooth scrolling for anchor links
+}
+
+// Smooth scrolling for anchor links
+function initSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -31,7 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 // Close mobile menu if open
-                if (navLinks.classList.contains('active')) {
+                const navLinks = document.querySelector('.nav-links');
+                if (navLinks && navLinks.classList.contains('active')) {
                     navLinks.classList.remove('active');
                 }
                 
@@ -43,24 +68,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
-    // Initialize Quiz
-    initializeQuiz();
-    
-    // Initialize Contact Form
-    initializeContactForm();
-});
-
-// Global variables for language system
-let translations = {};
-let currentLang = 'es'; // Default to Spanish
+}
 
 // Initialize language system
 async function initializeLanguageSystem() {
     try {
+        console.log('Initializing language system...');
+        
         // Load translations
         const enResponse = await fetch('translations_en.json');
         const esResponse = await fetch('translations_es.json');
+        
+        if (!enResponse.ok || !esResponse.ok) {
+            throw new Error('Failed to load translation files');
+        }
         
         const enData = await enResponse.json();
         const esData = await esResponse.json();
@@ -69,6 +90,8 @@ async function initializeLanguageSystem() {
             en: enData.en,
             es: esData.es
         };
+        
+        console.log('Translations loaded:', translations);
         
         // Detect user's preferred language
         detectLanguage();
@@ -79,7 +102,7 @@ async function initializeLanguageSystem() {
         // Initial translation
         translatePage(currentLang);
         
-        console.log('Language system initialized successfully');
+        console.log('Language system initialized successfully with language:', currentLang);
     } catch (error) {
         console.error('Error initializing language system:', error);
         
@@ -87,6 +110,7 @@ async function initializeLanguageSystem() {
         translations = {
             en: {
                 nav: {
+                    brand: "English with Ana",
                     home: "Home",
                     features: "Features",
                     content: "Content",
@@ -94,10 +118,15 @@ async function initializeLanguageSystem() {
                     resources: "Resources",
                     contact: "Contact"
                 },
+                language: {
+                    en: "English",
+                    es: "Spanish"
+                }
                 // Add more fallback translations as needed
             },
             es: {
                 nav: {
+                    brand: "Inglés Fácil con Ana",
                     home: "Inicio",
                     features: "Características",
                     content: "Contenido",
@@ -105,6 +134,10 @@ async function initializeLanguageSystem() {
                     resources: "Recursos",
                     contact: "Contacto"
                 },
+                language: {
+                    en: "Inglés",
+                    es: "Español"
+                }
                 // Add more fallback translations as needed
             }
         };
@@ -137,41 +170,76 @@ function detectLanguage() {
 
 // Set up language selector dropdown
 function setupLanguageSelector() {
-    const languageSelector = document.querySelector('.language-selector');
-    const currentLangElement = document.querySelector('.current-lang');
-    const langOptions = document.querySelectorAll('.lang-option');
+    console.log('Setting up language selector...');
     
     // Update current language display
     updateCurrentLanguageDisplay();
     
     // Add click event listeners to language options
+    const langOptions = document.querySelectorAll('.lang-option');
+    
     langOptions.forEach(option => {
-        option.addEventListener('click', function() {
+        option.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
             const lang = this.getAttribute('data-lang');
-            switchLanguage(lang);
+            console.log('Language option clicked:', lang);
+            
+            if (lang && lang !== currentLang) {
+                switchLanguage(lang);
+            }
         });
     });
+    
+    // Make sure the language selector is visible
+    const languageSelector = document.querySelector('.language-selector');
+    if (languageSelector) {
+        languageSelector.style.display = 'block';
+    }
+    
+    console.log('Language selector setup complete');
 }
 
 // Update current language display
 function updateCurrentLanguageDisplay() {
-    const currentLangElement = document.querySelector('.current-lang');
     const currentLangText = document.querySelector('.current-lang-text');
     const currentLangFlag = document.querySelector('.current-lang-flag');
     
-    if (currentLangText && translations[currentLang] && translations[currentLang].language) {
-        currentLangText.textContent = translations[currentLang].language[currentLang];
+    if (currentLangText) {
+        // Set the text based on the current language
+        if (currentLang === 'en') {
+            currentLangText.textContent = 'English';
+        } else {
+            currentLangText.textContent = 'Español';
+        }
     }
     
-    if (currentLangFlag) {
-        currentLangFlag.src = `images/flags/${currentLang}.png`;
-        currentLangFlag.alt = translations[currentLang]?.language?.[currentLang] || (currentLang === 'en' ? 'English' : 'Español');
-    }
+    // Update active state in dropdown
+    const langOptions = document.querySelectorAll('.lang-option');
+    langOptions.forEach(option => {
+        const optionLang = option.getAttribute('data-lang');
+        if (optionLang === currentLang) {
+            option.classList.add('active');
+        } else {
+            option.classList.remove('active');
+        }
+    });
+    
+    // Update HTML lang attribute
+    document.documentElement.lang = currentLang;
+    
+    console.log('Current language display updated to:', currentLang);
 }
 
 // Switch language
 function switchLanguage(lang) {
     if (lang === currentLang) return;
+    
+    console.log('Switching language from', currentLang, 'to', lang);
+    
+    // Add translating class to body for visual feedback
+    document.body.classList.add('translating');
     
     // Update current language
     currentLang = lang;
@@ -184,10 +252,19 @@ function switchLanguage(lang) {
     
     // Translate page content
     translatePage(lang);
+    
+    // Remove translating class after a short delay
+    setTimeout(() => {
+        document.body.classList.remove('translating');
+    }, 500);
+    
+    console.log('Language switched to:', lang);
 }
 
 // Translate page content
 function translatePage(lang) {
+    console.log('Translating page to:', lang);
+    
     // Translate elements with data-i18n attribute
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
@@ -215,6 +292,8 @@ function translatePage(lang) {
     
     // Translate quiz content
     translateQuizContent(lang);
+    
+    console.log('Page translation complete');
 }
 
 // Translate a specific element
@@ -269,8 +348,8 @@ function translateQuizContent(lang) {
     
     // Update question text
     document.querySelectorAll('.progress-text').forEach(element => {
-        const questionNumber = element.textContent.split(' ')[1];
-        element.textContent = `${translations[lang].quiz.question} ${questionNumber}`;
+        const questionNumber = element.querySelector('#current-question').textContent;
+        element.innerHTML = `<span data-i18n="quiz.question">${translations[lang].quiz.question}</span> <span id="current-question">${questionNumber}</span>/6`;
     });
     
     // Update hint buttons
@@ -319,7 +398,12 @@ function initializeQuiz() {
     const participantCount = document.getElementById('participant-count');
     const participantNumber = document.getElementById('participant-number');
     
-    if (!startBtn) return;
+    if (!startBtn) {
+        console.log('Quiz not found on page');
+        return;
+    }
+    
+    console.log('Initializing quiz...');
     
     // Quiz state
     let currentQuestion = 1;
@@ -521,13 +605,20 @@ function initializeQuiz() {
             }
         });
     });
+    
+    console.log('Quiz initialized successfully');
 }
 
 // Contact form functionality
 function initializeContactForm() {
     const contactForm = document.getElementById('contactForm');
     
-    if (!contactForm) return;
+    if (!contactForm) {
+        console.log('Contact form not found on page');
+        return;
+    }
+    
+    console.log('Initializing contact form...');
     
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -613,7 +704,19 @@ function initializeContactForm() {
         // Insert message after form
         contactForm.parentNode.insertBefore(messageElement, contactForm.nextSibling);
     }
+    
+    console.log('Contact form initialized successfully');
 }
 
-// Initialize language system when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeLanguageSystem);
+// Debug function to help troubleshoot language switching
+function debugLanguageSystem() {
+    console.log('=== Language System Debug ===');
+    console.log('Current language:', currentLang);
+    console.log('Available translations:', Object.keys(translations));
+    console.log('Language selector elements:', document.querySelectorAll('.lang-option').length);
+    console.log('Translatable elements:', document.querySelectorAll('[data-i18n]').length);
+    console.log('=== End Debug ===');
+}
+
+// Call debug function after initialization
+setTimeout(debugLanguageSystem, 2000);
