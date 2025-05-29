@@ -1,4 +1,3 @@
-```javascript
 // Main JavaScript for Inglés Fácil con Ana Website
 
 // Global variables for language system
@@ -52,6 +51,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize language system first, then other components
     initializeLanguageSystem();
+    
+    // Initialize quiz separately to ensure it works even if language system has issues
+    initializeQuiz();
+    
+    // Initialize contact form
+    initializeContactForm();
 });
 
 // Initialize language system
@@ -79,10 +84,6 @@ async function initializeLanguageSystem() {
         
         // Initial translation of the page
         translatePage(currentLang);
-        
-        // Now that translations are loaded and applied, initialize other components
-        initializeQuiz();
-        initializeContactForm();
         
         console.log('Language system initialized successfully');
     } catch (error) {
@@ -122,8 +123,6 @@ async function initializeLanguageSystem() {
         detectLanguage();
         setupLanguageSelector();
         translatePage(currentLang);
-        initializeQuiz(); // Initialize quiz after fallback translations are loaded
-        initializeContactForm(); // Initialize contact form after fallback translations are loaded
     }
 }
 
@@ -166,351 +165,242 @@ function setupLanguageSelector() {
 // Update current language display
 function updateCurrentLanguageDisplay() {
     const currentLangText = document.querySelector('.current-lang-text');
-    const currentLangFlagContainer = document.querySelector('.current-lang'); // The parent of the flag SVG
+    const currentLangFlag = document.querySelector('.current-lang-flag');
     
-    if (currentLangText && translations[currentLang] && translations[currentLang].language) {
-        currentLangText.textContent = translations[currentLang].language[currentLang];
+    // Update text
+    if (currentLangText) {
+        currentLangText.textContent = translations[currentLang]?.language?.[currentLang] || (currentLang === 'en' ? 'English' : 'Español');
     }
     
-    // Update active class for language options in the dropdown
-    document.querySelectorAll('.lang-option').forEach(option => {
-        if (option.getAttribute('data-lang') === currentLang) {
+    // Update active state in dropdown
+    const langOptions = document.querySelectorAll('.lang-option');
+    langOptions.forEach(option => {
+        const optionLang = option.getAttribute('data-lang');
+        if (optionLang === currentLang) {
             option.classList.add('active');
         } else {
             option.classList.remove('active');
         }
     });
-
-    // Update the displayed flag (SVG) in the current-lang div
-    const englishFlagSvg = `<svg class="flag-svg current-lang-flag" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="60" height="30" fill="#00247d"/>
-                            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
-                            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2"/>
-                            <path d="M30,0 L30,30 M0,15 L60,15" stroke="#fff" stroke-width="10"/>
-                            <path d="M30,0 L30,30 M0,15 L60,15" stroke="#cf142b" stroke-width="6"/>
-                        </svg>`;
-    const spanishFlagSvg = `<svg class="flag-svg current-lang-flag" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="60" height="30" fill="#c60b1e"/>
-                            <rect width="60" height="15" y="7.5" fill="#ffc400"/>
-                        </svg>`;
-
-    if (currentLangFlagContainer) {
-        // Find the existing flag SVG element inside .current-lang
-        const existingFlagSvg = currentLangFlagContainer.querySelector('.flag-svg.current-lang-flag');
-        if (existingFlagSvg) {
-            existingFlagSvg.outerHTML = currentLang === 'en' ? englishFlagSvg : spanishFlagSvg;
-        }
-    }
 }
 
 // Switch language
 function switchLanguage(lang) {
-    if (lang === currentLang) return;
+    if (lang === currentLang || !['en', 'es'].includes(lang)) return;
     
     // Update current language
     currentLang = lang;
     
-    // Store user preference
-    localStorage.setItem('preferredLanguage', lang);
+    // Save preference to localStorage
+    localStorage.setItem('preferredLanguage', currentLang);
     
-    // Update language display
+    // Update display
     updateCurrentLanguageDisplay();
     
-    // Translate page content
-    translatePage(lang);
+    // Translate page
+    translatePage(currentLang);
 }
 
 // Translate page content
 function translatePage(lang) {
+    if (!translations[lang]) return;
+    
     // Translate elements with data-i18n attribute
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
-        translateElement(element, key, lang);
+        const translation = getNestedTranslation(translations[lang], key);
+        
+        if (translation) {
+            element.textContent = translation;
+        }
     });
     
     // Translate placeholder attributes
     document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
         const key = element.getAttribute('data-i18n-placeholder');
         const translation = getNestedTranslation(translations[lang], key);
+        
         if (translation) {
-            element.setAttribute('placeholder', translation);
+            element.placeholder = translation;
         }
     });
     
-    // Translate select options
-    document.querySelectorAll('select').forEach(select => {
-        Array.from(select.options).forEach(option => {
-            const key = option.getAttribute('data-i18n');
-            if (key) {
-                translateElement(option, key, lang);
-            }
-        });
-    });
-    
-    // Translate quiz content (for static elements, dynamic ones are handled in quiz functions)
-    translateQuizContent(lang);
-}
-
-// Translate a specific element
-function translateElement(element, key, lang) {
-    if (!key || !translations[lang]) return;
-    
-    const translation = getNestedTranslation(translations[lang], key);
-    if (translation) {
-        element.textContent = translation;
+    // Update document title
+    const titleKey = document.querySelector('title').getAttribute('data-i18n');
+    if (titleKey) {
+        const titleTranslation = getNestedTranslation(translations[lang], titleKey);
+        if (titleTranslation) {
+            document.title = titleTranslation;
+        }
     }
 }
 
-// Get nested translation using dot notation
+// Helper function to get nested translation
 function getNestedTranslation(obj, path) {
-    if (!obj || !path) return null;
-    return path.split('.').reduce((prev, curr) => {
-        return prev ? prev[curr] : null;
-    }, obj);
+    const keys = path.split('.');
+    return keys.reduce((o, k) => (o || {})[k], obj);
 }
 
-// Translate quiz content (for elements not dynamically changed by quiz state)
-function translateQuizContent(lang) {
-    if (!translations[lang] || !translations[lang].quiz) return;
-    
-    // Update quiz title and intro (handled by data-i18n on respective elements)
-    // const quizTitle = document.querySelector('.quiz-title');
-    // if (quizTitle) { quizTitle.textContent = translations[lang].quiz.title; }
-    // const quizIntro = document.querySelector('.quiz-intro p[data-i18n="quiz.intro"]');
-    // if (quizIntro) { quizIntro.textContent = translations[lang].quiz.intro; }
-
-    // Update start button (handled by data-i18n)
-    // const startBtn = document.getElementById('start-quiz');
-    // if (startBtn) { startBtn.textContent = translations[lang].quiz.start_button; }
-    
-    // Update navigation buttons (dynamic ones handled in showQuestion)
-    const prevBtn = document.getElementById('prev-btn');
-    if (prevBtn) {
-        prevBtn.textContent = translations[lang].quiz.prev_button;
-    }
-    // The nextBtn text is dynamically set in `showQuestion` based on quiz progress.
-    
-    // Update question text in progress bar (only the "Question" part)
-    const progressTextSpan = document.querySelector('.quiz-progress .progress-text span[data-i18n="quiz.question"]');
-    if (progressTextSpan) {
-        progressTextSpan.textContent = translations[lang].quiz.question;
-    }
-    
-    // Update hint buttons
-    document.querySelectorAll('.hint-btn').forEach(button => {
-        button.textContent = translations[lang].quiz.hint_button;
-    });
-    
-    // Update results section labels (handled by data-i18n)
-    // const scoreLabel = document.querySelector('.score-label');
-    // if (scoreLabel) { scoreLabel.textContent = translations[lang].quiz.your_score; }
-    
-    // const retryBtn = document.getElementById('retry-quiz');
-    // if (retryBtn) { retryBtn.textContent = translations[lang].quiz.retry_button; }
-    
-    // const shareText = document.querySelector('.share-results h4');
-    // if (shareText) { shareText.textContent = translations[lang].quiz.share_results; }
-
-    // Participant text needs to be re-rendered for translation
-    const quizIntroParticipantText = document.querySelector('.quiz-intro p:nth-child(2)'); // "6 questions • 110 people have taken this quiz"
-    if (quizIntroParticipantText) {
-        const numQuestions = quizIntroParticipantText.querySelector('span[data-i18n="quiz.questions"]').textContent.split(' ')[0]; // "6"
-        const participantCount = quizIntroParticipantText.querySelector('#participant-count').textContent; // "110"
-        quizIntroParticipantText.innerHTML = `<span data-i18n="quiz.questions">${numQuestions} ${translations[lang].quiz.questions.split(' ')[1]}</span> • <span id="participant-count">${participantCount}</span> <span data-i18n="quiz.participants">${translations[lang].quiz.participants}</span>`;
-    }
-
-    // This part is handled in showResults, but for the initial load, make sure data-i18n is translated
-    // const participantText = document.querySelector('.competition-stats p');
-    // if (participantText) {
-    //     const participantNumber = document.getElementById('participant-number').textContent; // Get the number as it is
-    //     participantText.innerHTML = `<span data-i18n="quiz.participant_text">${translations[lang].quiz.participant_text}</span><span id="participant-number">${participantNumber}</span> <span data-i18n="quiz.participant_suffix">${translations[lang].quiz.participant_suffix}</span>`;
-    // }
-}
-
-// Quiz functionality
+// Initialize quiz functionality
 function initializeQuiz() {
-    // Quiz elements
+    const startQuizBtn = document.getElementById('start-quiz');
     const quizIntro = document.querySelector('.quiz-intro');
     const quizQuestions = document.querySelector('.quiz-questions');
     const quizResults = document.querySelector('.quiz-results');
-    const startBtn = document.getElementById('start-quiz');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const retryBtn = document.getElementById('retry-quiz');
-    const progressFill = document.querySelector('.progress-fill');
     const questions = document.querySelectorAll('.question');
-    const scoreEl = document.getElementById('score');
-    const scoreMessage = document.getElementById('score-message');
-    const participantCount = document.getElementById('participant-count'); // For intro screen
-    const participantNumber = document.getElementById('participant-number'); // For results screen
+    const progressFill = document.querySelector('.progress-fill');
+    const currentQuestionSpan = document.getElementById('current-question');
+    const prevQuestionBtn = document.getElementById('prev-question');
+    const nextQuestionBtn = document.getElementById('next-question');
+    const seeResultsBtn = document.getElementById('see-results');
+    const restartQuizBtn = document.getElementById('restart-quiz');
+    const userScoreSpan = document.getElementById('user-score');
+    const scoreMessageP = document.getElementById('score-message');
+    const participantNumberSpan = document.getElementById('participant-number');
+    const participantCountSpan = document.getElementById('participant-count');
     
-    if (!startBtn) return; // Exit if quiz elements are not present
-    
-    // Quiz state
-    let currentQuestion = 1;
-    let score = 0;
-    let answeredQuestions = {};
-    let quizCompleted = false;
-    
-    // Initialize participant count from localStorage or default to 110
-    let participants = localStorage.getItem('movieQuizParticipants') ? 
-        parseInt(localStorage.getItem('movieQuizParticipants')) : 110;
-    
-    if (participantCount) {
-        participantCount.textContent = participants;
+    // If any of these elements don't exist, the quiz isn't on the page
+    if (!startQuizBtn || !quizIntro || !quizQuestions || !quizResults) {
+        console.log('Quiz elements not found, skipping quiz initialization');
+        return;
     }
     
+    let currentQuestion = 1;
+    let score = 0;
+    let participantCount = parseInt(participantCountSpan.textContent) || 110;
+    
     // Start quiz
-    startBtn.addEventListener('click', function() {
+    startQuizBtn.addEventListener('click', function() {
         quizIntro.classList.remove('active');
         quizQuestions.classList.add('active');
-        showQuestion(currentQuestion);
+        showQuestion(1);
     });
     
-    // Show a specific question
+    // Show question
     function showQuestion(questionNumber) {
-        // Hide all questions
         questions.forEach(question => {
             question.classList.remove('active');
         });
         
-        // Show current question
-        const currentQuestionEl = document.querySelector(`.question[data-question="${questionNumber}"]`);
-        if (currentQuestionEl) {
-            currentQuestionEl.classList.add('active');
+        const questionToShow = document.querySelector(`.question[data-question="${questionNumber}"]`);
+        if (questionToShow) {
+            questionToShow.classList.add('active');
+            currentQuestionSpan.textContent = questionNumber;
+            progressFill.style.width = `${(questionNumber / questions.length) * 100}%`;
         }
-        
-        // Update progress text and fill
-        const progressTextEl = document.querySelector('.quiz-progress .progress-text');
-        if (progressTextEl && translations[currentLang]?.quiz?.question) {
-            progressTextEl.innerHTML = `<span data-i18n="quiz.question">${translations[currentLang].quiz.question}</span> <span id="current-question">${questionNumber}</span>/${questions.length}`;
-        }
-        progressFill.style.width = `${(questionNumber / questions.length) * 100}%`;
         
         // Update navigation buttons
-        prevBtn.disabled = questionNumber === 1;
-        
-        if (questionNumber === questions.length) {
-            nextBtn.textContent = translations[currentLang]?.quiz?.see_results || 'See Results';
-        } else {
-            nextBtn.textContent = translations[currentLang]?.quiz?.next_button || 'Next';
-        }
+        prevQuestionBtn.style.display = questionNumber === 1 ? 'none' : 'block';
+        nextQuestionBtn.style.display = questionNumber < questions.length ? 'block' : 'none';
+        seeResultsBtn.style.display = questionNumber === questions.length ? 'block' : 'none';
     }
     
-    // Handle option selection
-    document.querySelectorAll('.option').forEach(option => {
-        option.addEventListener('click', function() {
-            const questionEl = this.closest('.question');
-            const questionNumber = parseInt(questionEl.dataset.question);
-            
-            // If already answered, do nothing
-            if (answeredQuestions[questionNumber]) return;
-            
-            // Mark question as answered
-            answeredQuestions[questionNumber] = true;
-            
-            // Disable all options in this question
-            questionEl.querySelectorAll('.option').forEach(opt => {
-                opt.disabled = true;
-                opt.classList.remove('selected');
-            });
-            
-            // Mark selected option
-            this.classList.add('selected');
-            
-            // Check if correct
-            if (this.dataset.correct === 'true') {
-                this.classList.add('correct');
-                score++;
-            } else {
-                this.classList.add('incorrect');
-                // Find and highlight correct answer
-                questionEl.querySelector('.option[data-correct="true"]').classList.add('correct');
-            }
-            
-            // Show explanation
-            questionEl.querySelector('.explanation').classList.add('active');
-        });
-    });
-    
-    // Handle hint buttons
-    document.querySelectorAll('.hint-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const hint = this.nextElementSibling;
-            hint.classList.add('active');
-            this.style.display = 'none';
-        });
-    });
-    
-    // Navigation buttons
-    prevBtn.addEventListener('click', function() {
+    // Previous question
+    prevQuestionBtn.addEventListener('click', function() {
         if (currentQuestion > 1) {
             currentQuestion--;
             showQuestion(currentQuestion);
         }
     });
     
-    nextBtn.addEventListener('click', function() {
+    // Next question
+    nextQuestionBtn.addEventListener('click', function() {
         if (currentQuestion < questions.length) {
             currentQuestion++;
             showQuestion(currentQuestion);
-        } else {
-            // Show results
-            showResults();
         }
     });
     
-    // Show results
-    function showResults() {
+    // Option selection
+    document.querySelectorAll('.option').forEach(option => {
+        option.addEventListener('click', function() {
+            const question = this.closest('.question');
+            const options = question.querySelectorAll('.option');
+            
+            // If already answered, do nothing
+            if (options[0].disabled) return;
+            
+            // Disable all options
+            options.forEach(opt => {
+                opt.disabled = true;
+                opt.classList.remove('selected');
+            });
+            
+            // Select this option
+            this.classList.add('selected');
+            
+            // Check if correct
+            const isCorrect = this.hasAttribute('data-correct');
+            if (isCorrect) {
+                this.classList.add('correct');
+                score++;
+            } else {
+                this.classList.add('incorrect');
+                
+                // Highlight correct answer
+                options.forEach(opt => {
+                    if (opt.hasAttribute('data-correct')) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            
+            // Show explanation
+            const explanation = question.querySelector('.explanation');
+            if (explanation) {
+                explanation.classList.add('active');
+            }
+        });
+    });
+    
+    // Hint buttons
+    document.querySelectorAll('.hint-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const hint = this.nextElementSibling;
+            hint.classList.toggle('active');
+        });
+    });
+    
+    // See results
+    seeResultsBtn.addEventListener('click', function() {
         quizQuestions.classList.remove('active');
         quizResults.classList.add('active');
         
         // Update score
-        scoreEl.textContent = score;
+        userScoreSpan.textContent = score;
         
-        // Update score message based on current language
-        if (score === 6) {
-            scoreMessage.textContent = translations[currentLang]?.quiz?.perfect_score || 
-                "¡Perfecto! You're a movie quote master! Your English and movie knowledge are impressive!";
-        } else if (score >= 4) {
-            scoreMessage.textContent = translations[currentLang]?.quiz?.good_score || 
-                "¡Muy bien! You know your movies and English quotes quite well!";
-        } else if (score >= 2) {
-            scoreMessage.textContent = translations[currentLang]?.quiz?.average_score || 
-                "¡Buen intento! Keep watching movies in English to improve your knowledge!";
+        // Update score message
+        if (score === questions.length) {
+            scoreMessageP.textContent = translations[currentLang]?.quiz?.perfect_score || 'Perfect! You\'re a movie quote master! Your English and movie knowledge are impressive!';
+        } else if (score >= questions.length * 0.7) {
+            scoreMessageP.textContent = translations[currentLang]?.quiz?.good_score || 'Very good! You know your movies and English quotes quite well!';
+        } else if (score >= questions.length * 0.5) {
+            scoreMessageP.textContent = translations[currentLang]?.quiz?.average_score || 'Good try! Keep watching movies in English to improve your knowledge!';
         } else {
-            scoreMessage.textContent = translations[currentLang]?.quiz?.low_score || 
-                "¡Sigue practicando! Watch more movies in English with subtitles to learn these famous quotes!";
+            scoreMessageP.textContent = translations[currentLang]?.quiz?.low_score || 'Keep practicing! Watch more movies in English with subtitles to learn these famous quotes!';
         }
         
-        // Update participant count if quiz wasn't completed before
-        if (!quizCompleted) {
-            participants++;
-            if (participantCount) participantCount.textContent = participants; // Update on intro if visible
-            if (participantNumber) participantNumber.textContent = participants; // Update on results screen
-            localStorage.setItem('movieQuizParticipants', participants);
-            quizCompleted = true;
-        }
-
-        // Update participant text with translation
-        const participantTextWrapper = document.querySelector('.competition-stats p');
-        if (participantTextWrapper && translations[currentLang]?.quiz) {
-            const currentParticipantNumber = participantNumber.textContent; // Get the currently displayed number
-            const textBefore = translations[currentLang].quiz.participant_text || "You're participant #";
-            const textAfter = translations[currentLang].quiz.participant_suffix || "to take this quiz!";
-            participantTextWrapper.innerHTML = `${textBefore}<span id="participant-number">${currentParticipantNumber}</span> ${textAfter}`;
-        }
-    }
+        // Update participant number
+        participantCount++;
+        participantCountSpan.textContent = participantCount;
+        participantNumberSpan.textContent = participantCount;
+        
+        // Set up share links
+        const shareMessage = (translations[currentLang]?.quiz?.share_message || 'I scored {score}/6 on the Easy English with Ana movie quotes quiz! Can you beat it?').replace('{score}', score);
+        const encodedMessage = encodeURIComponent(shareMessage);
+        const shareUrl = encodeURIComponent(window.location.href);
+        
+        document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?text=${encodedMessage}&url=${shareUrl}`;
+        document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}&quote=${encodedMessage}`;
+        document.getElementById('share-whatsapp').href = `https://wa.me/?text=${encodedMessage} ${shareUrl}`;
+    });
     
-    // Retry quiz
-    retryBtn.addEventListener('click', function() {
-        // Reset quiz state
-        currentQuestion = 1;
+    // Restart quiz
+    restartQuizBtn.addEventListener('click', function() {
+        // Reset score
         score = 0;
-        answeredQuestions = {};
-        quizCompleted = false; // Allow participant count to increment again if retried
-
-        // Reset UI
+        
+        // Reset questions
         document.querySelectorAll('.option').forEach(option => {
             option.disabled = false;
             option.classList.remove('selected', 'correct', 'incorrect');
@@ -524,132 +414,70 @@ function initializeQuiz() {
             hint.classList.remove('active');
         });
         
-        document.querySelectorAll('.hint-btn').forEach(button => {
-            button.style.display = 'block';
-        });
-        
-        // Show first question
+        // Show intro
         quizResults.classList.remove('active');
-        quizQuestions.classList.add('active');
-        showQuestion(currentQuestion);
+        quizIntro.classList.add('active');
+        
+        // Reset current question
+        currentQuestion = 1;
     });
     
-    // Initialize social share buttons
-    document.querySelectorAll('.share-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const platform = this.querySelector('i').className;
-            const score = document.getElementById('score').textContent;
-            
-            // Use translated share message
-            const shareMessageTemplate = getNestedTranslation(translations[currentLang], 'quiz.share_message') || 
-                                        "I scored {score}/6 on the Easy English with Ana movie quotes quiz! Can you beat it?";
-            const message = encodeURIComponent(shareMessageTemplate.replace('{score}', score));
-            const url = encodeURIComponent(window.location.href);
-            
-            let shareUrl = '';
-            
-            if (platform.includes('facebook')) {
-                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${message}`;
-            } else if (platform.includes('twitter')) {
-                shareUrl = `https://twitter.com/intent/tweet?text=${message}&url=${url}`;
-            } else if (platform.includes('whatsapp')) {
-                shareUrl = `https://api.whatsapp.com/send?text=${message} ${url}`;
-            }
-            
-            if (shareUrl) {
-                window.open(shareUrl, '_blank', 'width=600,height=400');
-            }
-        });
-    });
+    console.log('Quiz initialized successfully');
 }
 
-// Contact form functionality
+// Initialize contact form
 function initializeContactForm() {
-    const contactForm = document.getElementById('contactForm');
+    const contactForm = document.getElementById('contact-form');
+    const formMessage = document.querySelector('.form-message');
     
-    if (!contactForm) return;
+    if (!contactForm || !formMessage) {
+        console.log('Contact form elements not found, skipping form initialization');
+        return;
+    }
     
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
         // Get form values
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
         const topic = document.getElementById('topic').value;
-        const message = document.getElementById('message').value;
+        const message = document.getElementById('message').value.trim();
         
-        // Simple validation
+        // Validate form
         if (!name || !email || !topic || !message) {
-            showFormMessage('error', 'contact.error_message_fill'); // Use translation key
+            formMessage.textContent = translations[currentLang]?.contact?.error_message_fill || 'Please fill in all fields.';
+            formMessage.className = 'form-message error';
             return;
         }
         
-        // Email validation
-        if (!validateEmail(email)) {
-            showFormMessage('error', 'contact.error_message_email'); // Use translation key
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            formMessage.textContent = translations[currentLang]?.contact?.error_message_email || 'Please enter a valid email address.';
+            formMessage.className = 'form-message error';
             return;
         }
         
-        // Simulate form submission (in a real implementation, this would send data to a server)
-        showFormMessage('loading', 'contact.loading_message'); // Use translation key
+        // Show loading message
+        formMessage.textContent = translations[currentLang]?.contact?.loading_message || 'Sending message...';
+        formMessage.className = 'form-message loading';
         
-        // Simulate server response after 1.5 seconds
+        // Simulate form submission (replace with actual form submission)
         setTimeout(function() {
-            // Success message
-            showFormMessage('success', 'contact.success_message'); // Use translation key
+            // Show success message
+            formMessage.textContent = translations[currentLang]?.contact?.success_message || 'Message sent successfully! We will respond to you soon.';
+            formMessage.className = 'form-message success';
             
             // Reset form
             contactForm.reset();
             
-            // Remove success message after 5 seconds
+            // Hide message after 5 seconds
             setTimeout(function() {
-                const messageElement = document.querySelector('.form-message');
-                if (messageElement) {
-                    messageElement.remove();
-                }
+                formMessage.style.display = 'none';
             }, 5000);
         }, 1500);
     });
     
-    // Function to validate email format
-    function validateEmail(email) {
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    }
-    
-    // Function to show form messages
-    function showFormMessage(type, messageKey) { // messageKey refers to a translation key
-        // Remove any existing message
-        const existingMessage = document.querySelector('.form-message');
-        if (existingMessage) {
-            existingMessage.remove();
-        }
-        
-        // Get the translated message
-        const message = getNestedTranslation(translations[currentLang], messageKey) || messageKey; // Fallback to key if not found
-        
-        // Create message element
-        const messageElement = document.createElement('div');
-        messageElement.className = `form-message ${type}`;
-        
-        // Set message content based on type
-        if (type === 'loading') {
-            messageElement.innerHTML = `
-                <div class="spinner"></div>
-                <p>${message}</p>
-            `;
-        } else {
-            messageElement.innerHTML = `
-                <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
-                <p>${message}</p>
-            `;
-        }
-        
-        // Insert message after form
-        contactForm.parentNode.insertBefore(messageElement, contactForm.nextSibling);
-    }
+    console.log('Contact form initialized successfully');
 }
-```
-
