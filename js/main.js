@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(event) {
         if (!event.target.closest('.mobile-menu') && !event.target.closest('.nav-links')) {
-            if (navLinks.classList.contains('active')) {
+            if (navLinks && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
             }
         }
@@ -28,15 +28,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
             const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
+            // Allow default behavior for non-anchor links or placeholder '#'
+            if (!targetId || targetId === '#' || !targetId.startsWith('#')) return;
+            
+            e.preventDefault(); // Prevent default only for valid internal anchors
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 // Close mobile menu if open
-                if (navLinks.classList.contains('active')) {
+                if (navLinks && navLinks.classList.contains('active')) {
                     navLinks.classList.remove('active');
                 }
                 
@@ -50,24 +51,35 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Initialize language system first, then other components
-    initializeLanguageSystem();
-    
-    // Initialize quiz separately to ensure it works even if language system has issues
-    initializeQuiz();
-    
-    // Initialize contact form
-    initializeContactForm();
+    initializeLanguageSystem().then(() => {
+        // Initialize components that depend on translations being loaded
+        initializeModals(); 
+        initializeQuiz();
+        initializeContactForm();
+        initializeScrollAnimations(); // Initialize after language system to ensure elements exist
+        initializeClickableCards(); // Initialize after language system
+        updateResourceLinks(); // Update resource links initially
+    }).catch(error => {
+        console.error("Failed to initialize language system or dependent components:", error);
+        // Attempt to initialize non-language dependent features anyway
+        initializeQuiz();
+        initializeContactForm();
+        initializeScrollAnimations();
+        initializeClickableCards();
+        updateResourceLinks();
+    });
 });
 
 // Initialize language system
 async function initializeLanguageSystem() {
     try {
-        // Load translations
-        // Assume translations_en.json contains the 'en' object directly
-        // and translations_es.json contains the 'es' object directly.
         const enResponse = await fetch('translations_en.json');
         const esResponse = await fetch('translations_es.json');
         
+        if (!enResponse.ok || !esResponse.ok) {
+            throw new Error(`HTTP error! status: ${enResponse.status}, ${esResponse.status}`);
+        }
+
         const enData = await enResponse.json();
         const esData = await esResponse.json();
         
@@ -76,107 +88,72 @@ async function initializeLanguageSystem() {
             es: esData
         };
         
-        // Detect user's preferred language
         detectLanguage();
-        
-        // Set up language selector
         setupLanguageSelector();
-        
-        // Initial translation of the page
-        translatePage(currentLang);
-        
+        await translatePage(currentLang); // Ensure translation completes before resolving
         console.log('Language system initialized successfully');
     } catch (error) {
         console.error('Error initializing language system:', error);
-        
-        // --- Fallback to hardcoded translations if JSON files can't be loaded ---
-        translations = {
-            en: {
-                nav: { home: "Home", features: "Features", content: "Content", quiz: "Quiz", resources: "Resources", contact: "Contact", brand: "Easy English with Ana" },
-                hero: { title: "Learn English the Easy Way", subtitle: "Join our community of over 385,000 Spanish speakers learning English through engaging, practical, and fun content.", btn_resources: "Get Learning Resources", btn_instagram: "Follow on Instagram" },
-                features: { title: "Why Learn With Us", daily_life: { title: "Daily Life English", description: "Learn the most useful sentences and expressions that Spanish speakers need in everyday situations." }, movie_vocab: { title: "Movie Vocabulary", description: "Understand your favorite movies and series by learning common expressions and slang used in entertainment." }, pronunciation: { title: "Perfect Pronunciation", description: "Master the sounds that are most challenging for Spanish speakers with our targeted practice exercises." } },
-                content: { title: "Our Popular Content", vocabulary: { tag: "Vocabulary", title: "How Many Words Do You Know?", description: "Test your knowledge with our popular word recognition challenges. How many English words can you remember?", button: "Watch Example" }, movies: { tag: "Movies", title: "Famous Movie Quotes", description: "Learn iconic movie quotes in English and impress your friends with your cultural knowledge and perfect pronunciation.", button: "Watch Example" }, pronunciation: { tag: "Pronunciation", title: "Perfect Pronunciation", description: "Master the most challenging English sounds for Spanish speakers with our targeted pronunciation exercises.", button: "Watch Example" } },
-                quiz: { title: "Test Your Movie Quote Knowledge", intro: "How well do you know famous movie quotes in English? Take this quick quiz to test your knowledge!", questions: "6 questions", participants: "people have taken this quiz", start_button: "Start Quiz", question: "Question", prev_button: "Previous", next_button: "Next", see_results: "See Results", hint_button: "Need a hint?", your_score: "Your Score:", perfect_score: "Perfect! You're a movie quote master! Your English and movie knowledge are impressive!", good_score: "Very good! You know your movies and English quotes quite well!", average_score: "Good try! Keep watching movies in English to improve your knowledge!", low_score: "Keep practicing! Watch more movies in English with subtitles to learn these famous quotes!", participant_text: "You're participant #", participant_suffix: "to take this quiz!", share_results: "Share your results:", share_message: "I scored {score}/6 on the Easy English with Ana movie quotes quiz! Can you beat it?" },
-                social: { title: "Follow Us on Social Media", tiktok: { title: "TikTok", description: "Learn English with short, fun videos. Useful phrases, pronunciation, and quick tips.", button: "Follow on TikTok" }, youtube: { title: "YouTube", description: "Full lessons, detailed explanations, and exclusive content to improve your English.", button: "Subscribe" } },
-                info: { tips: { title: "Learning Tips", description: "Discover effective strategies to learn English faster, memorization techniques, and recommended study habits.", button: "View Tips" }, practice: { title: "English Practice", description: "Interactive exercises, vocabulary games, and comprehension activities to practice your English in a fun way.", button: "Practice Now" } },
-                resources: { title: "Learning Resources", travel_guide: { title: "Travel English Guide", description: "Essential phrases and vocabulary for Spanish speakers traveling to English-speaking countries.", price_original: "$9.99", price_current: "Free for a limited time!", button: "Get Guide" }, movie_collection: { title: "Movie English Collection", description: "Learn 100+ expressions from popular movies and TV shows with context and examples.", price_original: "$14.99", price_current: "Free for a limited time!", button: "Get Collection" }, pronunciation_workbook: { title: "Pronunciation Workbook", description: "Targeted exercises for Spanish speakers to master challenging English sounds.", price_original: "$12.99", price_current: "Free for a limited time!", button: "Get Workbook" } },
-                contact: { title: "Get in Touch", name_placeholder: "Your Name", email_placeholder: "Your Email", topic_options: { default: "Select Topic", partnership: "Business Partnership", sponsorship: "Sponsorship", resources: "Learning Resources", other: "Other" }, message_placeholder: "Your Message", submit_button: "Send Message", success_message: "Message sent successfully! We will respond to you soon.", error_message_fill: "Please fill in all fields.", error_message_email: "Please enter a valid email address.", loading_message: "Sending message..." },
-                footer: { about_text: "Helping Spanish speakers learn English through engaging, practical, and fun content since 2020.", quick_links: "Quick Links", resources_title: "Resources", resources_links: { free_guides: "Free PDF Guides", premium: "Premium Materials", vip: "VIP Membership", business: "Business English", travel: "Travel English" }, copyright: "All Rights Reserved." },
-                language: { en: "English", es: "Spanish" }
-            },
-            es: {
-                nav: { home: "Inicio", features: "Características", content: "Contenido", quiz: "Cuestionario", resources: "Recursos", contact: "Contacto", brand: "Inglés Fácil con Ana" },
-                hero: { title: "Aprende Inglés de Forma Fácil", subtitle: "Únete a nuestra comunidad de más de 385,000 hispanohablantes que aprenden inglés a través de contenido atractivo, práctico y divertido.", btn_resources: "Obtener Recursos de Aprendizaje", btn_instagram: "Síguenos en Instagram" },
-                features: { title: "Por Qué Aprender Con Nosotros", daily_life: { title: "Inglés para la Vida Diaria", description: "Aprende las frases y expresiones más útiles que los hispanohablantes necesitan en situaciones cotidianas." }, movie_vocab: { title: "Vocabulario de Películas", description: "Comprende tus películas y series favoritas aprendiendo expresiones comunes y jerga utilizada en el entretenimiento." }, pronunciation: { title: "Pronunciación Perfecta", description: "Domina los sonidos que son más desafiantes para los hispanohablantes con nuestros ejercicios de práctica específicos." } },
-                content: { title: "Nuestro Contenido Popular", vocabulary: { tag: "Vocabulario", title: "¿Cuántas Palabras Conoces?", description: "Pon a prueba tus conocimientos con nuestros populares desafíos de reconocimiento de palabras. ¿Cuántas palabras en inglés puedes recordar?", button: "Ver Ejemplo" }, movies: { tag: "Películas", title: "Frases de Películas Famosas", description: "Aprende frases icónicas de películas en inglés e impresiona a tus amigos con tu conocimiento cultural y perfecta pronunciación.", button: "Ver Ejemplo" }, pronunciation: { tag: "Pronunciación", title: "Pronunciación Perfecta", description: "Domina los sonidos más desafiantes del inglés para hispanohablantes con nuestros ejercicios de pronunciación específicos.", button: "Ver Ejemplo" } },
-                quiz: { title: "Pon a Prueba Tu Conocimiento de Frases de Películas", intro: "¿Qué tan bien conoces las frases famosas de películas en inglés? ¡Haz este breve cuestionario para poner a prueba tus conocimientos!", questions: "6 preguntas", participants: "personas han realizado este cuestionario", start_button: "Comenzar Cuestionario", question: "Pregunta", prev_button: "Anterior", next_button: "Siguiente", see_results: "Ver Resultados", hint_button: "¿Necesitas una pista?", your_score: "Tu Puntuación:", perfect_score: "¡Perfecto! Eres un maestro de las frases de películas. ¡Tu inglés y conocimiento cinematográfico son impresionantes!", good_score: "¡Muy bien! Conoces tus películas y frases en inglés bastante bien.", average_score: "¡Buen intento! Sigue viendo películas en inglés para mejorar tus conocimientos.", low_score: "¡Sigue practicando! Mira más películas en inglés con subtítulos para aprender estas frases famosas.", participant_text: "Eres el participante #", participant_suffix: "en realizar este cuestionario!", share_results: "Comparte tus resultados:", share_message: "¡He obtenido {score}/6 en el cuestionario de frases de películas en inglés de Inglés Fácil con Ana! ¿Puedes superarlo?" },
-                social: { title: "Síguenos en Redes Sociales", tiktok: { title: "TikTok", description: "Aprende inglés con videos cortos y divertidos. Frases útiles, pronunciación y consejos rápidos.", button: "Seguir en TikTok" }, youtube: { title: "YouTube", description: "Lecciones completas, explicaciones detalladas y contenido exclusivo para mejorar tu inglés.", button: "Suscríbete" } },
-                info: { tips: { title: "Consejos de Aprendizaje", description: "Descubre estrategias efectivas para aprender inglés más rápido, técnicas de memorización y hábitos de estudio recomendados.", button: "Ver Consejos" }, practice: { title: "Práctica de Inglés", description: "Ejercicios interactivos, juegos de vocabulario y actividades de comprensión para practicar tu inglés de forma divertida.", button: "Practicar Ahora" } },
-                resources: { title: "Recursos de Aprendizaje", travel_guide: { title: "Guía de Inglés para Viajes", description: "Frases esenciales y vocabulario para hispanohablantes que viajan a países de habla inglesa.", price_original: "$9.99", price_current: "¡Gratis por tiempo limitado!", button: "Obtener Guía" }, movie_collection: { title: "Colección de Inglés de Películas", description: "Aprende más de 100 expresiones de películas y programas de TV populares con contexto y ejemplos.", price_original: "$14.99", price_current: "¡Gratis por tiempo limitado!", button: "Obtener Colección" }, pronunciation_workbook: { title: "Cuaderno de Ejercicios de Pronunciación", description: "Ejercicios específicos para hispanohablantes para dominar los sonidos desafiantes del inglés.", price_original: "$12.99", price_current: "¡Gratis por tiempo limitado!", button: "Obtener Cuaderno" } },
-                contact: { title: "Ponte en Contacto", name_placeholder: "Tu Nombre", email_placeholder: "Tu Email", topic_options: { default: "Seleccionar Tema", partnership: "Asociación Comercial", sponsorship: "Patrocinio", resources: "Recursos de Aprendizaje", other: "Otro" }, message_placeholder: "Tu Mensaje", submit_button: "Enviar Mensaje", success_message: "¡Mensaje enviado con éxito! Te responderemos pronto.", error_message_fill: "Por favor completa todos los campos.", error_message_email: "Por favor ingresa un email válido.", loading_message: "Enviando mensaje..." },
-                footer: { about_text: "Ayudando a hispanohablantes a aprender inglés a través de contenido atractivo, práctico y divertido desde 2020.", quick_links: "Enlaces Rápidos", resources_title: "Recursos", resources_links: { free_guides: "Guías PDF Gratuitas", premium: "Materiales Premium", vip: "Membresía VIP", business: "Inglés de Negocios", travel: "Inglés para Viajes" }, copyright: "Todos los Derechos Reservados." },
-                language: { en: "English", es: "Español" }
-            }
-        };
-        
-        // Continue with available translations
-        detectLanguage();
-        setupLanguageSelector();
-        translatePage(currentLang);
+        // Fallback can be added here if needed, or just let it fail gracefully
+        throw error; // Re-throw error to be caught by the caller
     }
 }
 
 // Detect user's preferred language
 function detectLanguage() {
-    // Check localStorage first
     const storedLang = localStorage.getItem('preferredLanguage');
     if (storedLang && ['en', 'es'].includes(storedLang)) {
         currentLang = storedLang;
         return;
     }
-    
-    // Check browser language
     const browserLang = navigator.language.split('-')[0];
-    if (browserLang === 'en') {
-        currentLang = 'en';
-    } else {
-        // Default to Spanish for all other languages
-        currentLang = 'es';
-    }
+    currentLang = (browserLang === 'en') ? 'en' : 'es';
 }
 
 // Set up language selector dropdown
 function setupLanguageSelector() {
     const languageSelector = document.querySelector('.language-selector');
-    
-    // Update current language display
+    if (!languageSelector) return;
+
     updateCurrentLanguageDisplay();
     
-    // Add click event listeners to language options
     const langOptions = document.querySelectorAll('.lang-option');
     langOptions.forEach(option => {
         option.addEventListener('click', function() {
             const lang = this.getAttribute('data-lang');
             switchLanguage(lang);
+            // Close dropdown after selection (optional)
+            const dropdown = languageSelector.querySelector('.lang-options');
+            if (dropdown) {
+                 dropdown.style.display = 'none';
+                 setTimeout(() => { dropdown.style.display = ''; }, 100); // Reset display property after a short delay
+            }
         });
     });
 }
 
-// Update current language display
+// Update current language display in the selector
 function updateCurrentLanguageDisplay() {
     const currentLangText = document.querySelector('.current-lang-text');
     const currentLangFlag = document.querySelector('.current-lang-flag');
-    
-    // Update text
+    const langOptions = document.querySelectorAll('.lang-option');
+
     if (currentLangText) {
         currentLangText.textContent = translations[currentLang]?.language?.[currentLang] || (currentLang === 'en' ? 'English' : 'Español');
+        currentLangText.setAttribute('data-i18n', `language.${currentLang}`);
     }
-    
+
+    if (currentLangFlag) {
+        // Update the SVG content for the current flag
+        const flagSvgContent = getFlagSvg(currentLang);
+        if (flagSvgContent) {
+            currentLangFlag.innerHTML = flagSvgContent;
+        }
+    }
+
     // Update active state in dropdown
-    const langOptions = document.querySelectorAll('.lang-option');
     langOptions.forEach(option => {
-        const optionLang = option.getAttribute('data-lang');
-        if (optionLang === currentLang) {
+        if (option.getAttribute('data-lang') === currentLang) {
             option.classList.add('active');
         } else {
             option.classList.remove('active');
@@ -184,300 +161,587 @@ function updateCurrentLanguageDisplay() {
     });
 }
 
+// Helper function to get SVG content for flags
+function getFlagSvg(lang) {
+    if (lang === 'en') {
+        return `<rect width="60" height="30" fill="#00247d"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2"/><path d="M30,0 L30,30 M0,15 L60,15" stroke="#fff" stroke-width="10"/><path d="M30,0 L30,30 M0,15 L60,15" stroke="#cf142b" stroke-width="6"/>`;
+    } else if (lang === 'es') {
+        return `<rect width="60" height="30" fill="#c60b1e"/><rect width="60" height="15" y="7.5" fill="#ffc400"/>`;
+    }
+    return ''; // Return empty string for unknown languages
+}
+
 // Switch language
 function switchLanguage(lang) {
     if (lang === currentLang || !['en', 'es'].includes(lang)) return;
     
-    // Update current language
     currentLang = lang;
+    localStorage.setItem('preferredLanguage', lang);
     
-    // Save preference to localStorage
-    localStorage.setItem('preferredLanguage', currentLang);
+    // Add visual feedback during translation
+    document.body.classList.add('translating');
     
-    // Update display
-    updateCurrentLanguageDisplay();
-    
-    // Translate page
-    translatePage(currentLang);
+    translatePage(currentLang).then(() => {
+        updateCurrentLanguageDisplay();
+        // Re-initialize components that might need re-translation or depend on language
+        initializeQuiz(); // Re-initialize quiz to update button texts etc.
+        initializeContactForm(); // Update placeholders
+        // Re-translate any open modals
+        const openModalElement = document.querySelector(".modal[style*='display: block']");
+        if (openModalElement) {
+            translateElement(openModalElement, lang);
+        }
+        document.body.classList.remove('translating');
+        console.log(`Language switched to ${lang}`);
+    }).catch(error => {
+        console.error("Error during language switch translation:", error);
+        document.body.classList.remove('translating');
+    });
+}
+
+// Translate a specific element and its children
+function translateElement(element, lang) {
+    element.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const translation = getTranslation(key, lang);
+        if (translation !== key) {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = translation;
+            } else if (el.tagName === 'TITLE') {
+                document.title = translation;
+            } else {
+                el.innerHTML = translation;
+            }
+        } else {
+            console.warn(`Translation key not found: ${key} for language ${lang}`);
+        }
+    });
+    // Also translate the element itself if it has data-i18n
+    if (element.hasAttribute('data-i18n')) {
+         const key = element.getAttribute('data-i18n');
+         const translation = getTranslation(key, lang);
+         if (translation !== key) {
+             if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                 element.placeholder = translation;
+             } else if (element.tagName === 'TITLE') {
+                 document.title = translation;
+             } else {
+                 element.innerHTML = translation;
+             }
+         } else {
+             console.warn(`Translation key not found: ${key} for language ${lang}`);
+         }
+    }
 }
 
 // Translate page content
-function translatePage(lang) {
-    if (!translations[lang]) return;
-    
-    // Translate elements with data-i18n attribute
-    document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        const translation = getNestedTranslation(translations[lang], key);
-        
-        if (translation) {
-            element.textContent = translation;
-        }
-    });
-    
-    // Translate placeholder attributes
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
-        const key = element.getAttribute('data-i18n-placeholder');
-        const translation = getNestedTranslation(translations[lang], key);
-        
-        if (translation) {
-            element.placeholder = translation;
-        }
-    });
-    
-    // Update document title
-    const titleKey = document.querySelector('title').getAttribute('data-i18n');
-    if (titleKey) {
-        const titleTranslation = getNestedTranslation(translations[lang], titleKey);
-        if (titleTranslation) {
-            document.title = titleTranslation;
-        }
-    }
-}
-
-// Helper function to get nested translation
-function getNestedTranslation(obj, path) {
-    const keys = path.split('.');
-    return keys.reduce((o, k) => (o || {})[k], obj);
-}
-
-// Initialize quiz functionality
-function initializeQuiz() {
-    const startQuizBtn = document.getElementById('start-quiz');
-    const quizIntro = document.querySelector('.quiz-intro');
-    const quizQuestions = document.querySelector('.quiz-questions');
-    const quizResults = document.querySelector('.quiz-results');
-    const questions = document.querySelectorAll('.question');
-    const progressFill = document.querySelector('.progress-fill');
-    const currentQuestionSpan = document.getElementById('current-question');
-    const prevQuestionBtn = document.getElementById('prev-question');
-    const nextQuestionBtn = document.getElementById('next-question');
-    const seeResultsBtn = document.getElementById('see-results');
-    const restartQuizBtn = document.getElementById('restart-quiz');
-    const userScoreSpan = document.getElementById('user-score');
-    const scoreMessageP = document.getElementById('score-message');
-    const participantNumberSpan = document.getElementById('participant-number');
-    const participantCountSpan = document.getElementById('participant-count');
-    
-    // If any of these elements don't exist, the quiz isn't on the page
-    if (!startQuizBtn || !quizIntro || !quizQuestions || !quizResults) {
-        console.log('Quiz elements not found, skipping quiz initialization');
+async function translatePage(lang) {
+    if (!translations[lang]) {
+        console.error(`Translations not available for language: ${lang}`);
         return;
     }
-    
-    let currentQuestion = 1;
-    let score = 0;
-    let participantCount = parseInt(participantCountSpan.textContent) || 110;
-    
-    // Start quiz
-    startQuizBtn.addEventListener('click', function() {
-        quizIntro.classList.remove('active');
-        quizQuestions.classList.add('active');
-        showQuestion(1);
-    });
-    
-    // Show question
-    function showQuestion(questionNumber) {
-        questions.forEach(question => {
-            question.classList.remove('active');
-        });
-        
-        const questionToShow = document.querySelector(`.question[data-question="${questionNumber}"]`);
-        if (questionToShow) {
-            questionToShow.classList.add('active');
-            currentQuestionSpan.textContent = questionNumber;
-            progressFill.style.width = `${(questionNumber / questions.length) * 100}%`;
-        }
-        
-        // Update navigation buttons
-        prevQuestionBtn.style.display = questionNumber === 1 ? 'none' : 'block';
-        nextQuestionBtn.style.display = questionNumber < questions.length ? 'block' : 'none';
-        seeResultsBtn.style.display = questionNumber === questions.length ? 'block' : 'none';
-    }
-    
-    // Previous question
-    prevQuestionBtn.addEventListener('click', function() {
-        if (currentQuestion > 1) {
-            currentQuestion--;
-            showQuestion(currentQuestion);
-        }
-    });
-    
-    // Next question
-    nextQuestionBtn.addEventListener('click', function() {
-        if (currentQuestion < questions.length) {
-            currentQuestion++;
-            showQuestion(currentQuestion);
-        }
-    });
-    
-    // Option selection
-    document.querySelectorAll('.option').forEach(option => {
-        option.addEventListener('click', function() {
-            const question = this.closest('.question');
-            const options = question.querySelectorAll('.option');
-            
-            // If already answered, do nothing
-            if (options[0].disabled) return;
-            
-            // Disable all options
-            options.forEach(opt => {
-                opt.disabled = true;
-                opt.classList.remove('selected');
-            });
-            
-            // Select this option
-            this.classList.add('selected');
-            
-            // Check if correct
-            const isCorrect = this.hasAttribute('data-correct');
-            if (isCorrect) {
-                this.classList.add('correct');
-                score++;
-            } else {
-                this.classList.add('incorrect');
-                
-                // Highlight correct answer
-                options.forEach(opt => {
-                    if (opt.hasAttribute('data-correct')) {
-                        opt.classList.add('correct');
-                    }
-                });
-            }
-            
-            // Show explanation
-            const explanation = question.querySelector('.explanation');
-            if (explanation) {
-                explanation.classList.add('active');
-            }
-        });
-    });
-    
-    // Hint buttons
-    document.querySelectorAll('.hint-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const hint = this.nextElementSibling;
-            hint.classList.toggle('active');
-        });
-    });
-    
-    // See results
-    seeResultsBtn.addEventListener('click', function() {
-        quizQuestions.classList.remove('active');
-        quizResults.classList.add('active');
-        
-        // Update score
-        userScoreSpan.textContent = score;
-        
-        // Update score message
-        if (score === questions.length) {
-            scoreMessageP.textContent = translations[currentLang]?.quiz?.perfect_score || 'Perfect! You\'re a movie quote master! Your English and movie knowledge are impressive!';
-        } else if (score >= questions.length * 0.7) {
-            scoreMessageP.textContent = translations[currentLang]?.quiz?.good_score || 'Very good! You know your movies and English quotes quite well!';
-        } else if (score >= questions.length * 0.5) {
-            scoreMessageP.textContent = translations[currentLang]?.quiz?.average_score || 'Good try! Keep watching movies in English to improve your knowledge!';
-        } else {
-            scoreMessageP.textContent = translations[currentLang]?.quiz?.low_score || 'Keep practicing! Watch more movies in English with subtitles to learn these famous quotes!';
-        }
-        
-        // Update participant number
-        participantCount++;
-        participantCountSpan.textContent = participantCount;
-        participantNumberSpan.textContent = participantCount;
-        
-        // Set up share links
-        const shareMessage = (translations[currentLang]?.quiz?.share_message || 'I scored {score}/6 on the Easy English with Ana movie quotes quiz! Can you beat it?').replace('{score}', score);
-        const encodedMessage = encodeURIComponent(shareMessage);
-        const shareUrl = encodeURIComponent(window.location.href);
-        
-        document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?text=${encodedMessage}&url=${shareUrl}`;
-        document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}&quote=${encodedMessage}`;
-        document.getElementById('share-whatsapp').href = `https://wa.me/?text=${encodedMessage} ${shareUrl}`;
-    });
-    
-    // Restart quiz
-    restartQuizBtn.addEventListener('click', function() {
-        // Reset score
-        score = 0;
-        
-        // Reset questions
-        document.querySelectorAll('.option').forEach(option => {
-            option.disabled = false;
-            option.classList.remove('selected', 'correct', 'incorrect');
-        });
-        
-        document.querySelectorAll('.explanation').forEach(explanation => {
-            explanation.classList.remove('active');
-        });
-        
-        document.querySelectorAll('.hint').forEach(hint => {
-            hint.classList.remove('active');
-        });
-        
-        // Show intro
-        quizResults.classList.remove('active');
-        quizIntro.classList.add('active');
-        
-        // Reset current question
-        currentQuestion = 1;
-    });
-    
-    console.log('Quiz initialized successfully');
+    translateElement(document.body, lang); // Translate the whole body
+    // Update elements that might not use data-i18n, like quiz participant count text
+    updateDynamicText(lang);
+    // Update resource links (they don't change language, but good practice)
+    updateResourceLinks();
 }
 
-// Initialize contact form
+// Get translation from nested key
+function getTranslation(key, lang) {
+    const keys = key.split('.');
+    let result = translations[lang];
+    
+    for (const k of keys) {
+        result = result?.[k];
+        if (result === undefined) {
+            // Return the key itself if not found, making it obvious in the UI
+            return key; 
+        }
+    }
+    
+    // Handle escaped newlines for descriptions
+    if (typeof result === 'string') {
+        result = result.replace(/\n/g, '<br>');
+    }
+    
+    return result || key; // Return key if result is null or empty string
+}
+
+// Update dynamic text elements not covered by data-i18n
+function updateDynamicText(lang) {
+    const participantSpan = document.getElementById('participant-count');
+    if (participantSpan) {
+        const count = participantSpan.textContent; // Keep the number
+        const textKey = 'quiz.participants';
+        const translatedText = getTranslation(textKey, lang);
+        // Reconstruct the string if translation found
+        if (translatedText !== textKey && participantSpan.nextSibling) {
+             participantSpan.nextSibling.textContent = ` ${translatedText}`; 
+        }
+    }
+    // Add other dynamic text updates here if needed
+}
+
+// Update resource links to point to actual files
+function updateResourceLinks() {
+    const resourceSection = document.getElementById('resources');
+    if (!resourceSection) return;
+
+    const links = {
+        'resources.travel_guide.button': 'resources/travel_guide.pdf',
+        'resources.movie_collection.button': 'resources/movie_collection.pdf',
+        'resources.pronunciation_workbook.button': 'resources/pronunciation_workbook.pdf'
+    };
+
+    Object.keys(links).forEach(key => {
+        const button = resourceSection.querySelector(`[data-i18n="${key}"]`);
+        if (button && button.tagName === 'A') {
+            button.href = links[key];
+            button.setAttribute('download', links[key].split('/').pop()); // Add download attribute
+            button.removeAttribute('target'); // Remove target=_blank if it exists
+        }
+    });
+}
+
+// --- Modal Functionality ---
+function initializeModals() {
+    const modalBtns = document.querySelectorAll(".open-modal-btn");
+    const modals = document.querySelectorAll(".modal");
+    const closeBtns = document.querySelectorAll(".close-btn");
+
+    modalBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const modalId = btn.getAttribute("data-modal-target");
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                openModal(modal);
+            }
+        });
+    });
+
+    closeBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const modal = btn.closest(".modal");
+            if (modal) {
+                closeModal(modal);
+            }
+        });
+    });
+
+    // Close modal if background is clicked
+    modals.forEach(modal => {
+        modal.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                closeModal(modal);
+            }
+        });
+    });
+
+    // Close modal with Escape key
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            const openModalElement = document.querySelector(".modal[style*='display: block']");
+            if (openModalElement) {
+                closeModal(openModalElement);
+            }
+        }
+    });
+}
+
+function openModal(modal) {
+    modal.style.display = "block";
+    // Trigger translation for the newly displayed modal content
+    translateElement(modal, currentLang);
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+function closeModal(modal) {
+    modal.classList.add('closing');
+    // Wait for animation to finish before hiding
+    modal.addEventListener('animationend', () => {
+        modal.style.display = "none";
+        modal.classList.remove('closing');
+        document.body.style.overflow = 'auto'; // Restore background scrolling
+    }, { once: true });
+}
+// --- End Modal Functionality ---
+
+
+// --- Scroll Animation Functionality ---
+function initializeScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.section, .feature-card, .sample-card, .info-button, .resource-card, .social-platform'); // Add more selectors as needed
+
+    if (!("IntersectionObserver" in window)) {
+        console.log("IntersectionObserver not supported, scroll animations disabled.");
+        animatedElements.forEach(el => el.classList.add('is-visible')); // Make all visible if no observer
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                // Optional: Unobserve after animation to save resources
+                // observer.unobserve(entry.target);
+            } else {
+                 // Optional: Remove class if you want animation to repeat on scroll up/down
+                 // entry.target.classList.remove('is-visible');
+            }
+        });
+    }, {
+        rootMargin: '0px',
+        threshold: 0.1 // Trigger when 10% of the element is visible
+    });
+
+    animatedElements.forEach(el => {
+        el.classList.add('animate-on-scroll'); // Ensure base class is present for initial state
+        observer.observe(el);
+    });
+}
+// --- End Scroll Animation Functionality ---
+
+
+// --- Clickable Cards Functionality ---
+function initializeClickableCards() {
+    const clickableCards = document.querySelectorAll('.sample-card, .resource-card, .info-button'); // Add other card selectors if needed
+
+    clickableCards.forEach(card => {
+        const link = card.querySelector('a.btn, button.btn'); // Find the button or link inside
+        if (link) {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', (event) => {
+                // Prevent triggering card click if the button itself or an inner link was clicked
+                if (event.target.closest('a, button')) {
+                    return;
+                }
+                link.click(); // Simulate a click on the button/link
+            });
+        }
+    });
+}
+// --- End Clickable Cards Functionality ---
+
+
+// --- Quiz Functionality (Enhanced) ---
+function initializeQuiz() {
+    const quizContainer = document.querySelector('.quiz-container');
+    if (!quizContainer) return;
+
+    const startBtn = document.getElementById('start-quiz');
+    const quizIntro = quizContainer.querySelector('.quiz-intro');
+    const quizQuestionsContainer = quizContainer.querySelector('.quiz-questions');
+    const quizResultsContainer = quizContainer.querySelector('.quiz-results');
+    const questions = quizContainer.querySelectorAll('.question');
+    const progressBarFill = quizContainer.querySelector('.progress-fill');
+    const currentQuestionSpan = document.getElementById('current-question');
+    const participantCountSpan = document.getElementById('participant-count');
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let participantNumber = parseInt(participantCountSpan?.textContent || '110', 10);
+
+    // Reset quiz state
+    quizIntro?.classList.add('active');
+    quizQuestionsContainer?.classList.remove('active');
+    quizResultsContainer?.classList.remove('active');
+    questions.forEach(q => q.classList.remove('active'));
+    currentQuestionIndex = 0;
+    score = 0;
+    updateProgressBar();
+
+    // Remove previous event listeners to avoid duplicates if re-initializing
+    startBtn?.replaceWith(startBtn.cloneNode(true));
+    document.getElementById('start-quiz')?.addEventListener('click', startQuiz);
+
+    quizContainer.querySelectorAll('.option').forEach(option => {
+        option.replaceWith(option.cloneNode(true)); // Clone to remove old listeners
+    });
+    quizContainer.querySelectorAll('.hint-btn').forEach(btn => {
+        btn.replaceWith(btn.cloneNode(true));
+    });
+    quizContainer.querySelectorAll('.quiz-navigation button').forEach(btn => {
+        btn.replaceWith(btn.cloneNode(true));
+    });
+
+    // Add new event listeners
+    quizContainer.querySelectorAll('.option').forEach(option => {
+        option.addEventListener('click', handleOptionClick);
+    });
+    quizContainer.querySelectorAll('.hint-btn').forEach(btn => {
+        btn.addEventListener('click', handleHintClick);
+    });
+    quizContainer.querySelector('.prev-btn')?.addEventListener('click', () => navigateQuestion(-1));
+    quizContainer.querySelector('.next-btn')?.addEventListener('click', () => navigateQuestion(1));
+    quizContainer.querySelector('.results-btn')?.addEventListener('click', showResults);
+
+    function startQuiz() {
+        quizIntro?.classList.remove('active');
+        quizQuestionsContainer?.classList.add('active');
+        showQuestion(currentQuestionIndex);
+    }
+
+    function handleOptionClick(event) {
+        const selectedOption = event.target;
+        const questionElement = selectedOption.closest('.question');
+        const options = questionElement.querySelectorAll('.option');
+        const explanation = questionElement.querySelector('.explanation');
+
+        // Prevent selecting multiple options or changing after selection
+        if (questionElement.classList.contains('answered')) return;
+        questionElement.classList.add('answered');
+
+        options.forEach(opt => opt.disabled = true); // Disable all options
+
+        const isCorrect = selectedOption.getAttribute('data-correct') === 'true';
+
+        if (isCorrect) {
+            score++;
+            selectedOption.classList.add('correct', 'pulse-correct'); // Add pulse animation
+        } else {
+            selectedOption.classList.add('incorrect', 'shake-incorrect'); // Add shake animation
+            // Highlight the correct answer
+            const correctOption = questionElement.querySelector('.option[data-correct="true"]');
+            correctOption?.classList.add('correct');
+        }
+
+        // Show explanation
+        if (explanation) {
+            explanation.classList.add('active');
+        }
+        
+        // Automatically move to next question after a short delay
+        // setTimeout(() => {
+        //     navigateQuestion(1);
+        // }, 1500); // Adjust delay as needed
+    }
+
+    function handleHintClick(event) {
+        const hintBtn = event.target;
+        const hintElement = hintBtn.nextElementSibling;
+        if (hintElement && hintElement.classList.contains('hint')) {
+            hintElement.classList.toggle('active');
+        }
+    }
+
+    function navigateQuestion(direction) {
+        const nextIndex = currentQuestionIndex + direction;
+        if (nextIndex >= 0 && nextIndex < questions.length) {
+            showQuestion(nextIndex);
+        } else if (nextIndex >= questions.length) {
+            showResults();
+        }
+    }
+
+    function showQuestion(index) {
+        questions.forEach((q, i) => {
+            q.classList.toggle('active', i === index);
+        });
+        currentQuestionIndex = index;
+        updateProgressBar();
+        updateNavigationButtons();
+    }
+
+    function updateProgressBar() {
+        const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+        if (progressBarFill) progressBarFill.style.width = `${progress}%`;
+        if (currentQuestionSpan) currentQuestionSpan.textContent = currentQuestionIndex + 1;
+    }
+
+    function updateNavigationButtons() {
+        const prevBtn = quizContainer.querySelector('.prev-btn');
+        const nextBtn = quizContainer.querySelector('.next-btn');
+        const resultsBtn = quizContainer.querySelector('.results-btn');
+
+        if (prevBtn) prevBtn.disabled = currentQuestionIndex === 0;
+        if (nextBtn) nextBtn.style.display = currentQuestionIndex < questions.length - 1 ? 'inline-block' : 'none';
+        if (resultsBtn) resultsBtn.style.display = currentQuestionIndex === questions.length - 1 ? 'inline-block' : 'none';
+    }
+
+    function showResults() {
+        quizQuestionsContainer?.classList.remove('active');
+        quizResultsContainer?.classList.add('active');
+
+        const scoreSpan = quizResultsContainer.querySelector('#score');
+        const totalSpan = quizResultsContainer.querySelector('#total-questions');
+        const messageSpan = quizResultsContainer.querySelector('#results-message');
+        const participantNumSpan = quizResultsContainer.querySelector('#participant-number');
+        const resultsIcon = quizResultsContainer.querySelector('.results-icon i');
+
+        if (scoreSpan) scoreSpan.textContent = score;
+        if (totalSpan) totalSpan.textContent = questions.length;
+        
+        participantNumber++; // Increment participant number
+        if (participantNumSpan) participantNumSpan.textContent = participantNumber;
+        if (participantCountSpan) participantCountSpan.textContent = participantNumber; // Update intro count too
+
+        let messageKey = '';
+        let iconClass = 'fa-solid fa-check'; // Default icon
+
+        const percentage = (score / questions.length) * 100;
+        if (percentage === 100) {
+            messageKey = 'quiz.perfect_score';
+            iconClass = 'fa-solid fa-trophy';
+            triggerConfetti(); // Add confetti for perfect score
+        } else if (percentage >= 70) {
+            messageKey = 'quiz.good_score';
+            iconClass = 'fa-solid fa-thumbs-up';
+        } else if (percentage >= 40) {
+            messageKey = 'quiz.average_score';
+            iconClass = 'fa-solid fa-face-meh';
+        } else {
+            messageKey = 'quiz.low_score';
+            iconClass = 'fa-solid fa-book-open';
+        }
+
+        if (messageSpan) messageSpan.textContent = getTranslation(messageKey, currentLang);
+        if (resultsIcon) resultsIcon.className = iconClass; // Update icon
+
+        // Setup share buttons
+        setupShareButtons(score, questions.length);
+    }
+    
+    function setupShareButtons(userScore, totalQuestions) {
+        const shareMessageTemplate = getTranslation('quiz.share_message', currentLang);
+        const shareMessage = shareMessageTemplate.replace('{score}', userScore);
+        const pageUrl = window.location.href;
+
+        const twitterBtn = quizResultsContainer.querySelector('.share-twitter');
+        const facebookBtn = quizResultsContainer.querySelector('.share-facebook');
+        const whatsappBtn = quizResultsContainer.querySelector('.share-whatsapp');
+
+        if (twitterBtn) twitterBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareMessage)}&url=${encodeURIComponent(pageUrl)}`;
+        if (facebookBtn) facebookBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}&quote=${encodeURIComponent(shareMessage)}`;
+        if (whatsappBtn) whatsappBtn.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareMessage + ' ' + pageUrl)}`;
+    }
+    
+    // Initial setup
+    showQuestion(currentQuestionIndex);
+    updateNavigationButtons();
+}
+
+// Simple Confetti Effect
+function triggerConfetti() {
+    const confettiContainer = document.createElement('div');
+    confettiContainer.style.position = 'fixed';
+    confettiContainer.style.top = '0';
+    confettiContainer.style.left = '0';
+    confettiContainer.style.width = '100%';
+    confettiContainer.style.height = '100%';
+    confettiContainer.style.pointerEvents = 'none';
+    confettiContainer.style.zIndex = '9999';
+    document.body.appendChild(confettiContainer);
+
+    for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'absolute';
+        confetti.style.width = `${Math.random() * 8 + 4}px`;
+        confetti.style.height = confetti.style.width;
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.top = `${-Math.random() * 20}%`; // Start above screen
+        confetti.style.opacity = `${Math.random() * 0.5 + 0.5}`;
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear ${Math.random() * 1}s infinite`;
+        confettiContainer.appendChild(confetti);
+    }
+
+    // Remove confetti after animation duration
+    setTimeout(() => {
+        document.body.removeChild(confettiContainer);
+    }, 5000); // Adjust time as needed
+}
+
+// Add keyframes for confetti animation in CSS or here via JS
+const styleSheet = document.styleSheets[0];
+styleSheet.insertRule(`
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+`, styleSheet.cssRules.length);
+// --- End Quiz Functionality ---
+
+
+// --- Contact Form Functionality (Enhanced) ---
 function initializeContactForm() {
     const contactForm = document.getElementById('contact-form');
-    const formMessage = document.querySelector('.form-message');
-    
-    if (!contactForm || !formMessage) {
-        console.log('Contact form elements not found, skipping form initialization');
-        return;
-    }
-    
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form values
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const topic = document.getElementById('topic').value;
-        const message = document.getElementById('message').value.trim();
-        
-        // Validate form
-        if (!name || !email || !topic || !message) {
-            formMessage.textContent = translations[currentLang]?.contact?.error_message_fill || 'Please fill in all fields.';
-            formMessage.className = 'form-message error';
-            return;
+    if (!contactForm) return;
+
+    const formMessage = document.getElementById('form-message');
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton ? submitButton.textContent : 'Send Message';
+
+    // Update placeholders on init/language change
+    contactForm.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const translation = getTranslation(key, currentLang);
+        if (translation !== key) {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = translation;
+            } else {
+                el.textContent = translation; // For button text
+            }
         }
-        
-        // Validate email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            formMessage.textContent = translations[currentLang]?.contact?.error_message_email || 'Please enter a valid email address.';
-            formMessage.className = 'form-message error';
-            return;
-        }
-        
-        // Show loading message
-        formMessage.textContent = translations[currentLang]?.contact?.loading_message || 'Sending message...';
-        formMessage.className = 'form-message loading';
-        
-        // Simulate form submission (replace with actual form submission)
-        setTimeout(function() {
-            // Show success message
-            formMessage.textContent = translations[currentLang]?.contact?.success_message || 'Message sent successfully! We will respond to you soon.';
-            formMessage.className = 'form-message success';
-            
-            // Reset form
-            contactForm.reset();
-            
-            // Hide message after 5 seconds
-            setTimeout(function() {
-                formMessage.style.display = 'none';
-            }, 5000);
-        }, 1500);
     });
-    
-    console.log('Contact form initialized successfully');
+    if (submitButton) submitButton.textContent = getTranslation('contact.submit_button', currentLang);
+
+    contactForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const name = contactForm.querySelector('#name').value.trim();
+        const email = contactForm.querySelector('#email').value.trim();
+        const topic = contactForm.querySelector('#topic').value;
+        const message = contactForm.querySelector('#message').value.trim();
+
+        // Basic Validation
+        if (!name || !email || topic === "" || !message) {
+            displayFormMessage(getTranslation('contact.error_message_fill', currentLang), 'error');
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            displayFormMessage(getTranslation('contact.error_message_email', currentLang), 'error');
+            return;
+        }
+
+        // Simulate sending message
+        displayFormMessage(getTranslation('contact.loading_message', currentLang), 'loading');
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = getTranslation('contact.loading_message', currentLang);
+        }
+
+        setTimeout(() => {
+            // Simulate success
+            displayFormMessage(getTranslation('contact.success_message', currentLang), 'success');
+            contactForm.reset(); // Clear the form
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = getTranslation('contact.submit_button', currentLang);
+            }
+        }, 1500); // Simulate network delay
+    });
+
+    function displayFormMessage(message, type) {
+        if (!formMessage) return;
+        formMessage.textContent = message;
+        formMessage.className = `form-message ${type} active`; // Add 'active' class to show it
+        
+        // Optionally hide the message after some time, except for loading
+        if (type !== 'loading') {
+            setTimeout(() => {
+                formMessage.classList.remove('active');
+            }, 5000); // Hide after 5 seconds
+        }
+    }
+
+    function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
 }
+// --- End Contact Form Functionality ---
+
