@@ -1081,3 +1081,336 @@ footer {
     font-size: 1.25rem;
   }
 }
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+}
+
+.modal-container {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-container {
+    transform: scale(1);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    padding: 0.5rem;
+    line-height: 1;
+}
+
+.modal-close-btn:hover {
+    color: var(--dark-color);
+}
+
+.modal-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.modal-content p,
+.modal-content ul,
+.modal-content ol {
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+    line-height: 1.7;
+}
+
+.modal-content ul,
+.modal-content ol {
+    padding-left: 1.5rem;
+}
+
+.modal-content li {
+    margin-bottom: 0.5rem;
+}
+
+.modal-content strong {
+    color: var(--primary-color);
+}
+
+.modal-content .challenge,
+.modal-content .practice,
+.modal-content .tip {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-left: 4px solid var(--accent-color-1);
+    border-radius: 0 5px 5px 0;
+    font-size: 0.95rem;
+}
+
+.modal-content .challenge strong,
+.modal-content .practice strong,
+.modal-content .tip strong {
+    color: var(--accent-color-1);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Ensure modal content respects newlines from JSON */
+.modal-content p {
+    white-space: pre-line;
+}
+
+/* Scroll Animation Base Class */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1001; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+  animation: fadeInModal 0.3s ease-out;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto; /* 10% from the top and centered */
+  padding: 30px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  max-width: 700px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  animation: slideInModal 0.3s ease-out;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.modal-content p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.modal-content strong {
+    color: var(--dark-color);
+}
+
+.modal-content em {
+    color: #555;
+    font-style: italic;
+}
+
+.close-btn {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Modal Animations */
+@keyframes fadeInModal {
+  from { background-color: rgba(0,0,0,0); }
+  to { background-color: rgba(0,0,0,0.6); }
+}
+
+@keyframes slideInModal {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal.closing {
+    animation: fadeOutModal 0.3s ease-out forwards;
+}
+
+.modal.closing .modal-content {
+    animation: slideOutModal 0.3s ease-out forwards;
+}
+
+@keyframes fadeOutModal {
+  from { background-color: rgba(0,0,0,0.6); }
+  to { background-color: rgba(0,0,0,0); }
+}
+
+@keyframes slideOutModal {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-50px); opacity: 0; }
+}
+
+/* Ensure modal content scrolls if too tall */
+@media (max-height: 600px) {
+    .modal-content {
+        margin: 5% auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}
+
+
+
+
+/* Scroll Animation Styles */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Add staggered delay for grid items */
+.features-grid .feature-card, 
+.samples-grid .sample-card, 
+.resources-grid .resource-card,
+.info-buttons .info-button,
+.social-platforms .social-platform {
+    transition-delay: calc(0.1s * var(--animation-order, 0)); /* Use CSS variable for order */
+}
+
+/* Quiz Animation Styles */
+.option.pulse-correct {
+    animation: pulseCorrect 0.5s ease-out;
+}
+
+.option.shake-incorrect {
+    animation: shakeIncorrect 0.5s ease-out;
+}
+
+@keyframes pulseCorrect {
+    0% { transform: scale(1); background-color: rgba(107, 212, 144, 0.1); }
+    50% { transform: scale(1.05); background-color: rgba(107, 212, 144, 0.3); }
+    100% { transform: scale(1); background-color: rgba(107, 212, 144, 0.1); }
+}
+
+@keyframes shakeIncorrect {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
+
+/* Contact Form Feedback Styles */
+.form-message {
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+  display: none; /* Hidden by default */
+  text-align: center;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.form-message.active {
+    display: block;
+    opacity: 1;
+}
+
+.form-message.success {
+  background-color: rgba(107, 212, 144, 0.2);
+  color: #155724;
+  border: 1px solid rgba(107, 212, 144, 0.4);
+}
+
+.form-message.error {
+  background-color: rgba(255, 107, 107, 0.2);
+  color: #721c24;
+  border: 1px solid rgba(255, 107, 107, 0.4);
+}
+
+.form-message.loading {
+  background-color: rgba(74, 111, 165, 0.1);
+  color: var(--primary-color);
+  border: 1px solid rgba(74, 111, 165, 0.3);
+}
+
+/* Enhanced Hover Effects */
+.feature-card:hover, .sample-card:hover, .resource-card:hover, .info-button:hover {
+    /* Existing hover effects are good, maybe add slight scale */
+    transform: translateY(-8px) scale(1.02);
+}
+
+.btn:hover {
+    /* Existing hover effects are good */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Hero Animation (Subtle fade-in for text) */
+.hero h1, .hero p, .hero .hero-buttons {
+    animation: fadeInHero 1s ease-out forwards;
+    opacity: 0;
+}
+
+.hero p { animation-delay: 0.2s; }
+.hero .hero-buttons { animation-delay: 0.4s; }
+
+@keyframes fadeInHero {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
