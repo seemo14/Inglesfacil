@@ -25,10 +25,8 @@
                     <li><a href="#contact" data-i18n="nav.contact">Contacto</a></li>
                     <li class="language-selector">
                         <div class="current-lang">
-                            <!-- Default to Spanish SVG flag on load -->
                             <svg class="flag-svg current-lang-flag" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="60" height="30" fill="#c60b1e"/>
-                                <rect width="60" height="15" y="7.5" fill="#ffc400"/>
+                                <!-- Flag updated by JS -->
                             </svg>
                             <span class="current-lang-text" data-i18n="language.es">Español</span>
                             <i class="fas fa-chevron-down"></i>
@@ -36,18 +34,13 @@
                         <div class="lang-options">
                             <div class="lang-option" data-lang="en">
                                 <svg class="flag-svg" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="60" height="30" fill="#00247d"/>
-                                    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
-                                    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2"/>
-                                    <path d="M30,0 L30,30 M0,15 L60,15" stroke="#fff" stroke-width="10"/>
-                                    <path d="M30,0 L30,30 M0,15 L60,15" stroke="#cf142b" stroke-width="6"/>
+                                    <rect width="60" height="30" fill="#00247d"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2"/><path d="M30,0 L30,30 M0,15 L60,15" stroke="#fff" stroke-width="10"/><path d="M30,0 L30,30 M0,15 L60,15" stroke="#cf142b" stroke-width="6"/>
                                 </svg>
                                 <span data-i18n="language.en">English</span>
                             </div>
                             <div class="lang-option active" data-lang="es">
                                 <svg class="flag-svg" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="60" height="30" fill="#c60b1e"/>
-                                    <rect width="60" height="15" y="7.5" fill="#ffc400"/>
+                                    <rect width="60" height="30" fill="#c60b1e"/><rect width="60" height="15" y="7.5" fill="#ffc400"/>
                                 </svg>
                                 <span data-i18n="language.es">Español</span>
                             </div>
@@ -62,7 +55,7 @@
     </header>
 
     <section id="home" class="hero">
-        <div class="container">
+        <div class="container animate-on-scroll">
             <h1 data-i18n="hero.title">Aprende Inglés de Forma Fácil</h1>
             <p data-i18n="hero.subtitle">Únete a nuestra comunidad de más de 385,000 hispanohablantes que aprenden inglés a través de contenido atractivo, práctico y divertido.</p>
             <div class="hero-buttons">
@@ -74,30 +67,33 @@
 
     <section id="features" class="features section">
         <div class="container">
-            <div class="section-title">
+            <div class="section-title animate-on-scroll">
                 <h2 data-i18n="features.title">Por Qué Aprender Con Nosotros</h2>
             </div>
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll clickable-card">
                     <div class="feature-icon">
                         <i class="fas fa-comments"></i>
                     </div>
                     <h3 data-i18n="features.daily_life.title">Inglés para la Vida Diaria</h3>
                     <p data-i18n="features.daily_life.description">Aprende las frases y expresiones más útiles que los hispanohablantes necesitan en situaciones cotidianas.</p>
+                    <!-- No button here, card is clickable -->
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll clickable-card">
                     <div class="feature-icon">
                         <i class="fas fa-film"></i>
                     </div>
                     <h3 data-i18n="features.movie_vocab.title">Vocabulario de Películas</h3>
                     <p data-i18n="features.movie_vocab.description">Comprende tus películas y series favoritas aprendiendo expresiones comunes y jerga utilizada en el entretenimiento.</p>
+                     <!-- No button here, card is clickable -->
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll clickable-card">
                     <div class="feature-icon">
                         <i class="fas fa-microphone-alt"></i>
                     </div>
                     <h3 data-i18n="features.pronunciation.title">Pronunciación Perfecta</h3>
                     <p data-i18n="features.pronunciation.description">Domina los sonidos que son más desafiantes para los hispanohablantes con nuestros ejercicios de práctica específicos.</p>
+                     <!-- No button here, card is clickable -->
                 </div>
             </div>
         </div>
@@ -105,32 +101,32 @@
 
     <section id="content" class="content-samples section">
         <div class="container">
-            <div class="section-title">
+            <div class="section-title animate-on-scroll">
                 <h2 data-i18n="content.title">Nuestro Contenido Popular</h2>
             </div>
             <div class="samples-grid">
-                <div class="sample-card">
+                <div class="sample-card animate-on-scroll clickable-card">
                     <div class="sample-content">
                         <span class="tag" data-i18n="content.vocabulary.tag">Vocabulario</span>
                         <h3 data-i18n="content.vocabulary.title">¿Cuántas Palabras Conoces?</h3>
                         <p data-i18n="content.vocabulary.description">Pon a prueba tus conocimientos con nuestros populares desafíos de reconocimiento de palabras. ¿Cuántas palabras en inglés puedes recordar?</p>
-                        <a href="#" class="btn btn-primary" data-i18n="content.vocabulary.button">Ver Ejemplo</a>
+                        <button class="btn btn-primary" data-modal-target="vocabulary" data-i18n="content.vocabulary.button">Ver Ejemplo</button> <!-- Corrected data-modal-target -->
                     </div>
                 </div>
-                <div class="sample-card">
+                <div class="sample-card animate-on-scroll clickable-card">
                     <div class="sample-content">
                         <span class="tag" data-i18n="content.movies.tag">Películas</span>
                         <h3 data-i18n="content.movies.title">Frases de Películas Famosas</h3>
                         <p data-i18n="content.movies.description">Aprende frases icónicas de películas en inglés e impresiona a tus amigos con tu conocimiento cultural y perfecta pronunciación.</p>
-                        <a href="#" class="btn btn-primary" data-i18n="content.movies.button">Ver Ejemplo</a>
+                        <button class="btn btn-primary" data-modal-target="movies" data-i18n="content.movies.button">Ver Ejemplo</button> <!-- Corrected data-modal-target -->
                     </div>
                 </div>
-                <div class="sample-card">
+                <div class="sample-card animate-on-scroll clickable-card">
                     <div class="sample-content">
                         <span class="tag" data-i18n="content.pronunciation.tag">Pronunciación</span>
                         <h3 data-i18n="content.pronunciation.title">Pronunciación Perfecta</h3>
                         <p data-i18n="content.pronunciation.description">Domina los sonidos más desafiantes del inglés para hispanohablantes con nuestros ejercicios de pronunciación específicos.</p>
-                        <a href="#" class="btn btn-primary" data-i18n="content.pronunciation.button">Ver Ejemplo</a>
+                        <button class="btn btn-primary" data-modal-target="pronunciation" data-i18n="content.pronunciation.button">Ver Ejemplo</button> <!-- Corrected data-modal-target -->
                     </div>
                 </div>
             </div>
@@ -138,7 +134,7 @@
     </section>
 
     <section id="quiz" class="quiz section">
-        <div class="container">
+        <div class="container animate-on-scroll">
             <div class="section-title">
                 <h2 class="quiz-title" data-i18n="quiz.title">Pon a Prueba Tu Conocimiento de Frases de Películas</h2>
             </div>
@@ -156,6 +152,7 @@
                         <div class="progress-text"><span data-i18n="quiz.question">Pregunta</span> <span id="current-question">1</span>/6</div>
                     </div>
                     
+                    <!-- Quiz questions remain the same -->
                     <div class="question" data-question="1">
                         <div class="quote">
                             <span class="original">"May the Force be with you."</span>
@@ -247,197 +244,144 @@
                         <div class="hint">Esta frase es de una película clásica en blanco y negro ambientada en Marruecos durante la Segunda Guerra Mundial.</div>
                         <div class="explanation">
                             <h4>Explicación:</h4>
-                            <p>"Here's looking at you, kid" es una frase icónica de Rick Blaine (Humphrey Bogart) a Ilsa Lund (Ingrid Bergman) en la película Casablanca de 1942.</p>
+                            <p>"Here's looking at you, kid" es una frase famosa de la película Casablanca, dicha por Rick Blaine (Humphrey Bogart) a Ilsa Lund (Ingrid Bergman).</p>
                         </div>
                     </div>
                     
                     <div class="question" data-question="6">
                         <div class="quote">
-                            <span class="original">"You're gonna need a bigger boat."</span>
-                            <span class="translation">[Vas a necesitar un barco más grande.]</span>
+                            <span class="original">"To infinity... and beyond!"</span>
+                            <span class="translation">[¡Hasta el infinito... y más allá!]</span>
                         </div>
                         <div class="options">
-                            <button class="option">Titanic</button>
-                            <button class="option" data-correct="true">Jaws</button>
-                            <button class="option">Pirates of the Caribbean</button>
-                            <button class="option">The Perfect Storm</button>
+                            <button class="option">Shrek</button>
+                            <button class="option">Finding Nemo</button>
+                            <button class="option" data-correct="true">Toy Story</button>
+                            <button class="option">The Lion King</button>
                         </div>
                         <button class="hint-btn" data-i18n="quiz.hint_button">¿Necesitas una pista?</button>
-                        <div class="hint">Esta frase es de una película sobre un tiburón asesino.</div>
+                        <div class="hint">Esta frase es dicha por un juguete espacial que cree que es real.</div>
                         <div class="explanation">
                             <h4>Explicación:</h4>
-                            <p>"You're gonna need a bigger boat" es una frase dicha por el jefe de policía Brody (Roy Scheider) en la película Jaws (Tiburón) de 1975, después de ver el tamaño del tiburón.</p>
+                            <p>"To infinity... and beyond!" es la frase característica de Buzz Lightyear en la saga de películas Toy Story.</p>
                         </div>
-                    </div>
-                    
-                    <div class="quiz-navigation">
-                        <button id="prev-question" class="btn btn-secondary" data-i18n="quiz.prev_button">Anterior</button>
-                        <button id="next-question" class="btn btn-primary" data-i18n="quiz.next_button">Siguiente</button>
-                        <button id="see-results" class="btn btn-primary" data-i18n="quiz.see_results">Ver Resultados</button>
                     </div>
                 </div>
-                
                 <div class="quiz-results">
-                    <div class="results-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <h3 data-i18n="quiz.your_score">Tu Puntuación:</h3>
-                    <div class="score">
-                        <span id="user-score">0</span>/6
-                    </div>
-                    <p id="score-message"></p>
-                    
-                    <div class="competition-stats">
-                        <p><span data-i18n="quiz.participant_text">Eres el participante #</span><span id="participant-number">111</span> <span data-i18n="quiz.participant_suffix">en realizar este cuestionario!</span></p>
-                    </div>
-                    
-                    <div class="share-results">
-                        <p data-i18n="quiz.share_results">Comparte tus resultados:</p>
-                        <div class="social-share">
-                            <a href="#" class="share-btn" id="share-twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="share-btn" id="share-facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="share-btn" id="share-whatsapp"><i class="fab fa-whatsapp"></i></a>
-                        </div>
-                    </div>
-                    
-                    <button id="restart-quiz" class="btn btn-primary">Reintentar</button>
+                    <!-- Results will be loaded here by JavaScript -->
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Social Media Section -->
-    <section class="social-media-section section">
+    <section id="social" class="social section">
         <div class="container">
-            <div class="section-title">
+            <div class="section-title animate-on-scroll">
                 <h2 data-i18n="social.title">Síguenos en Redes Sociales</h2>
             </div>
-            <div class="social-platforms">
-                <div class="social-platform">
-                    <div class="platform-icon tiktok">
+            <div class="social-grid">
+                <div class="social-card animate-on-scroll clickable-card">
+                    <div class="social-icon tiktok">
                         <i class="fab fa-tiktok"></i>
                     </div>
-                    <h3 class="platform-title" data-i18n="social.tiktok.title">TikTok</h3>
-                    <p class="platform-description" data-i18n="social.tiktok.description">Aprende inglés con videos cortos y divertidos. Frases útiles, pronunciación y consejos rápidos.</p>
-                    <a href="https://www.tiktok.com/@ingls.fcil.con.ana" target="_blank" class="platform-link" data-i18n="social.tiktok.button">Seguir en TikTok</a>
+                    <h3 data-i18n="social.tiktok.title">TikTok</h3>
+                    <p data-i18n="social.tiktok.description">Aprende inglés con videos cortos y divertidos. Frases útiles, pronunciación y consejos rápidos.</p>
+                    <a href="https://www.tiktok.com/@inglesfacilconana" target="_blank" class="btn btn-secondary platform-link" data-i18n="social.tiktok.button">Seguir en TikTok</a>
                 </div>
-                <div class="social-platform">
-                    <div class="platform-icon youtube">
+                <div class="social-card animate-on-scroll clickable-card">
+                    <div class="social-icon youtube">
                         <i class="fab fa-youtube"></i>
                     </div>
-                    <h3 class="platform-title" data-i18n="social.youtube.title">YouTube</h3>
-                    <p class="platform-description" data-i18n="social.youtube.description">Lecciones completas, explicaciones detalladas y contenido exclusivo para mejorar tu inglés.</p>
-                    <a href="https://www.youtube.com/@InglesfacilConana" target="_blank" class="platform-link" data-i18n="social.youtube.button">Suscríbete</a>
+                    <h3 data-i18n="social.youtube.title">YouTube</h3>
+                    <p data-i18n="social.youtube.description">Lecciones completas, explicaciones detalladas y contenido exclusivo para mejorar tu inglés.</p>
+                    <a href="https://www.youtube.com/channel/UCinglesfacilconana" target="_blank" class="btn btn-secondary platform-link" data-i18n="social.youtube.button">Suscríbete</a> <!-- Placeholder link -->
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Additional Info Sections -->
-    <section class="additional-info section">
+    <section id="info-section" class="info-section section">
         <div class="container">
-            <div class="info-buttons">
-                <div class="info-button">
+            <div class="info-grid">
+                <div class="info-card animate-on-scroll">
                     <div class="info-icon">
-                        <i class="fas fa-lightbulb"></i>
+                        <i class="fas fa-brain"></i>
                     </div>
-                    <h3 class="info-title" data-i18n="info.tips.title">Consejos de Aprendizaje</h3>
-                    <p class="info-description" data-i18n="info.tips.description">Descubre estrategias efectivas para aprender inglés más rápido, técnicas de memorización y hábitos de estudio recomendados.</p>
-                    <a href="#" class="info-link" data-i18n="info.tips.button">Ver Consejos</a>
+                    <h3 data-i18n="info.tips.title">Unlock Your English Potential: Top Learning Tips</h3>
+                    <p data-i18n="info.tips.description">Boost your learning journey with these proven strategies... (content from JSON)</p>
+                    <button class="btn btn-primary" data-modal-target="learning_tips" data-i18n="info.tips.button">Explore More Tips</button> <!-- Added modal target -->
                 </div>
-                <div class="info-button">
+                <div class="info-card animate-on-scroll">
                     <div class="info-icon">
-                        <i class="fas fa-tasks"></i>
+                        <i class="fas fa-puzzle-piece"></i>
                     </div>
-                    <h3 class="info-title" data-i18n="info.practice.title">Práctica de Inglés</h3>
-                    <p class="info-description" data-i18n="info.practice.description">Ejercicios interactivos, juegos de vocabulario y actividades de comprensión para practicar tu inglés de forma divertida.</p>
-                    <a href="#" class="info-link" data-i18n="info.practice.button">Practicar Ahora</a>
-                </div>
-            </div>
-        </div>
-    </section> <!-- End Quiz Section -->
-
-    <!-- Info Buttons Section -->
-    <section id="info-section" class="section info-section">
-        <div class="container">
-            <!-- Optional: Add a section title if desired -->
-            <!-- <div class="section-title">
-                <h2 data-i18n="info.section_title">Explore More</h2>
-            </div> -->
-            <div class="info-buttons">
-                <div class="info-button">
-                    <div class="info-icon">
-                        <i class="fas fa-brain"></i> <!-- Updated icon -->
-                    </div>
-                    <h3 class="info-title" data-i18n="info.tips.title">Unlock Your English Potential: Top Learning Tips</h3>
-                    <p class="info-description" data-i18n="info.tips.description"></p> <!-- Description loaded by JS -->
-                    <a href="#" class="info-link btn" data-i18n="info.tips.button">Explore More Tips <i class="fas fa-arrow-right"></i></a> <!-- Added btn class and icon -->
-                </div>
-                <div class="info-button">
-                    <div class="info-icon">
-                        <i class="fas fa-puzzle-piece"></i> <!-- Updated icon -->
-                    </div>
-                    <h3 class="info-title" data-i18n="info.practice.title">Sharpen Your Skills: Interactive Practice</h3>
-                    <p class="info-description" data-i18n="info.practice.description"></p> <!-- Description loaded by JS -->
-                    <a href="#quiz" class="info-link btn" data-i18n="info.practice.button">Start Practicing <i class="fas fa-arrow-right"></i></a> <!-- Added btn class, linked to quiz, added icon -->
+                    <h3 data-i18n="info.practice.title">Sharpen Your Skills: Interactive Practice</h3>
+                    <p data-i18n="info.practice.description">Put your knowledge to the test with our fun and effective exercises... (content from JSON)</p>
+                    <a href="#quiz" class="btn btn-primary" data-i18n="info.practice.button">Start Practicing</a> <!-- Correctly links to quiz -->
                 </div>
             </div>
         </div>
     </section>
-    <!-- End Info Buttons Section -->
 
     <section id="resources" class="resources section">
         <div class="container">
-            <div class="section-title">
+            <div class="section-title animate-on-scroll">
                 <h2 data-i18n="resources.title">Recursos de Aprendizaje</h2>
             </div>
             <div class="resources-grid">
-                <div class="resource-card">
+                <div class="resource-card animate-on-scroll clickable-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-plane-departure"></i>
+                    </div>
                     <h3 data-i18n="resources.travel_guide.title">Guía de Inglés para Viajes</h3>
                     <p data-i18n="resources.travel_guide.description">Frases esenciales y vocabulario para hispanohablantes que viajan a países de habla inglesa.</p>
                     <div class="price">
-                        <del data-i18n="resources.travel_guide.price_original">$9.99</del>
-                        <span class="new-price" data-i18n="resources.travel_guide.price_current">¡Gratis por tiempo limitado!</span>
+                        <span class="original-price" data-i18n="resources.travel_guide.price_original">$9.99</span>
+                        <span class="current-price" data-i18n="resources.travel_guide.price_current">¡Gratis por tiempo limitado!</span>
                     </div>
-                    <a href="https://raw.githubusercontent.com/seemo14/Inglesfacil/main/resources/travel_english_guide.pdf" target="_blank" class="btn btn-primary" data-i18n="resources.travel_guide.button">Obtener Guía</a>
+                    <a href="#" class="btn btn-primary" data-i18n="resources.travel_guide.button">Obtener Guía</a> <!-- Link updated by JS -->
                 </div>
-                <div class="resource-card">
+                <div class="resource-card animate-on-scroll clickable-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
                     <h3 data-i18n="resources.movie_collection.title">Colección de Inglés de Películas</h3>
                     <p data-i18n="resources.movie_collection.description">Aprende más de 100 expresiones de películas y programas de TV populares con contexto y ejemplos.</p>
                     <div class="price">
-                        <del data-i18n="resources.movie_collection.price_original">$14.99</del>
-                        <span class="new-price" data-i18n="resources.movie_collection.price_current">¡Gratis por tiempo limitado!</span>
+                        <span class="original-price" data-i18n="resources.movie_collection.price_original">$14.99</span>
+                        <span class="current-price" data-i18n="resources.movie_collection.price_current">¡Gratis por tiempo limitado!</span>
                     </div>
-                    <a href="https://raw.githubusercontent.com/seemo14/Inglesfacil/main/resources/movie_english_collection.pdf" target="_blank" class="btn btn-primary" data-i18n="resources.movie_collection.button">Obtener Colección</a>
+                    <a href="#" class="btn btn-primary" data-i18n="resources.movie_collection.button">Obtener Colección</a> <!-- Link updated by JS -->
                 </div>
-                <div class="resource-card">
+                <div class="resource-card animate-on-scroll clickable-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
                     <h3 data-i18n="resources.pronunciation_workbook.title">Cuaderno de Ejercicios de Pronunciación</h3>
                     <p data-i18n="resources.pronunciation_workbook.description">Ejercicios específicos para hispanohablantes para dominar los sonidos desafiantes del inglés.</p>
                     <div class="price">
-                        <del data-i18n="resources.pronunciation_workbook.price_original">$12.99</del>
-                        <span class="new-price" data-i18n="resources.pronunciation_workbook.price_current">¡Gratis por tiempo limitado!</span>
+                        <span class="original-price" data-i18n="resources.pronunciation_workbook.price_original">$12.99</span>
+                        <span class="current-price" data-i18n="resources.pronunciation_workbook.price_current">¡Gratis por tiempo limitado!</span>
                     </div>
-                    <a href="https://raw.githubusercontent.com/seemo14/Inglesfacil/main/resources/pronunciation_workbook.pdf" target="_blank" class="btn btn-primary" data-i18n="resources.pronunciation_workbook.button">Obtener Cuaderno</a>
+                    <a href="#" class="btn btn-primary" data-i18n="resources.pronunciation_workbook.button">Obtener Cuaderno</a> <!-- Link updated by JS -->
                 </div>
             </div>
         </div>
-    </section>
-
-    <section id="contact" class="contact section">
-        <div class="container">
+    </section    <section id="contact" class="contact section">
+        <div class="container animate-on-scroll">
             <div class="section-title">
                 <h2 data-i18n="contact.title">Ponte en Contacto</h2>
             </div>
-            <form class="contact-form" id="contact-form">
+            <form id="contact-form" class="contact-form">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="name" placeholder="Tu Nombre" data-i18n-placeholder="contact.name_placeholder" required>
+                    <input type="text" id="name" name="name" required data-i18n="contact.name_placeholder" placeholder="Tu Nombre">
                 </div>
                 <div class="form-group">
-                    <input type="email" class="form-control" id="email" placeholder="Tu Email" data-i18n-placeholder="contact.email_placeholder" required>
+                    <input type="email" id="email" name="email" required data-i18n="contact.email_placeholder" placeholder="Tu Email">
                 </div>
                 <div class="form-group">
-                    <select class="form-control" id="topic" required>
-                        <option value="" data-i18n="contact.topic_options.default">Seleccionar Tema</option>
+                    <select id="topic" name="topic" required>
+                        <option value="" disabled selected data-i18n="contact.topic_options.default">Seleccionar Tema</option>
                         <option value="partnership" data-i18n="contact.topic_options.partnership">Asociación Comercial</option>
                         <option value="sponsorship" data-i18n="contact.topic_options.sponsorship">Patrocinio</option>
                         <option value="resources" data-i18n="contact.topic_options.resources">Recursos de Aprendizaje</option>
@@ -445,57 +389,67 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" id="message" rows="5" placeholder="Tu Mensaje" data-i18n-placeholder="contact.message_placeholder" required></textarea>
+                    <textarea id="message" name="message" rows="5" required data-i18n="contact.message_placeholder" placeholder="Tu Mensaje"></textarea>
                 </div>
+                <div id="form-message" class="form-message"></div> <!-- Added form message display area -->
                 <button type="submit" class="btn btn-primary" data-i18n="contact.submit_button">Enviar Mensaje</button>
-                <div class="form-message"></div>
+            </form>
+        </div>
+    </section>ype="submit" class="btn btn-primary" data-i18n="contact.submit_button">Enviar Mensaje</button>
             </form>
         </div>
     </section>
 
-    <footer>
+    <footer id="footer" class="footer">
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-grid">
                 <div class="footer-about">
-                    <h3>Inglés Fácil con Ana</h3>
+                    <img src="images/logo_ing_transparent_white.png" alt="Inglés Fácil con Ana Logo White" class="footer-logo">
                     <p data-i18n="footer.about_text">Ayudando a hispanohablantes a aprender inglés a través de contenido atractivo, práctico y divertido desde 2020.</p>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/ingles.facil123/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@inglesfacilconana" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.youtube.com/channel/UCinglesfacilconana" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a> <!-- Placeholder link -->
+                    </div>
                 </div>
                 <div class="footer-links">
-                    <h3 data-i18n="footer.quick_links">Enlaces Rápidos</h3>
+                    <h4 data-i18n="footer.quick_links">Enlaces Rápidos</h4>
                     <ul>
-                        <li><a href="#home">Inicio</a></li>
-                        <li><a href="#features">Características</a></li>
-                        <li><a href="#content">Contenido</a></li>
-                        <li><a href="#quiz">Cuestionario</a></li>
-                        <li><a href="#resources">Recursos</a></li>
-                        <li><a href="#contact">Contacto</a></li>
+                        <li><a href="#home" data-i18n="nav.home">Inicio</a></li>
+                        <li><a href="#features" data-i18n="nav.features">Características</a></li>
+                        <li><a href="#content" data-i18n="nav.content">Contenido</a></li>
+                        <li><a href="#quiz" data-i18n="nav.quiz">Cuestionario</a></li>
+                        <li><a href="#contact" data-i18n="nav.contact">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="footer-resources">
-                    <h3 data-i18n="footer.resources_title">Recursos</h3>
+                    <h4 data-i18n="footer.resources_title">Recursos</h4>
                     <ul>
-                        <li><a href="#" data-i18n="footer.resources_links.free_guides">Guías PDF Gratuitas</a></li>
-                        <li><a href="#" data-i18n="footer.resources_links.premium">Materiales Premium</a></li>
-                        <li><a href="#" data-i18n="footer.resources_links.vip">Membresía VIP</a></li>
-                        <li><a href="#" data-i18n="footer.resources_links.business">Inglés de Negocios</a></li>
-                        <li><a href="#" data-i18n="footer.resources_links.travel">Inglés para Viajes</a></li>
+                        <li><a href="#resources" data-i18n="footer.resources_links.free_guides">Guías PDF Gratuitas</a></li> <!-- Links to resources section -->
+                        <li><a href="#" data-i18n="footer.resources_links.premium">Materiales Premium</a></li> <!-- Placeholder -->
+                        <li><a href="#" data-i18n="footer.resources_links.vip">Membresía VIP</a></li> <!-- Placeholder -->
+                        <li><a href="#" data-i18n="footer.resources_links.business">Inglés de Negocios</a></li> <!-- Placeholder -->
+                        <li><a href="#" data-i18n="footer.resources_links.travel">Inglés para Viajes</a></li> <!-- Placeholder -->
                     </ul>
-                </div>
-                <div class="footer-social">
-                    <h3>Social</h3>
-                    <div class="social-icons">
-                        <a href="https://www.instagram.com/ingles.facil123/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.tiktok.com/@ingls.fcil.con.ana" target="_blank"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://www.youtube.com/@InglesfacilConana" target="_blank"><i class="fab fa-youtube"></i></a>
-                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Inglés Fácil con Ana. <span data-i18n="footer.copyright">Todos los Derechos Reservados.</span></p>
+                <p>&copy; 2024 Inglés Fácil con Ana. <span data-i18n="footer.copyright">Todos los Derechos Reservados.</span></p>
             </div>
         </div>
     </footer>
 
+    <!-- Modal Structure (Initially Hidden) -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div id="modal-container" class="modal-container">
+            <button id="modal-close-btn" class="modal-close-btn" data-i18n="modals.close_button">Close</button>
+            <div id="modal-content" class="modal-content">
+                <!-- Content will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
 </body>
 </html>
+
