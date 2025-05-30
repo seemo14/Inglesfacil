@@ -707,11 +707,16 @@ header {
 }
 
 /* Additional Info Sections (from multilingual_styles.css) */
+.info-section {
+  background-color: var(--light-color); /* Match surrounding sections */
+}
+
 .info-buttons {
   display: flex;
   justify-content: center;
   gap: 2rem;
   margin-top: 3rem;
+  flex-wrap: wrap; /* Add wrap for responsiveness */
 }
 
 .info-button {
@@ -719,49 +724,68 @@ header {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  max-width: 300px;
-  padding: 2rem;
+  max-width: 350px; /* Slightly wider */
+  flex: 1 1 300px; /* Allow flex wrapping */
+  padding: 2.5rem 2rem; /* Increased padding */
   background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  border-radius: 15px; /* Slightly more rounded */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07); /* Enhanced shadow */
+  transition: all 0.3s ease-in-out; /* Smoother transition */
+  border: 1px solid #eee; /* Subtle border */
 }
 
 .info-button:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  transform: translateY(-10px) scale(1.03); /* Add scale effect */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12); /* Enhanced hover shadow */
 }
 
 .info-icon {
-  font-size: 3rem;
-  color: var(--accent-color-1);
-  margin-bottom: 1rem;
+  font-size: 3.5rem; /* Larger icon */
+  color: var(--accent-color-1); /* Use accent color */
+  margin-bottom: 1.5rem; /* Increased margin */
+  transition: transform 0.3s ease-in-out; /* Add transition for icon */
+}
+
+.info-button:hover .info-icon {
+  transform: scale(1.1); /* Scale icon on hover */
 }
 
 .info-title {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.6rem; /* Slightly larger title */
+  margin-bottom: 1rem; /* Adjusted margin */
   color: var(--primary-color);
+  font-weight: 600; /* Slightly bolder */
 }
 
 .info-description {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem; /* Increased margin */
+  color: #555; /* Slightly darker text */
+  min-height: 100px; /* Ensure consistent height before JS load */
+  white-space: pre-line; /* Respect newlines from JSON */
 }
 
 .info-link {
-  display: inline-block;
-  padding: 0.5rem 1.5rem;
+  /* Inherits .btn styles now */
   background-color: var(--primary-color);
   color: white;
-  border-radius: 50px;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  margin-top: auto; /* Push button to bottom */
+  padding: 0.9rem 1.8rem; /* Slightly larger button */
+}
+
+.info-link i {
+  margin-left: 0.5rem; /* Space before icon */
+  transition: transform 0.2s ease-in-out;
 }
 
 .info-link:hover {
   background-color: var(--secondary-color);
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  color: white; /* Keep text white */
+  transform: translateY(-3px); /* Keep btn hover effect */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.info-link:hover i {
+    transform: translateX(5px); /* Move icon slightly on hover */
 }
 
 
