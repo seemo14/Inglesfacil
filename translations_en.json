@@ -1,158 +1,158 @@
 {
-  "nav": {
-    "home": "Home",
-    "features": "Features",
-    "content": "Content",
-    "quiz": "Quiz",
-    "resources": "Resources",
-    "contact": "Contact",
-    "brand": "Easy English with Ana"
-  },
-  "hero": {
-    "title": "Learn English the Easy Way",
-    "subtitle": "Join our community of over 385,000 Spanish speakers learning English through engaging, practical, and fun content.",
-    "btn_resources": "Get Learning Resources",
-    "btn_instagram": "Follow on Instagram"
-  },
-  "features": {
-    "title": "Why Learn With Us",
-    "daily_life": {
-      "title": "Daily Life English",
-      "description": "Learn the most useful sentences and expressions that Spanish speakers need in everyday situations."
+    "nav": {
+        "home": "Home",
+        "features": "Features",
+        "content": "Content",
+        "quiz": "Quiz",
+        "resources": "Resources",
+        "contact": "Contact",
+        "brand": "Easy English with Ana"
     },
-    "movie_vocab": {
-      "title": "Movie Vocabulary",
-      "description": "Understand your favorite movies and series by learning common expressions and slang used in entertainment."
+    "hero": {
+        "title": "Learn English the Easy Way",
+        "subtitle": "Join our community of over 385,000 Spanish speakers learning English through engaging, practical, and fun content.",
+        "btn_resources": "Get Learning Resources",
+        "btn_instagram": "Follow on Instagram"
     },
-    "pronunciation": {
-      "title": "Perfect Pronunciation",
-      "description": "Master the sounds that are most challenging for Spanish speakers with our targeted practice exercises."
+    "features": {
+        "title": "Why Learn With Us",
+        "daily_life": {
+            "title": "Daily Life English",
+            "description": "Learn the most useful sentences and expressions that Spanish speakers need in everyday situations."
+        },
+        "movie_vocab": {
+            "title": "Movie Vocabulary",
+            "description": "Understand your favorite movies and series by learning common expressions and slang used in entertainment."
+        },
+        "pronunciation": {
+            "title": "Perfect Pronunciation",
+            "description": "Master the sounds that are most challenging for Spanish speakers with our targeted practice exercises."
+        }
+    },
+    "content": {
+        "title": "Our Popular Content",
+        "vocabulary": {
+            "tag": "Vocabulary",
+            "title": "How Many Words Do You Know?",
+            "description": "Test your knowledge with our popular word recognition challenges. How many English words can you remember?",
+            "button": "Watch Example"
+        },
+        "movies": {
+            "tag": "Movies",
+            "title": "Famous Movie Quotes",
+            "description": "Learn iconic movie quotes in English and impress your friends with your cultural knowledge and perfect pronunciation.",
+            "button": "Watch Example"
+        },
+        "pronunciation": {
+            "tag": "Pronunciation",
+            "title": "Perfect Pronunciation",
+            "description": "Master the most challenging English sounds for Spanish speakers with our targeted pronunciation exercises.",
+            "button": "Watch Example"
+        }
+    },
+    "quiz": {
+        "title": "Test Your Movie Quote Knowledge",
+        "intro": "How well do you know famous movie quotes in English? Take this quick quiz to test your knowledge!",
+        "questions": "6 questions",
+        "participants": "people have taken this quiz",
+        "start_button": "Start Quiz",
+        "question": "Question",
+        "prev_button": "Previous",
+        "next_button": "Next",
+        "see_results": "See Results",
+        "hint_button": "Need a hint?",
+        "your_score": "Your Score:",
+        "perfect_score": "Perfect! You're a movie quote master! Your English and movie knowledge are impressive!",
+        "good_score": "Very good! You know your movies and English quotes quite well!",
+        "average_score": "Good try! Keep watching movies in English to improve your knowledge!",
+        "low_score": "Keep practicing! Watch more movies in English with subtitles to learn these famous quotes!",
+        "participant_text": "You're participant #",
+        "participant_suffix": "to take this quiz!",
+        "share_results": "Share your results:",
+        "share_message": "I scored {score}/6 on the Easy English with Ana movie quotes quiz! Can you beat it?"
+    },
+    "social": {
+        "title": "Follow Us on Social Media",
+        "tiktok": {
+            "title": "TikTok",
+            "description": "Learn English with short, fun videos. Useful phrases, pronunciation, and quick tips.",
+            "button": "Follow on TikTok"
+        },
+        "youtube": {
+            "title": "YouTube",
+            "description": "Full lessons, detailed explanations, and exclusive content to improve your English.",
+            "button": "Subscribe"
+        }
+    },
+    "info": {
+        "tips": {
+            "title": "Unlock Your English Potential: Top Learning Tips",
+            "description": "Boost your learning journey with these proven strategies:\n*   Immerse Yourself: Watch movies/series in English (start with subtitles!).\n*   Practice Daily: Even 15 minutes of focused practice makes a difference.\n*   Speak Out Loud: Don't be afraid to practice pronunciation, even to yourself.\n*   Expand Vocabulary: Learn 5 new words daily and use them in sentences.\n*   Find a Partner: Practice conversation with a friend or language exchange partner.",
+            "button": "Explore More Tips"
+        },
+        "practice": {
+            "title": "Sharpen Your Skills: Interactive Practice",
+            "description": "Put your knowledge to the test with our fun and effective exercises:\n*   Vocabulary Quizzes: Expand your word bank with engaging quizzes.\n*   Grammar Drills: Master sentence structure and verb tenses.\n*   Listening Comprehension: Improve your understanding of spoken English.\n*   Pronunciation Exercises: Refine your accent with targeted practice.\n*   (Coming Soon!) Reading Challenges: Enhance your reading speed and comprehension.",
+            "button": "Start Practicing"
+        }
+    },
+    "resources": {
+        "title": "Learning Resources",
+        "travel_guide": {
+            "title": "Travel English Guide",
+            "description": "Essential phrases and vocabulary for Spanish speakers traveling to English-speaking countries.",
+            "price_original": "$9.99",
+            "price_current": "Free for a limited time!",
+            "button": "Get Guide"
+        },
+        "movie_collection": {
+            "title": "Movie English Collection",
+            "description": "Learn 100+ expressions from popular movies and TV shows with context and examples.",
+            "price_original": "$14.99",
+            "price_current": "Free for a limited time!",
+            "button": "Get Collection"
+        },
+        "pronunciation_workbook": {
+            "title": "Pronunciation Workbook",
+            "description": "Targeted exercises for Spanish speakers to master challenging English sounds.",
+            "price_original": "$12.99",
+            "price_current": "Free for a limited time!",
+            "button": "Get Workbook"
+        }
+    },
+    "contact": {
+        "title": "Get in Touch",
+        "name_placeholder": "Your Name",
+        "email_placeholder": "Your Email",
+        "topic_options": {
+            "default": "Select Topic",
+            "partnership": "Business Partnership",
+            "sponsorship": "Sponsorship",
+            "resources": "Learning Resources",
+            "other": "Other"
+        },
+        "message_placeholder": "Your Message",
+        "submit_button": "Send Message",
+        "success_message": "Message sent successfully! We will respond to you soon.",
+        "error_message_fill": "Please fill in all fields.",
+        "error_message_email": "Please enter a valid email address.",
+        "loading_message": "Sending message..."
+    },
+    "footer": {
+        "about_text": "Helping Spanish speakers learn English through engaging, practical, and fun content since 2020.",
+        "quick_links": "Quick Links",
+        "resources_title": "Resources",
+        "resources_links": {
+            "free_guides": "Free PDF Guides",
+            "premium": "Premium Materials",
+            "vip": "VIP Membership",
+            "business": "Business English",
+            "travel": "Travel English"
+        },
+        "copyright": "All Rights Reserved."
+    },
+    "language": {
+        "en": "English",
+        "es": "Spanish"
     }
-  },
-  "content": {
-    "title": "Our Popular Content",
-    "vocabulary": {
-      "tag": "Vocabulary",
-      "title": "How Many Words Do You Know?",
-      "description": "Test your knowledge with our popular word recognition challenges. How many English words can you remember?",
-      "button": "Watch Example"
-    },
-    "movies": {
-      "tag": "Movies",
-      "title": "Famous Movie Quotes",
-      "description": "Learn iconic movie quotes in English and impress your friends with your cultural knowledge and perfect pronunciation.",
-      "button": "Watch Example"
-    },
-    "pronunciation": {
-      "tag": "Pronunciation",
-      "title": "Perfect Pronunciation",
-      "description": "Master the most challenging English sounds for Spanish speakers with our targeted pronunciation exercises.",
-      "button": "Watch Example"
-    }
-  },
-  "quiz": {
-    "title": "Test Your Movie Quote Knowledge",
-    "intro": "How well do you know famous movie quotes in English? Take this quick quiz to test your knowledge!",
-    "questions": "6 questions",
-    "participants": "people have taken this quiz",
-    "start_button": "Start Quiz",
-    "question": "Question",
-    "prev_button": "Previous",
-    "next_button": "Next",
-    "see_results": "See Results",
-    "hint_button": "Need a hint?",
-    "your_score": "Your Score:",
-    "perfect_score": "Perfect! You're a movie quote master! Your English and movie knowledge are impressive!",
-    "good_score": "Very good! You know your movies and English quotes quite well!",
-    "average_score": "Good try! Keep watching movies in English to improve your knowledge!",
-    "low_score": "Keep practicing! Watch more movies in English with subtitles to learn these famous quotes!",
-    "participant_text": "You're participant #",
-    "participant_suffix": "to take this quiz!",
-    "share_results": "Share your results:",
-    "share_message": "I scored {score}/6 on the Easy English with Ana movie quotes quiz! Can you beat it?"
-  },
-  "social": {
-    "title": "Follow Us on Social Media",
-    "tiktok": {
-      "title": "TikTok",
-      "description": "Learn English with short, fun videos. Useful phrases, pronunciation, and quick tips.",
-      "button": "Follow on TikTok"
-    },
-    "youtube": {
-      "title": "YouTube",
-      "description": "Full lessons, detailed explanations, and exclusive content to improve your English.",
-      "button": "Subscribe"
-    }
-  },
-  "info": {
-    "tips": {
-      "title": "Learning Tips",
-      "description": "Discover effective strategies to learn English faster, memorization techniques, and recommended study habits.",
-      "button": "View Tips"
-    },
-    "practice": {
-      "title": "English Practice",
-      "description": "Interactive exercises, vocabulary games, and comprehension activities to practice your English in a fun way.",
-      "button": "Practice Now"
-    }
-  },
-  "resources": {
-    "title": "Learning Resources",
-    "travel_guide": {
-      "title": "Travel English Guide",
-      "description": "Essential phrases and vocabulary for Spanish speakers traveling to English-speaking countries.",
-      "price_original": "$9.99",
-      "price_current": "Free for a limited time!",
-      "button": "Get Guide"
-    },
-    "movie_collection": {
-      "title": "Movie English Collection",
-      "description": "Learn 100+ expressions from popular movies and TV shows with context and examples.",
-      "price_original": "$14.99",
-      "price_current": "Free for a limited time!",
-      "button": "Get Collection"
-    },
-    "pronunciation_workbook": {
-      "title": "Pronunciation Workbook",
-      "description": "Targeted exercises for Spanish speakers to master challenging English sounds.",
-      "price_original": "$12.99",
-      "price_current": "Free for a limited time!",
-      "button": "Get Workbook"
-    }
-  },
-  "contact": {
-    "title": "Get in Touch",
-    "name_placeholder": "Your Name",
-    "email_placeholder": "Your Email",
-    "topic_options": {
-      "default": "Select Topic",
-      "partnership": "Business Partnership",
-      "sponsorship": "Sponsorship",
-      "resources": "Learning Resources",
-      "other": "Other"
-    },
-    "message_placeholder": "Your Message",
-    "submit_button": "Send Message",
-    "success_message": "Message sent successfully! We will respond to you soon.",
-    "error_message_fill": "Please fill in all fields.",
-    "error_message_email": "Please enter a valid email address.",
-    "loading_message": "Sending message..."
-  },
-  "footer": {
-    "about_text": "Helping Spanish speakers learn English through engaging, practical, and fun content since 2020.",
-    "quick_links": "Quick Links",
-    "resources_title": "Resources",
-    "resources_links": {
-      "free_guides": "Free PDF Guides",
-      "premium": "Premium Materials",
-      "vip": "VIP Membership",
-      "business": "Business English",
-      "travel": "Travel English"
-    },
-    "copyright": "All Rights Reserved."
-  },
-  "language": {
-    "en": "English",
-    "es": "Spanish"
-  }
 }
