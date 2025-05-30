@@ -1,158 +1,158 @@
 {
-  "nav": {
-    "home": "Inicio",
-    "features": "Características",
-    "content": "Contenido",
-    "quiz": "Cuestionario",
-    "resources": "Recursos",
-    "contact": "Contacto",
-    "brand": "Inglés Fácil con Ana"
-  },
-  "hero": {
-    "title": "Aprende Inglés de Forma Fácil",
-    "subtitle": "Únete a nuestra comunidad de más de 385,000 hispanohablantes que aprenden inglés a través de contenido atractivo, práctico y divertido.",
-    "btn_resources": "Obtener Recursos de Aprendizaje",
-    "btn_instagram": "Síguenos en Instagram"
-  },
-  "features": {
-    "title": "Por Qué Aprender Con Nosotros",
-    "daily_life": {
-      "title": "Inglés para la Vida Diaria",
-      "description": "Aprende las frases y expresiones más útiles que los hispanohablantes necesitan en situaciones cotidianas."
+    "nav": {
+        "home": "Inicio",
+        "features": "Características",
+        "content": "Contenido",
+        "quiz": "Cuestionario",
+        "resources": "Recursos",
+        "contact": "Contacto",
+        "brand": "Inglés Fácil con Ana"
     },
-    "movie_vocab": {
-      "title": "Vocabulario de Películas",
-      "description": "Comprende tus películas y series favoritas aprendiendo expresiones comunes y jerga utilizada en el entretenimiento."
+    "hero": {
+        "title": "Aprende Inglés de Forma Fácil",
+        "subtitle": "Únete a nuestra comunidad de más de 385,000 hispanohablantes que aprenden inglés a través de contenido atractivo, práctico y divertido.",
+        "btn_resources": "Obtener Recursos de Aprendizaje",
+        "btn_instagram": "Síguenos en Instagram"
     },
-    "pronunciation": {
-      "title": "Pronunciación Perfecta",
-      "description": "Domina los sonidos que son más desafiantes para los hispanohablantes con nuestros ejercicios de práctica específicos."
+    "features": {
+        "title": "Por Qué Aprender Con Nosotros",
+        "daily_life": {
+            "title": "Inglés para la Vida Diaria",
+            "description": "Aprende las frases y expresiones más útiles que los hispanohablantes necesitan en situaciones cotidianas."
+        },
+        "movie_vocab": {
+            "title": "Vocabulario de Películas",
+            "description": "Comprende tus películas y series favoritas aprendiendo expresiones comunes y jerga utilizada en el entretenimiento."
+        },
+        "pronunciation": {
+            "title": "Pronunciación Perfecta",
+            "description": "Domina los sonidos que son más desafiantes para los hispanohablantes con nuestros ejercicios de práctica específicos."
+        }
+    },
+    "content": {
+        "title": "Nuestro Contenido Popular",
+        "vocabulary": {
+            "tag": "Vocabulario",
+            "title": "¿Cuántas Palabras Conoces?",
+            "description": "Pon a prueba tus conocimientos con nuestros populares desafíos de reconocimiento de palabras. ¿Cuántas palabras en inglés puedes recordar?",
+            "button": "Ver Ejemplo"
+        },
+        "movies": {
+            "tag": "Películas",
+            "title": "Frases de Películas Famosas",
+            "description": "Aprende frases icónicas de películas en inglés e impresiona a tus amigos con tu conocimiento cultural y perfecta pronunciación.",
+            "button": "Ver Ejemplo"
+        },
+        "pronunciation": {
+            "tag": "Pronunciación",
+            "title": "Pronunciación Perfecta",
+            "description": "Domina los sonidos más desafiantes del inglés para hispanohablantes con nuestros ejercicios de pronunciación específicos.",
+            "button": "Ver Ejemplo"
+        }
+    },
+    "quiz": {
+        "title": "Pon a Prueba Tu Conocimiento de Frases de Películas",
+        "intro": "¿Qué tan bien conoces las frases famosas de películas en inglés? ¡Haz este breve cuestionario para poner a prueba tus conocimientos!",
+        "questions": "6 preguntas",
+        "participants": "personas han realizado este cuestionario",
+        "start_button": "Comenzar Cuestionario",
+        "question": "Pregunta",
+        "prev_button": "Anterior",
+        "next_button": "Siguiente",
+        "see_results": "Ver Resultados",
+        "hint_button": "¿Necesitas una pista?",
+        "your_score": "Tu Puntuación:",
+        "perfect_score": "¡Perfecto! Eres un maestro de las frases de películas. ¡Tu inglés y conocimiento cinematográfico son impresionantes!",
+        "good_score": "¡Muy bien! Conoces tus películas y frases en inglés bastante bien.",
+        "average_score": "¡Buen intento! Sigue viendo películas en inglés para mejorar tus conocimientos.",
+        "low_score": "¡Sigue practicando! Mira más películas en inglés con subtítulos para aprender estas frases famosas.",
+        "participant_text": "Eres el participante #",
+        "participant_suffix": "en realizar este cuestionario!",
+        "share_results": "Comparte tus resultados:",
+        "share_message": "¡He obtenido {score}/6 en el cuestionario de frases de películas en inglés de Inglés Fácil con Ana! ¿Puedes superarlo?"
+    },
+    "social": {
+        "title": "Síguenos en Redes Sociales",
+        "tiktok": {
+            "title": "TikTok",
+            "description": "Aprende inglés con videos cortos y divertidos. Frases útiles, pronunciación y consejos rápidos.",
+            "button": "Seguir en TikTok"
+        },
+        "youtube": {
+            "title": "YouTube",
+            "description": "Lecciones completas, explicaciones detalladas y contenido exclusivo para mejorar tu inglés.",
+            "button": "Suscríbete"
+        }
+    },
+    "info": {
+        "tips": {
+            "title": "Desbloquea Tu Potencial en Inglés: Consejos Clave",
+            "description": "Impulsa tu aprendizaje con estas estrategias probadas:\n*   Sumérgete: Mira películas/series en inglés (¡empieza con subtítulos!).\n*   Practica a Diario: Incluso 15 minutos de práctica enfocada marcan la diferencia.\n*   Habla en Voz Alta: No temas practicar la pronunciación, incluso contigo mismo.\n*   Amplía Vocabulario: Aprende 5 palabras nuevas al día y úsalas en frases.\n*   Encuentra un Compañero: Practica conversación con un amigo o compañero de intercambio.",
+            "button": "Explorar Más Consejos"
+        },
+        "practice": {
+            "title": "Perfecciona Tus Habilidades: Práctica Interactiva",
+            "description": "Pon a prueba tus conocimientos con nuestros ejercicios divertidos y efectivos:\n*   Cuestionarios de Vocabulario: Amplía tu banco de palabras con cuestionarios atractivos.\n*   Ejercicios de Gramática: Domina la estructura de frases y los tiempos verbales.\n*   Comprensión Auditiva: Mejora tu entendimiento del inglés hablado.\n*   Ejercicios de Pronunciación: Refina tu acento con práctica específica.\n*   (¡Próximamente!) Desafíos de Lectura: Mejora tu velocidad y comprensión lectora.",
+            "button": "Empezar a Practicar"
+        }
+    },
+    "resources": {
+        "title": "Recursos de Aprendizaje",
+        "travel_guide": {
+            "title": "Guía de Inglés para Viajes",
+            "description": "Frases esenciales y vocabulario para hispanohablantes que viajan a países de habla inglesa.",
+            "price_original": "$9.99",
+            "price_current": "¡Gratis por tiempo limitado!",
+            "button": "Obtener Guía"
+        },
+        "movie_collection": {
+            "title": "Colección de Inglés de Películas",
+            "description": "Aprende más de 100 expresiones de películas y programas de TV populares con contexto y ejemplos.",
+            "price_original": "$14.99",
+            "price_current": "¡Gratis por tiempo limitado!",
+            "button": "Obtener Colección"
+        },
+        "pronunciation_workbook": {
+            "title": "Cuaderno de Ejercicios de Pronunciación",
+            "description": "Ejercicios específicos para hispanohablantes para dominar los sonidos desafiantes del inglés.",
+            "price_original": "$12.99",
+            "price_current": "¡Gratis por tiempo limitado!",
+            "button": "Obtener Cuaderno"
+        }
+    },
+    "contact": {
+        "title": "Ponte en Contacto",
+        "name_placeholder": "Tu Nombre",
+        "email_placeholder": "Tu Email",
+        "topic_options": {
+            "default": "Seleccionar Tema",
+            "partnership": "Asociación Comercial",
+            "sponsorship": "Patrocinio",
+            "resources": "Recursos de Aprendizaje",
+            "other": "Otro"
+        },
+        "message_placeholder": "Tu Mensaje",
+        "submit_button": "Enviar Mensaje",
+        "success_message": "¡Mensaje enviado con éxito! Te responderemos pronto.",
+        "error_message_fill": "Por favor completa todos los campos.",
+        "error_message_email": "Por favor ingresa un email válido.",
+        "loading_message": "Enviando mensaje..."
+    },
+    "footer": {
+        "about_text": "Ayudando a hispanohablantes a aprender inglés a través de contenido atractivo, práctico y divertido desde 2020.",
+        "quick_links": "Enlaces Rápidos",
+        "resources_title": "Recursos",
+        "resources_links": {
+            "free_guides": "Guías PDF Gratuitas",
+            "premium": "Materiales Premium",
+            "vip": "Membresía VIP",
+            "business": "Inglés de Negocios",
+            "travel": "Inglés para Viajes"
+        },
+        "copyright": "Todos los Derechos Reservados."
+    },
+    "language": {
+        "en": "English",
+        "es": "Español"
     }
-  },
-  "content": {
-    "title": "Nuestro Contenido Popular",
-    "vocabulary": {
-      "tag": "Vocabulario",
-      "title": "¿Cuántas Palabras Conoces?",
-      "description": "Pon a prueba tus conocimientos con nuestros populares desafíos de reconocimiento de palabras. ¿Cuántas palabras en inglés puedes recordar?",
-      "button": "Ver Ejemplo"
-    },
-    "movies": {
-      "tag": "Películas",
-      "title": "Frases de Películas Famosas",
-      "description": "Aprende frases icónicas de películas en inglés e impresiona a tus amigos con tu conocimiento cultural y perfecta pronunciación.",
-      "button": "Ver Ejemplo"
-    },
-    "pronunciation": {
-      "tag": "Pronunciación",
-      "title": "Pronunciación Perfecta",
-      "description": "Domina los sonidos más desafiantes del inglés para hispanohablantes con nuestros ejercicios de pronunciación específicos.",
-      "button": "Ver Ejemplo"
-    }
-  },
-  "quiz": {
-    "title": "Pon a Prueba Tu Conocimiento de Frases de Películas",
-    "intro": "¿Qué tan bien conoces las frases famosas de películas en inglés? ¡Haz este breve cuestionario para poner a prueba tus conocimientos!",
-    "questions": "6 preguntas",
-    "participants": "personas han realizado este cuestionario",
-    "start_button": "Comenzar Cuestionario",
-    "question": "Pregunta",
-    "prev_button": "Anterior",
-    "next_button": "Siguiente",
-    "see_results": "Ver Resultados",
-    "hint_button": "¿Necesitas una pista?",
-    "your_score": "Tu Puntuación:",
-    "perfect_score": "¡Perfecto! Eres un maestro de las frases de películas. ¡Tu inglés y conocimiento cinematográfico son impresionantes!",
-    "good_score": "¡Muy bien! Conoces tus películas y frases en inglés bastante bien.",
-    "average_score": "¡Buen intento! Sigue viendo películas en inglés para mejorar tus conocimientos.",
-    "low_score": "¡Sigue practicando! Mira más películas en inglés con subtítulos para aprender estas frases famosas.",
-    "participant_text": "Eres el participante #",
-    "participant_suffix": "en realizar este cuestionario!",
-    "share_results": "Comparte tus resultados:",
-    "share_message": "¡He obtenido {score}/6 en el cuestionario de frases de películas en inglés de Inglés Fácil con Ana! ¿Puedes superarlo?"
-  },
-  "social": {
-    "title": "Síguenos en Redes Sociales",
-    "tiktok": {
-      "title": "TikTok",
-      "description": "Aprende inglés con videos cortos y divertidos. Frases útiles, pronunciación y consejos rápidos.",
-      "button": "Seguir en TikTok"
-    },
-    "youtube": {
-      "title": "YouTube",
-      "description": "Lecciones completas, explicaciones detalladas y contenido exclusivo para mejorar tu inglés.",
-      "button": "Suscríbete"
-    }
-  },
-  "info": {
-    "tips": {
-      "title": "Consejos de Aprendizaje",
-      "description": "Descubre estrategias efectivas para aprender inglés más rápido, técnicas de memorización y hábitos de estudio recomendados.",
-      "button": "Ver Consejos"
-    },
-    "practice": {
-      "title": "Práctica de Inglés",
-      "description": "Ejercicios interactivos, juegos de vocabulario y actividades de comprensión para practicar tu inglés de forma divertida.",
-      "button": "Practicar Ahora"
-    }
-  },
-  "resources": {
-    "title": "Recursos de Aprendizaje",
-    "travel_guide": {
-      "title": "Guía de Inglés para Viajes",
-      "description": "Frases esenciales y vocabulario para hispanohablantes que viajan a países de habla inglesa.",
-      "price_original": "$9.99",
-      "price_current": "¡Gratis por tiempo limitado!",
-      "button": "Obtener Guía"
-    },
-    "movie_collection": {
-      "title": "Colección de Inglés de Películas",
-      "description": "Aprende más de 100 expresiones de películas y programas de TV populares con contexto y ejemplos.",
-      "price_original": "$14.99",
-      "price_current": "¡Gratis por tiempo limitado!",
-      "button": "Obtener Colección"
-    },
-    "pronunciation_workbook": {
-      "title": "Cuaderno de Ejercicios de Pronunciación",
-      "description": "Ejercicios específicos para hispanohablantes para dominar los sonidos desafiantes del inglés.",
-      "price_original": "$12.99",
-      "price_current": "¡Gratis por tiempo limitado!",
-      "button": "Obtener Cuaderno"
-    }
-  },
-  "contact": {
-    "title": "Ponte en Contacto",
-    "name_placeholder": "Tu Nombre",
-    "email_placeholder": "Tu Email",
-    "topic_options": {
-      "default": "Seleccionar Tema",
-      "partnership": "Asociación Comercial",
-      "sponsorship": "Patrocinio",
-      "resources": "Recursos de Aprendizaje",
-      "other": "Otro"
-    },
-    "message_placeholder": "Tu Mensaje",
-    "submit_button": "Enviar Mensaje",
-    "success_message": "¡Mensaje enviado con éxito! Te responderemos pronto.",
-    "error_message_fill": "Por favor completa todos los campos.",
-    "error_message_email": "Por favor ingresa un email válido.",
-    "loading_message": "Enviando mensaje..."
-  },
-  "footer": {
-    "about_text": "Ayudando a hispanohablantes a aprender inglés a través de contenido atractivo, práctico y divertido desde 2020.",
-    "quick_links": "Enlaces Rápidos",
-    "resources_title": "Recursos",
-    "resources_links": {
-      "free_guides": "Guías PDF Gratuitas",
-      "premium": "Materiales Premium",
-      "vip": "Membresía VIP",
-      "business": "Inglés de Negocios",
-      "travel": "Inglés para Viajes"
-    },
-    "copyright": "Todos los Derechos Reservados."
-  },
-  "language": {
-    "en": "English",
-    "es": "Español"
-  }
 }
