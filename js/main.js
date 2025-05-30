@@ -289,8 +289,8 @@ function updateResourceLinks() {
     if (!resourceSection) return;
 
     const links = {
-        'resources.travel_guide.button': 'resources/travel_guide.pdf',
-        'resources.movie_collection.button': 'resources/movie_collection.pdf',
+        'resources.travel_guide.button': 'resources/travel_english_guide.pdf',
+        'resources.movie_collection.button': 'resources/movie_english_collection.pdf',
         'resources.pronunciation_workbook.button': 'resources/pronunciation_workbook.pdf'
     };
 
