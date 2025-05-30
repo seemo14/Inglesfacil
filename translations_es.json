@@ -154,5 +154,28 @@
     "language": {
         "en": "English",
         "es": "Español"
+    },
+    "modals": {
+        "close_button": "Cerrar",
+        "vocabulary_example": {
+            "title": "¡Expande Tu Poder de Palabras!",
+            "text": "¿Listo para impulsar tu vocabulario en inglés? Aquí tienes algunas palabras comunes relacionadas con las rutinas diarias:\n\n*   **Wake up:** Despertarse.\n    *   *Ejemplo:* Normalmente me **despierto** a las 7 AM.\n*   **Commute:** Desplazarse regularmente entre casa y el trabajo/escuela.\n    *   *Ejemplo:* Mi **desplazamiento** dura unos 30 minutos en autobús.\n*   **Errands:** Viajes cortos para hacer tareas como compras o ir al banco.\n    *   *Ejemplo:* Necesito hacer algunos **recados** durante mi hora de almuerzo.\n*   **Unwind:** Relajarse después de un período de trabajo o estrés.\n    *   *Ejemplo:* Me gusta **relajarme** leyendo un libro por la noche.",
+            "challenge": "Reto: ¡Intenta usar estas palabras en tus propias frases hoy!"
+        },
+        "movies_example": {
+            "title": "Frases Icónicas de Películas",
+            "text": "Entender frases de películas te ayuda a conectar con hablantes nativos y la cultura. Aquí tienes un clásico:\n\n*   **Frase:** \"Francamente, querida, me importa un bledo.\"\n*   **Película:** *Lo que el viento se llevó* (1939)\n*   **Contexto:** Dicha por Rhett Butler a Scarlett O'Hara, significando su desapego final de ella.\n*   **Uso:** Aunque la frase exacta es famosa, el sentimiento de indiferencia (\"No me importa\") es común.",
+            "challenge": "Reto: ¿Puedes reconocer de qué película es esta frase: \"Brindo por ti, pequeña.\"? (Respuesta: *Casablanca*)"
+        },
+        "pronunciation_example": {
+            "title": "Dominando Sonidos Difíciles",
+            "text": "El sonido 'TH' puede ser complicado para los hispanohablantes. Hay dos tipos:\n\n1.  **Sordo /θ/:** Como en \"**th**ink\" (pensar), \"**th**ree\" (tres), \"ba**th**\" (baño). La punta de la lengua está ligeramente entre los dientes, y expulsas aire sin vibrar las cuerdas vocales.\n2.  **Sonoro /ð/:** Como en \"**th**is\" (esto), \"**th**at\" (eso), \"mo**th**er\" (madre). Misma posición de la lengua, pero vibras las cuerdas vocales (como un sonido suave de 'd').",
+            "practice": "Práctica: Intenta decir estos pares en voz alta:\n*   *Sordo:* thin /θɪn/ (delgado)\n*   *Sonoro:* then /ðɛn/ (entonces)",
+            "tip": "Consejo: ¡Mírate en un espejo para comprobar la posición de tu lengua!"
+        },
+        "learning_tips": {
+            "title": "Más Consejos de Aprendizaje",
+            "text": "Aquí tienes algunas estrategias más detalladas para acelerar tu aprendizaje de inglés:\n\n*   **Establece Metas SMART:** Haz que tus metas sean Específicas, Medibles, Alcanzables, Relevantes y con Plazo definido (p. ej., \"Aprender 50 palabras nuevas relacionadas con viajes en las próximas 2 semanas\").\n*   **Usa Tarjetas de Memoria (Flashcards):** Aplicaciones digitales (como Anki o Quizlet) o tarjetas físicas son geniales para memorizar vocabulario y frases.\n*   **Etiqueta Tu Entorno:** Pon notas adhesivas con palabras en inglés en objetos de tu casa (mesa, silla, ventana).\n*   **Escucha Activamente:** Presta atención a podcasts, música o noticias en inglés. Intenta entender primero la idea principal, luego enfócate en los detalles.\n*   **Lee Regularmente:** Empieza con artículos sencillos o libros infantiles y avanza gradualmente a materiales más complejos. No te preocupes por entender cada palabra.\n*   **Lleva un Diario:** Escribe unas pocas frases en inglés cada día sobre tus actividades, pensamientos o sentimientos. No te estreses por la perfección.\n*   **Repasa Constantemente:** Revisa regularmente lo que has aprendido para moverlo de la memoria a corto plazo a la memoria a largo plazo.\n*   **Mantén la Motivación:** ¡Encuentra formas de hacer el aprendizaje divertido! Mira YouTubers en inglés, únete a comunidades en línea o recompénsate por alcanzar hitos."
+        }
     }
 }
