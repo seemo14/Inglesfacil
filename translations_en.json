@@ -154,5 +154,28 @@
     "language": {
         "en": "English",
         "es": "Spanish"
+    },
+    "modals": {
+        "close_button": "Close",
+        "vocabulary_example": {
+            "title": "Expand Your Word Power!",
+            "text": "Ready to boost your English vocabulary? Here are a few common words related to daily routines:\n\n*   **Wake up:** To stop sleeping.\n    *   *Example:* I usually **wake up** at 7 AM.\n*   **Commute:** To travel regularly between home and work/school.\n    *   *Example:* My **commute** takes about 30 minutes by bus.\n*   **Errands:** Short trips to do tasks like shopping or banking.\n    *   *Example:* I need to run some **errands** during my lunch break.\n*   **Unwind:** To relax after a period of work or stress.\n    *   *Example:* I like to **unwind** by reading a book in the evening.",
+            "challenge": "Challenge: Try using these words in your own sentences today!"
+        },
+        "movies_example": {
+            "title": "Iconic Movie Lines",
+            "text": "Understanding movie quotes helps you connect with native speakers and culture. Here’s a classic:\n\n*   **Quote:** \"Frankly, my dear, I don't give a damn.\"\n*   **Movie:** *Gone with the Wind* (1939)\n*   **Context:** Spoken by Rhett Butler to Scarlett O'Hara, signifying his final detachment from her.\n*   **Usage:** While the exact phrase is famous, the sentiment of indifference (\"I don't care\") is common.",
+            "challenge": "Challenge: Can you recognize the movie this quote is from: \"Here's looking at you, kid.\"? (Answer: *Casablanca*)"
+        },
+        "pronunciation_example": {
+            "title": "Mastering Tricky Sounds",
+            "text": "The 'TH' sound can be tricky for Spanish speakers. There are two types:\n\n1.  **Voiceless /θ/:** Like in \"**th**ink\", \"**th**ree\", \"ba**th**\". Your tongue tip is lightly between your teeth, and you push air out without vibrating your vocal cords.\n2.  **Voiced /ð/:** Like in \"**th**is\", \"**th**at\", \"mo**th**er\". Same tongue position, but you vibrate your vocal cords (like a gentle 'd' sound).",
+            "practice": "Practice: Try saying these pairs aloud:\n*   *Voiceless:* thin /θɪn/\n*   *Voiced:* then /ðɛn/",
+            "tip": "Tip: Look in a mirror to check your tongue position!"
+        },
+        "learning_tips": {
+            "title": "More Learning Tips",
+            "text": "Here are some more detailed strategies to accelerate your English learning:\n\n*   **Set SMART Goals:** Make your goals Specific, Measurable, Achievable, Relevant, and Time-bound (e.g., \"Learn 50 new vocabulary words related to travel in the next 2 weeks\").\n*   **Use Flashcards:** Digital apps (like Anki or Quizlet) or physical cards are great for memorizing vocabulary and phrases.\n*   **Label Your Environment:** Put sticky notes with English words on objects around your house (table, chair, window).\n*   **Listen Actively:** Pay attention to podcasts, music, or news in English. Try to understand the main idea first, then focus on details.\n*   **Read Regularly:** Start with simple articles or children's books and gradually move to more complex materials. Don't worry about understanding every word.\n*   **Keep a Journal:** Write a few sentences in English each day about your activities, thoughts, or feelings. Don't stress about perfection.\n*   **Review Consistently:** Regularly revisit what you've learned to move it from short-term to long-term memory.\n*   **Stay Motivated:** Find ways to make learning fun! Watch English YouTubers, join online communities, or reward yourself for reaching milestones."
+        }
     }
 }
