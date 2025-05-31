@@ -4,6 +4,8 @@
         "features": "Características",
         "content": "Contenido",
         "quiz": "Cuestionario",
+        "tourism": "Viaja y Aprende",
+        "reviews": "Opiniones",
         "resources": "Recursos",
         "contact": "Contacto",
         "brand": "Inglés Fácil con Ana"
@@ -50,6 +52,45 @@
             "button": "Ver Ejemplo"
         }
     },
+    "tourism": {
+        "title": "Viaja y Aprende",
+        "subtitle": "Explora destinos hermosos mientras practicas tus habilidades en inglés",
+        "morocco": {
+            "title": "Marruecos Mágico",
+            "description": "Descubre los colores vibrantes y la rica cultura de Marruecos mientras aprendes frases esenciales de viaje y vocabulario cultural.",
+            "button": "Explorar Marruecos"
+        },
+        "uk": {
+            "title": "Descubre el Reino Unido",
+            "description": "Experimenta los impresionantes paisajes y las ciudades históricas del Reino Unido con nuestra guía especializada de inglés para viajes.",
+            "button": "Explorar Reino Unido"
+        }
+    },
+    "reviews": {
+        "title": "Lo Que Dicen Nuestros Estudiantes",
+        "subtitle": "Únete a miles de estudiantes satisfechos que han transformado sus habilidades en inglés",
+        "review1": {
+            "name": "Maria Rodriguez",
+            "location": "Ciudad de México",
+            "rating": 5,
+            "text": "He probado muchos cursos de inglés antes, pero ninguno fue tan efectivo y agradable como Inglés Fácil con Ana. ¡Las frases de la vida diaria me ayudaron a comunicarme con confianza durante mi viaje a Nueva York!",
+            "date": "15 de marzo de 2025"
+        },
+        "review2": {
+            "name": "Carlos Mendoza",
+            "location": "Buenos Aires",
+            "rating": 5,
+            "text": "¡Los ejercicios de pronunciación son increíbles! Después de solo dos meses, mis colegas estadounidenses me entienden mucho mejor. La sección de vocabulario de películas también es súper divertida.",
+            "date": "2 de abril de 2025"
+        },
+        "review3": {
+            "name": "Sofia Herrera",
+            "location": "Bogotá",
+            "rating": 4,
+            "text": "Me encantan las guías de viaje y cómo combinan frases prácticas con conocimientos culturales. La guía de Marruecos fue especialmente útil durante mis recientes vacaciones.",
+            "date": "10 de mayo de 2025"
+        }
+    },
     "quiz": {
         "title": "Pon a Prueba Tu Conocimiento de Frases de Películas",
         "intro": "¿Qué tan bien conoces las frases famosas de películas en inglés? ¡Haz este breve cuestionario para poner a prueba tus conocimientos!",
@@ -87,12 +128,12 @@
     "info": {
         "tips": {
             "title": "Desbloquea Tu Potencial en Inglés: Consejos Clave",
-            "description": "Impulsa tu aprendizaje con estas estrategias probadas:\n*   Sumérgete: Mira películas/series en inglés (¡empieza con subtítulos!).\n*   Practica a Diario: Incluso 15 minutos de práctica enfocada marcan la diferencia.\n*   Habla en Voz Alta: No temas practicar la pronunciación, incluso contigo mismo.\n*   Amplía Vocabulario: Aprende 5 palabras nuevas al día y úsalas en frases.\n*   Encuentra un Compañero: Practica conversación con un amigo o compañero de intercambio.",
+            "description": "Impulsa tu aprendizaje con estas estrategias probadas:\n*   **Establece Metas SMART:** Específicas, Medibles, Alcanzables, Relevantes, con Plazo.\n*   **Usa Tarjetas de Memoria:** Apps digitales o tarjetas físicas para memorizar.\n*   **Etiqueta Tu Entorno:** Usa notas adhesivas con palabras en inglés en casa.\n*   **Escucha Activamente:** Enfócate en podcasts, música o noticias en inglés.\n*   **Lee Regularmente:** Empieza simple y aumenta la complejidad gradualmente.\n*   **Lleva un Diario:** Escribe unas pocas frases en inglés diariamente.\n*   **Repasa Constantemente:** Revisa el material aprendido regularmente.\n*   **Mantén la Motivación:** Haz el aprendizaje divertido y recompensa los hitos.",
             "button": "Explorar Más Consejos"
         },
         "practice": {
             "title": "Perfecciona Tus Habilidades: Práctica Interactiva",
-            "description": "Pon a prueba tus conocimientos con nuestros ejercicios divertidos y efectivos:\n*   Cuestionarios de Vocabulario: Amplía tu banco de palabras con cuestionarios atractivos.\n*   Ejercicios de Gramática: Domina la estructura de frases y los tiempos verbales.\n*   Comprensión Auditiva: Mejora tu entendimiento del inglés hablado.\n*   Ejercicios de Pronunciación: Refina tu acento con práctica específica.\n*   (¡Próximamente!) Desafíos de Lectura: Mejora tu velocidad y comprensión lectora.",
+            "description": "Pon a prueba tus conocimientos con nuestros ejercicios divertidos y efectivos:\n*   **Cuestionarios de Vocabulario:** Amplía tu banco de palabras.\n*   **Ejercicios de Gramática:** Domina la estructura de frases.\n*   **Comprensión Auditiva:** Mejora tu entendimiento.\n*   **Ejercicios de Pronunciación:** Refina tu acento.\n*   **(¡Próximamente!) Desafíos de Lectura:** Mejora velocidad y comprensión.",
             "button": "Empezar a Practicar"
         }
     },
