@@ -4,6 +4,8 @@
         "features": "Features",
         "content": "Content",
         "quiz": "Quiz",
+        "tourism": "Travel & Learn",
+        "reviews": "Reviews",
         "resources": "Resources",
         "contact": "Contact",
         "brand": "Easy English with Ana"
@@ -50,6 +52,45 @@
             "button": "Watch Example"
         }
     },
+    "tourism": {
+        "title": "Travel & Learn",
+        "subtitle": "Explore beautiful destinations while practicing your English skills",
+        "morocco": {
+            "title": "Magical Morocco",
+            "description": "Discover the vibrant colors and rich culture of Morocco while learning essential travel phrases and cultural vocabulary.",
+            "button": "Explore Morocco"
+        },
+        "uk": {
+            "title": "Discover the UK",
+            "description": "Experience the breathtaking landscapes and historic cities of the United Kingdom with our specialized English travel guide.",
+            "button": "Explore UK"
+        }
+    },
+    "reviews": {
+        "title": "What Our Students Say",
+        "subtitle": "Join thousands of satisfied learners who have transformed their English skills",
+        "review1": {
+            "name": "Maria Rodriguez",
+            "location": "Mexico City",
+            "rating": 5,
+            "text": "I've tried many English courses before, but none were as effective and enjoyable as Easy English with Ana. The daily life phrases helped me communicate confidently during my trip to New York!",
+            "date": "March 15, 2025"
+        },
+        "review2": {
+            "name": "Carlos Mendoza",
+            "location": "Buenos Aires",
+            "rating": 5,
+            "text": "The pronunciation exercises are incredible! After just two months, my American colleagues can understand me much better. The movie vocabulary section is also super fun.",
+            "date": "April 2, 2025"
+        },
+        "review3": {
+            "name": "Sofia Herrera",
+            "location": "Bogotá",
+            "rating": 4,
+            "text": "I love the travel guides and how they combine practical phrases with cultural insights. The Morocco guide was especially helpful during my recent vacation.",
+            "date": "May 10, 2025"
+        }
+    },
     "quiz": {
         "title": "Test Your Movie Quote Knowledge",
         "intro": "How well do you know famous movie quotes in English? Take this quick quiz to test your knowledge!",
@@ -87,12 +128,12 @@
     "info": {
         "tips": {
             "title": "Unlock Your English Potential: Top Learning Tips",
-            "description": "Boost your learning journey with these proven strategies:\n*   Immerse Yourself: Watch movies/series in English (start with subtitles!).\n*   Practice Daily: Even 15 minutes of focused practice makes a difference.\n*   Speak Out Loud: Don't be afraid to practice pronunciation, even to yourself.\n*   Expand Vocabulary: Learn 5 new words daily and use them in sentences.\n*   Find a Partner: Practice conversation with a friend or language exchange partner.",
+            "description": "Boost your learning journey with these proven strategies:\n*   **Set SMART Goals:** Specific, Measurable, Achievable, Relevant, Time-bound.\n*   **Use Flashcards:** Digital apps or physical cards for memorization.\n*   **Label Your Environment:** Use sticky notes with English words at home.\n*   **Listen Actively:** Focus on podcasts, music, or news in English.\n*   **Read Regularly:** Start simple and gradually increase complexity.\n*   **Keep a Journal:** Write a few sentences in English daily.\n*   **Review Consistently:** Revisit learned material regularly.\n*   **Stay Motivated:** Make learning fun and reward milestones.",
             "button": "Explore More Tips"
         },
         "practice": {
             "title": "Sharpen Your Skills: Interactive Practice",
-            "description": "Put your knowledge to the test with our fun and effective exercises:\n*   Vocabulary Quizzes: Expand your word bank with engaging quizzes.\n*   Grammar Drills: Master sentence structure and verb tenses.\n*   Listening Comprehension: Improve your understanding of spoken English.\n*   Pronunciation Exercises: Refine your accent with targeted practice.\n*   (Coming Soon!) Reading Challenges: Enhance your reading speed and comprehension.",
+            "description": "Put your knowledge to the test with our fun and effective exercises:\n*   **Vocabulary Quizzes:** Expand your word bank.\n*   **Grammar Drills:** Master sentence structure.\n*   **Listening Comprehension:** Improve understanding.\n*   **Pronunciation Exercises:** Refine your accent.\n*   **(Coming Soon!) Reading Challenges:** Enhance speed and comprehension.",
             "button": "Start Practicing"
         }
     },
@@ -164,7 +205,7 @@
         },
         "movies_example": {
             "title": "Iconic Movie Lines",
-            "text": "Understanding movie quotes helps you connect with native speakers and culture. Here’s a classic:\n\n*   **Quote:** \"Frankly, my dear, I don't give a damn.\"\n*   **Movie:** *Gone with the Wind* (1939)\n*   **Context:** Spoken by Rhett Butler to Scarlett O'Hara, signifying his final detachment from her.\n*   **Usage:** While the exact phrase is famous, the sentiment of indifference (\"I don't care\") is common.",
+            "text": "Understanding movie quotes helps you connect with native speakers and culture. Here's a classic:\n\n*   **Quote:** \"Frankly, my dear, I don't give a damn.\"\n*   **Movie:** *Gone with the Wind* (1939)\n*   **Context:** Spoken by Rhett Butler to Scarlett O'Hara, signifying his final detachment from her.\n*   **Usage:** While the exact phrase is famous, the sentiment of indifference (\"I don't care\") is common.",
             "challenge": "Challenge: Can you recognize the movie this quote is from: \"Here's looking at you, kid.\"? (Answer: *Casablanca*)"
         },
         "pronunciation_example": {
